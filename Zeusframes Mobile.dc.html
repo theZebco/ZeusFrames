@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0e0e0e;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none;transition:opacity .3s}a:hover{opacity:.7}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#0e0e0e;color:#f2f0eb;font-family:'Space Mono',monospace;padding:40px 40px 90px;box-sizing:border-box">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap;margin-bottom:40px">
+    <div>
+      <div style="font-size:11px;letter-spacing:.25em;text-transform:uppercase;opacity:.6">Zeus Frames · Landing</div>
+      <h1 style="margin:8px 0 0;font-weight:400;font-size:22px;letter-spacing:.02em">Mobile — five directions</h1>
+      <p style="margin:10px 0 0;font-size:12px;line-height:1.6;opacity:.6;max-width:520px">Each phone runs the real design at 402px. Tap a phone to load it; scroll inside it like a visitor would.</p>
+    </div>
+    <a href="Zeusframes Landing.dc.html" style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(242,240,235,.4);padding:10px 16px;border-radius:999px">← Desktop</a>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:44px 32px;justify-content:center">
+    <sc-for list="{{ phones }}" as="p" hint-placeholder-count="5">
+      <div style="display:flex;flex-direction:column;gap:14px;width:402px;max-width:100%">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:11px;letter-spacing:.2em;text-transform:uppercase">
+          <span style="display:flex;align-items:baseline;gap:10px"><span style="background:#f2f0eb;color:#0e0e0e;padding:3px 8px;border-radius:999px">{{ p.id }}</span><span>{{ p.name }}</span></span>
+          <span style="opacity:.55;text-align:right">{{ p.note }}</span>
+        </div>
+        <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" dark="{{ p.dark }}" hint-size="402px,874px">
+          <div style="position:relative;display:flex;flex-direction:column;height:100%;background:#000">
+            <div style="height:54px;flex:none;background:{{ p.barBg }}"></div>
+            <iframe src="{{ p.src }}" title="{{ p.name }}" style="display:block;flex:1;width:100%;border:0;background:#000"></iframe>
+            <button data-id="{{ p.id }}" onClick="{{ load }}" style="position:absolute;inset:0;display:{{ p.coverDisplay }};flex-direction:column;align-items:center;justify-content:center;gap:16px;background:#000;color:#f2f0eb;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase">
+              <span style="width:56px;height:56px;border:1px solid rgba(242,240,235,.5);border-radius:50%;display:grid;place-items:center;font-size:16px;padding-left:3px;box-sizing:border-box">▶</span>
+              <span>Tap to load {{ p.id }}</span>
+            </button>
+          </div>
+        </x-import>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { live: ['a1'] };
+  renderVals() {
+    const defs = [
+      ['a1', 'Noir', 'Cinematic · menu overlay', true],
+      ['a2', 'Gallery', 'Editorial · side rail', false],
+      ['a3', 'Darkroom', 'Contact sheet · estimator', false],
+      ['a4', 'Split', 'Opposite scroll · doors', true],
+      ['a5', 'Projector', 'Scroll-driven film', true]
+    ];
+    const live = this.state.live;
+    return {
+      phones: defs.map(([id, name, note, dark]) => { const on = live.includes(id); return { id, name, note, dark, src: on ? 'Zeusframes%20Landing.dc.html?embed=1#' + id : 'about:blank', coverDisplay: on ? 'none' : 'flex', barBg: dark ? '#000' : '#f4f2ee' }; }),
+      load: e => { const id = e.currentTarget.dataset.id; this.setState(s => ({ live: s.live.includes(id) ? s.live : [...s.live, id] })); }
+    };
+  }
+}
+</script>
+</body>
+</html>
