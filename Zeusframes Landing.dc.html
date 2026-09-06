@@ -9,7 +9,7 @@
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Space+Grotesk:wght@300..700&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Syne:wght@400..800&family=IBM+Plex+Mono:wght@400;500&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Archivo:wght@400..700&family=Bebas+Neue&family=Chivo:wght@300..700&family=Big+Shoulders+Display:wght@400..900&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Space+Grotesk:wght@300..700&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Syne:wght@400..800&family=IBM+Plex+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@400;500&family=Bebas+Neue&family=Chivo:wght@300..700&family=Big+Shoulders+Display:wght@400..900&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 html{scroll-behavior:smooth}
 body{margin:0;background:#0b0b0b;-webkit-font-smoothing:antialiased}
@@ -29,8 +29,14 @@ video,img{display:block}
 @keyframes marquee{to{transform:translateX(-50%)}}
 @keyframes curtainUp{to{transform:translateY(-101%)}}
 @keyframes curtainDown{to{transform:translateY(101%)}}
-@keyframes doorL{to{transform:translateX(-101%)}}
-@keyframes doorR{to{transform:translateX(101%)}}
+@keyframes irisOpen{to{width:300vmax;height:300vmax}}
+@keyframes focusPull{from{filter:grayscale(1) blur(16px) contrast(1.1);transform:scale(1.06)}to{filter:grayscale(1) blur(0) contrast(1.1);transform:none}}
+@keyframes bladeTop{0%{transform:translateY(-100%)}38%{transform:translateY(0)}62%{transform:translateY(0)}100%{transform:translateY(-100%)}}
+@keyframes bladeBot{0%{transform:translateY(100%)}38%{transform:translateY(0)}62%{transform:translateY(0)}100%{transform:translateY(100%)}}
+@keyframes flash{0%,55%{opacity:0}62%{opacity:.9}100%{opacity:0}}
+@keyframes afBlink{0%,100%{opacity:.9}50%{opacity:.2}}
+[data-reveal="iris"]{opacity:1;transform:none;clip-path:circle(0% at 50% 50%);transition:clip-path 1.4s cubic-bezier(.76,0,.24,1)}
+[data-reveal="iris"][data-inview]{clip-path:circle(75% at 50% 50%)}
 @keyframes rise{from{clip-path:inset(100% 0 -20% 0);transform:translateY(40%)}to{clip-path:inset(-20% 0 -20% 0);transform:none}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @keyframes fadeOut{to{opacity:0}}
@@ -40,127 +46,180 @@ video,img{display:block}
 </helmet>
 
 <sc-if value="{{ isa4 }}" hint-placeholder-val="{{ false }}">
-<div data-screen-label="a4 Split" style="background:#050505;color:#f5f5f3;font-family:'Archivo',sans-serif;min-height:100vh">
-  <sc-if value="{{ doorOpen }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ doorClose }}" style="position:fixed;inset:0;z-index:800;cursor:zoom-out;background:#000;overflow:hidden">
-      <video data-auto="1" src="{{ doorSrc }}" muted="{{ true }}" autoPlay="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08)"></video>
-      <div style="position:absolute;left:40px;right:40px;bottom:40px;color:#fff;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(40px,7vw,120px);line-height:.9;letter-spacing:-.04em;text-shadow:0 2px 24px rgba(0,0,0,.5);animation:fade .8s 1s both">{{ doorTitle }}</div>
-      <div style="position:absolute;right:40px;top:80px;color:#fff;font-size:11px;letter-spacing:.2em;text-transform:uppercase;animation:fade .8s 1s both">{{ doorMeta }} · Close ✕</div>
-      <div style="position:absolute;top:0;bottom:0;left:0;width:50%;background:#050505;animation:doorL 1.1s cubic-bezier(.76,0,.24,1) .1s forwards"></div>
-      <div style="position:absolute;top:0;bottom:0;right:0;width:50%;background:#f5f5f3;animation:doorR 1.1s cubic-bezier(.76,0,.24,1) .1s forwards"></div>
+<div data-screen-label="a4 Viewfinder" onMouseMove="{{ afMove }}" style="background:{{ bg4 }};color:{{ ink4 }};font-family:'DM Mono',monospace;min-height:100vh;transition:background 1.2s ease,color 1.2s ease">
+  <sc-if value="{{ intro4 }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:900;pointer-events:none;overflow:hidden">
+      <div style="position:absolute;left:50%;top:50%;width:0;height:0;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 250vmax #000;animation:irisOpen 1.7s cubic-bezier(.76,0,.24,1) .7s forwards"></div>
+      <div style="position:absolute;inset:0;display:grid;place-items:center;color:#ecebe6;font-size:11px;letter-spacing:.35em;text-transform:uppercase;animation:fadeOut .5s .5s forwards">Zeus Frames — focusing</div>
     </div>
   </sc-if>
-  <nav style="position:fixed;top:0;left:0;right:0;z-index:500;display:flex;justify-content:space-between;align-items:center;padding:22px 40px;mix-blend-mode:difference;color:#fff;font-size:11px;letter-spacing:.2em;text-transform:uppercase">
-    <a href="#a4" style="font-weight:700">Zeus Frames</a>
-    <sc-if value="{{ notMob }}" hint-placeholder-val="{{ true }}">
-      <div style="display:flex;gap:30px"><a href="#work-a4">Work</a><a href="#services-a4">Services</a><a href="#studio-a4">Studio</a><a href="#packages-a4">Packages</a></div>
-    </sc-if>
-    <a href="#quote-a4" style="border-bottom:1px solid #fff;padding-bottom:3px">Get a quote</a>
-  </nav>
+  <sc-if value="{{ shotOn }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:850;pointer-events:none;overflow:hidden">
+      <div style="position:absolute;left:0;right:0;top:0;height:50%;background:#000;animation:bladeTop .7s cubic-bezier(.76,0,.24,1) both"></div>
+      <div style="position:absolute;left:0;right:0;bottom:0;height:50%;background:#000;animation:bladeBot .7s cubic-bezier(.76,0,.24,1) both"></div>
+      <div style="position:absolute;inset:0;background:#fff;animation:flash .7s both"></div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ lb4Open }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeLb4 }}" style="position:fixed;inset:0;z-index:800;background:#000;color:#ecebe6;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:18px;padding:80px 6vw 40px;box-sizing:border-box;animation:fade .5s .3s both;cursor:zoom-out">
+      <div style="display:flex;justify-content:space-between;font-size:10px;letter-spacing:.2em;text-transform:uppercase"><span>{{ lb4N }} — {{ lb4C }}</span><span>Close ✕</span></div>
+      <video data-auto="1" src="{{ lb4Src }}" muted="{{ true }}" autoPlay="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="width:100%;height:100%;object-fit:contain;filter:grayscale(1)"></video>
+      <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(36px,5vw,84px);line-height:1">{{ lb4T }}</div>
+    </div>
+  </sc-if>
+  <div ref="{{ afRef }}" style="position:fixed;left:0;top:0;width:44px;height:44px;z-index:600;pointer-events:none;mix-blend-mode:difference;transform:translate3d(-100px,-100px,0);transition:transform .22s cubic-bezier(.2,.8,.2,1),width .35s cubic-bezier(.2,.8,.2,1),height .35s cubic-bezier(.2,.8,.2,1);display:{{ mobHide }}">
+    <span style="position:absolute;left:0;top:0;width:10px;height:10px;border-left:1.5px solid #fff;border-top:1.5px solid #fff"></span>
+    <span style="position:absolute;right:0;top:0;width:10px;height:10px;border-right:1.5px solid #fff;border-top:1.5px solid #fff"></span>
+    <span style="position:absolute;left:0;bottom:0;width:10px;height:10px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff"></span>
+    <span style="position:absolute;right:0;bottom:0;width:10px;height:10px;border-right:1.5px solid #fff;border-bottom:1.5px solid #fff"></span>
+  </div>
+  <div style="position:fixed;inset:0;z-index:500;pointer-events:none;mix-blend-mode:difference;color:#fff;font-size:10px;letter-spacing:.2em;text-transform:uppercase">
+    <span style="position:absolute;left:16px;top:16px;width:18px;height:18px;border-left:1px solid #fff;border-top:1px solid #fff"></span>
+    <span style="position:absolute;right:16px;top:16px;width:18px;height:18px;border-right:1px solid #fff;border-top:1px solid #fff"></span>
+    <span style="position:absolute;left:16px;bottom:16px;width:18px;height:18px;border-left:1px solid #fff;border-bottom:1px solid #fff"></span>
+    <span style="position:absolute;right:16px;bottom:16px;width:18px;height:18px;border-right:1px solid #fff;border-bottom:1px solid #fff"></span>
+    <div style="position:absolute;left:36px;right:36px;top:26px;display:flex;justify-content:space-between;align-items:center;gap:16px">
+      <a href="#a4" style="pointer-events:auto;font-weight:500">Zeus Frames</a>
+      <span style="display:flex;align-items:center;gap:10px;white-space:nowrap"><span style="width:7px;height:7px;border-radius:50%;background:#fff;animation:blink 1.2s steps(1) infinite"></span>REC <span style="opacity:.7;font-variant-numeric:tabular-nums">{{ tc }}</span></span>
+      <a href="#contact-4" style="pointer-events:auto;border-bottom:1px solid #fff;padding-bottom:3px;white-space:nowrap">Get a quote</a>
+    </div>
+    <div style="position:absolute;left:36px;bottom:26px;display:{{ mobHide }};white-space:nowrap">{{ exp4 }}</div>
+    <div ref="{{ frRef }}" style="position:absolute;right:36px;bottom:26px;font-variant-numeric:tabular-nums;white-space:nowrap">FR 0000 / 1000</div>
+  </div>
+  <sc-if value="{{ notMob }}" hint-placeholder-val="{{ true }}">
+    <nav style="position:fixed;right:36px;top:50%;transform:translateY(-50%);z-index:520;display:flex;flex-direction:column;align-items:flex-end;gap:18px;mix-blend-mode:difference;color:#fff;font-size:10px;letter-spacing:.2em;text-transform:uppercase">
+      <sc-for list="{{ nav4 }}" as="n" hint-placeholder-count="4">
+        <a href="{{ n.href }}" style="display:flex;align-items:center;gap:10px;opacity:{{ n.op }};transition:opacity .4s"><span>{{ n.t }}</span><span style="width:{{ n.tick }};height:1px;background:#fff;transition:width .4s"></span></a>
+      </sc-for>
+    </nav>
+  </sc-if>
 
-  <section style="position:relative;height:{{ heroH }};min-height:{{ heroMinH }};overflow:hidden;display:grid;grid-template-columns:{{ splitCols }};grid-template-rows:{{ splitRows }}">
-    <div style="position:relative;overflow:hidden;background:#050505;color:#f5f5f3;display:flex;align-items:flex-end;padding:{{ heroPadL }};box-sizing:border-box">
-      <div ref="{{ leftRef }}" style="will-change:transform">
-        <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6;animation:fade 1s .2s both">Toronto · Video · Photo · Social</div>
-        <h1 style="margin:18px 0 0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(44px,6.4vw,112px);line-height:.92;letter-spacing:-.045em">
-          <span style="display:block;animation:rise 1.1s cubic-bezier(.2,.7,.2,1) .3s both">Two sides</span>
-          <span style="display:block;animation:rise 1.1s cubic-bezier(.2,.7,.2,1) .45s both">to every</span>
-          <span style="display:block;font-weight:200;animation:rise 1.1s cubic-bezier(.2,.7,.2,1) .6s both">story.</span>
-        </h1>
-        <p style="margin:26px 0 0;max-width:420px;font-size:16px;line-height:1.55;opacity:.8;animation:fade 1s .9s both">The craft on one side, the work on the other. A Toronto studio for video, photography and social content.</p>
-        <div style="margin-top:34px;display:flex;flex-wrap:wrap;gap:14px;animation:fade 1s 1.1s both">
-          <a href="#quote-a4" style="background:#f5f5f3;color:#050505;padding:15px 24px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600">Get a quote</a>
-          <a href="#work-a4" style="border:1px solid rgba(245,245,243,.4);padding:15px 24px;font-size:12px;letter-spacing:.12em;text-transform:uppercase">See the work</a>
+  <section style="position:relative;height:100vh;min-height:620px;overflow:hidden;background:#000;color:#ecebe6">
+    <video data-auto="1" src="assets/video/12735441.mp4" muted="{{ true }}" autoPlay="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;animation:focusPull 2.4s cubic-bezier(.2,.7,.2,1) 1.1s both"></video>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 40%,rgba(0,0,0,.55) 100%),linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.55))"></div>
+    <div style="position:absolute;left:50%;top:50%;width:26px;height:26px;transform:translate(-50%,-50%);border:1px solid rgba(236,235,230,.75);animation:afBlink 1.2s ease-in-out 1.1s 2"></div>
+    <div style="position:absolute;left:6vw;right:6vw;bottom:14vh">
+      <div style="font-size:11px;letter-spacing:.25em;text-transform:uppercase;opacity:.75;animation:fade 1s 2.2s both">Toronto media studio · Video · Photo · Social</div>
+      <h1 style="margin:14px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(60px,11vw,190px);line-height:.88;letter-spacing:-.025em">
+        <span style="display:block;animation:rise 1.2s cubic-bezier(.2,.7,.2,1) 2.3s both">Everything</span>
+        <span style="display:block;font-style:italic;padding-left:.18em;animation:rise 1.2s cubic-bezier(.2,.7,.2,1) 2.45s both">in focus.</span>
+      </h1>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:30px;animation:fade 1s 2.9s both">
+        <p style="margin:0;max-width:440px;font-size:14px;line-height:1.7;opacity:.85">Video, photography and social content from a North York studio — for brands, creators and families who want to be remembered.</p>
+        <div style="display:flex;align-items:center;gap:28px">
+          <a href="#contact-4" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;align-items:center;gap:14px"><span style="width:56px;height:56px;border-radius:50%;background:#ecebe6;box-shadow:0 0 0 3px #000,0 0 0 4px #ecebe6;transition:transform .4s" style-hover="transform:scale(1.08)"></span><span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase">Get a quote</span></a>
+          <a href="#work-4" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid rgba(236,235,230,.5);padding-bottom:4px">See the work</a>
         </div>
       </div>
     </div>
-    <div style="position:relative;overflow:hidden;background:#f5f5f3;color:#050505">
-      <div ref="{{ rightRef }}" style="will-change:transform;padding:14vh 6vw 0;box-sizing:border-box;display:flex;flex-direction:column;gap:5vh">
-        <sc-for list="{{ heroTiles }}" as="w" hint-placeholder-count="3">
-          <figure style="margin:0;width:{{ w.w }};align-self:{{ w.al }}">
-            <div style="overflow:hidden;aspect-ratio:{{ w.ar }};background:#e2e2df">
-              <video data-auto="1" src="{{ w.src }}" muted="{{ true }}" autoPlay="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></video>
-            </div>
-            <figcaption style="display:flex;justify-content:space-between;gap:12px;margin-top:10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase"><span>{{ w.n }} — {{ w.t }}</span><span style="opacity:.55">{{ w.c }}</span></figcaption>
-          </figure>
-        </sc-for>
-      </div>
-    </div>
-    <sc-if value="{{ notMob }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,.14);pointer-events:none;mix-blend-mode:difference"></div></sc-if>
   </section>
 
-  <section id="work-a4" style="background:#f5f5f3;color:#050505;padding:130px 6vw">
-    <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:60px">
-      <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(40px,6vw,104px);line-height:.9;letter-spacing:-.045em">Selected<br><span style="font-weight:200">work</span></h2>
-      <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">Hover to play · Click to open the doors</span>
+  <section id="work-4" style="padding:140px 6vw 100px">
+    <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:50px">
+      <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(48px,7vw,120px);line-height:.9;letter-spacing:-.02em">Selected <em>work</em></h2>
+      <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Hover to focus · Click to shoot</span>
     </div>
-    <div style="display:grid;grid-template-columns:{{ workCols }};gap:70px 6vw;align-items:start">
-      <sc-for list="{{ works2 }}" as="w" hint-placeholder-count="6">
-        <figure data-i="{{ $index }}" onClick="{{ doorOpenFn }}" onMouseEnter="{{ hp }}" onMouseLeave="{{ hs }}" data-reveal="1" style="margin:{{ w.mt }} 0 0;cursor:pointer">
-          <div style="overflow:hidden;aspect-ratio:{{ w.ar }};background:#e2e2df">
-            <video src="{{ w.src }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:transform 1s cubic-bezier(.2,.7,.2,1)" style-hover="transform:scale(1.04)"></video>
+    <div onMouseLeave="{{ whOff }}" style="display:grid;grid-template-columns:{{ workCols4 }};gap:28px 24px">
+      <sc-for list="{{ works4 }}" as="w" hint-placeholder-count="6">
+        <figure data-i="{{ $index }}" onClick="{{ shoot }}" onMouseEnter="{{ whOn }}" onMouseLeave="{{ whLeave }}" data-reveal="1" style="margin:0;cursor:pointer;transition-delay:{{ w.delay }}">
+          <div style="overflow:hidden;aspect-ratio:16/10;background:#1a1a1a;position:relative">
+            <video src="{{ w.src }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) blur({{ w.blur }});transform:scale({{ w.sc }});opacity:{{ w.op }};transition:filter .7s ease,transform .9s cubic-bezier(.2,.7,.2,1),opacity .7s ease"></video>
+            <span style="position:absolute;left:12px;top:10px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#fff;mix-blend-mode:difference">{{ w.n }}</span>
           </div>
-          <figcaption style="display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:11px;letter-spacing:.16em;text-transform:uppercase"><span>{{ w.n }} — {{ w.t }}</span><span style="opacity:.55">{{ w.c }}</span></figcaption>
+          <figcaption style="display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase"><span>{{ w.t }}</span><span style="opacity:.55">{{ w.c }}</span></figcaption>
         </figure>
       </sc-for>
     </div>
   </section>
 
-  <section id="services-a4" style="padding:130px 6vw;display:grid;grid-template-columns:{{ grida1 }};gap:60px">
-    <div data-reveal="1">
-      <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">01 — What we do</div>
-      <h2 style="margin:18px 0 0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(40px,5vw,84px);line-height:.92;letter-spacing:-.045em">Four disciplines,<br><span style="font-weight:200">one crew.</span></h2>
+  <section id="services-4" style="padding:120px 6vw 80px">
+    <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:60px">
+      <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(48px,7vw,120px);line-height:.9;letter-spacing:-.02em">What we <em>make</em></h2>
+      <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Scroll — the lens refocuses</span>
     </div>
-    <div>
-      <sc-for list="{{ svcs2 }}" as="s" hint-placeholder-count="4">
-        <div data-reveal="1" style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:baseline;padding:30px 0;border-top:1px solid rgba(245,245,243,.18);transition:padding-left .5s" style-hover="padding-left:14px">
-          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:200;font-size:clamp(40px,4vw,72px);line-height:1;letter-spacing:-.04em;opacity:.55">{{ s.n }}</span>
-          <div><h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(24px,2.4vw,40px);line-height:1;letter-spacing:-.03em">{{ s.t }}</h3><p style="margin:10px 0 0;font-size:15px;line-height:1.55;opacity:.75;max-width:460px">{{ s.d }}</p></div>
+    <div style="display:grid;grid-template-columns:{{ lensCols }};gap:6vw;align-items:start">
+      <div>
+        <sc-for list="{{ svcs4 }}" as="s" hint-placeholder-count="4">
+          <div data-lens="{{ $index }}" style="min-height:{{ svcMinH }};display:flex;flex-direction:column;justify-content:center;padding:40px 0;border-top:1px solid {{ bd4 }};opacity:{{ s.op }};transition:opacity .6s">
+            <div style="display:flex;justify-content:space-between;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65"><span>{{ s.n }}</span><span>{{ s.mm }}</span></div>
+            <h3 style="margin:18px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(30px,4.6vw,78px);line-height:.95;letter-spacing:-.02em">{{ s.t }}</h3>
+            <p style="margin:18px 0 0;max-width:460px;font-size:14px;line-height:1.7;opacity:.8">{{ s.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div style="position:sticky;top:{{ lensTop }};width:{{ lensW }};aspect-ratio:1;justify-self:center;z-index:2">
+        <div ref="{{ ringRef }}" style="position:absolute;inset:{{ ringIn }};border-radius:50%;border:1px dashed {{ bd4s }};will-change:transform"></div>
+        <div style="position:absolute;inset:-6px;border-radius:50%;border:1px solid {{ bd4 }}"></div>
+        <div style="position:absolute;inset:0;border-radius:50%;overflow:hidden;background:#000">
+          <sc-for list="{{ lensVids }}" as="l" hint-placeholder-count="4">
+            <video data-auto="1" src="{{ l.src }}" muted="{{ true }}" autoPlay="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);clip-path:circle({{ l.r }} at 50% 50%);transition:clip-path 1.1s cubic-bezier(.76,0,.24,1)"></video>
+          </sc-for>
+          <div style="position:absolute;left:50%;top:50%;width:22px;height:22px;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.7);mix-blend-mode:difference"></div>
         </div>
-      </sc-for>
-    </div>
-  </section>
-
-  <section id="studio-a4" style="background:#f5f5f3;color:#050505;padding:130px 6vw;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:60px;align-items:center">
-    <div data-reveal="wipe" style="aspect-ratio:4/5;overflow:hidden;background:#e2e2df"><img src="assets/img/1516035069371-29a1b244cc32.jpg" alt="Camera in the studio" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></div>
-    <div data-reveal="1">
-      <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">02 — The studio · North York</div>
-      <h2 style="margin:18px 0 0;font-family:'Bricolage Grotesque',sans-serif;font-weight:200;font-size:clamp(30px,3.4vw,56px);line-height:1.05;letter-spacing:-.03em">A physical studio in North York, cinema-grade kit, and a crew that thinks in <strong style="font-weight:800">campaigns</strong>, not clips.</h2>
-      <div style="display:flex;flex-wrap:wrap;gap:40px 50px;margin-top:40px">
-        <div><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(36px,4vw,64px);line-height:1;letter-spacing:-.04em">$250</div><div style="margin-top:8px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">per reel</div></div>
-        <div><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(36px,4vw,64px);line-height:1;letter-spacing:-.04em">$499</div><div style="margin-top:8px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">subscription / month</div></div>
-        <div><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(36px,4vw,64px);line-height:1;letter-spacing:-.04em">10%</div><div style="margin-top:8px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">off · 3-month contract</div></div>
+        <div style="position:absolute;left:50%;bottom:-40px;transform:translateX(-50%);font-size:10px;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;opacity:.7;display:{{ mobHide }}">{{ lensLabel }}</div>
       </div>
     </div>
   </section>
 
-  <section id="packages-a4" style="padding:130px 6vw">
-    <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:50px">
-      <h2 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(40px,6vw,104px);line-height:.9;letter-spacing:-.045em">Monthly<br><span style="font-weight:200">packages.</span></h2>
-      <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">03 — Creative subscription · 10% off with a 3-month contract</span>
+  <section id="studio-4" data-light-zone="1" style="padding:160px 6vw;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:70px;align-items:center">
+    <div data-reveal="1">
+      <div style="display:flex;justify-content:space-between;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65"><span>Studio · North York</span><span>85mm · f/1.8</span></div>
+      <h2 style="margin:20px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,5.6vw,96px);line-height:.92;letter-spacing:-.02em">A room <em>built</em> for light.</h2>
+      <p style="margin:26px 0 0;max-width:460px;font-size:14px;line-height:1.7;opacity:.8">Portraits, products, podcasts and lookbooks — our studio comes with the crew, the kit and the edit. One production day becomes a month of content.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:36px 50px;margin-top:44px">
+        <div><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,4.6vw,76px);line-height:1">$250</div><div style="margin-top:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">per reel</div></div>
+        <div><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,4.6vw,76px);line-height:1">$499</div><div style="margin-top:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">subscription / month</div></div>
+        <div><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,4.6vw,76px);line-height:1">10%</div><div style="margin-top:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">off · 3-month contract</div></div>
+      </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:1px;background:rgba(245,245,243,.2)">
+    <div data-reveal="iris" style="aspect-ratio:4/5;overflow:hidden;background:#c9c8c3"><img src="assets/img/1516035069371-29a1b244cc32.jpg" alt="Camera in the studio" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></div>
+  </section>
+
+  <section id="packages-4" style="padding:140px 6vw">
+    <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:40px">
+      <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(48px,7vw,120px);line-height:.9;letter-spacing:-.02em">Monthly <em>packages</em></h2>
+      <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Creative subscription · 10% off with a 3-month contract</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px">
       <sc-for list="{{ plans }}" as="p" hint-placeholder-count="3">
-        <div data-reveal="1" style="background:#050505;padding:40px 32px;display:flex;flex-direction:column;gap:14px;min-height:320px;box-sizing:border-box;transition:background .5s,color .5s" style-hover="background:#f5f5f3;color:#050505">
-          <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">{{ p.tag }}</div>
-          <h3 style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(26px,2.6vw,40px);line-height:1;letter-spacing:-.03em">{{ p.name }}</h3>
-          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(40px,4vw,64px);line-height:1;letter-spacing:-.04em">{{ p.price }}<span style="font-family:'Archivo',sans-serif;font-size:11px;letter-spacing:.15em;margin-left:8px;font-weight:400">/ mo</span></div>
-          <p style="margin:0;font-size:14px;line-height:1.55;opacity:.75">{{ p.d }}</p>
-          <a href="#quote-a4" style="margin-top:auto;font-size:11px;letter-spacing:.2em;text-transform:uppercase">Get in touch →</a>
+        <div data-reveal="1" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="border:1px solid {{ bd4 }};padding:34px 30px;display:flex;flex-direction:column;gap:14px;min-height:320px;box-sizing:border-box;transition-delay:{{ p.delay }}">
+          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">{{ p.tag }}</span>
+          <h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,3.2vw,52px);line-height:.95">{{ p.name }}</h3>
+          <div style="font-size:clamp(26px,2.6vw,40px);letter-spacing:-.02em;line-height:1">{{ p.price }}<span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin-left:8px">/ mo</span></div>
+          <p style="margin:0;font-size:13px;line-height:1.7;opacity:.8">{{ p.d }}</p>
+          <a href="#contact-4" style="margin-top:auto;font-size:10px;letter-spacing:.2em;text-transform:uppercase">Get in touch →</a>
         </div>
       </sc-for>
     </div>
+    <div data-reveal="1" style="margin-top:24px;border:1px solid {{ bd4 }};padding:{{ estPad }};display:grid;grid-template-columns:{{ estGrid }};gap:40px">
+      <div>
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Build your package · Live estimate</span>
+        <h3 style="margin:14px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,4vw,64px);line-height:.95;letter-spacing:-.02em">Dial in what you need.</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:30px">
+          <sc-for list="{{ pkItems4 }}" as="k" hint-placeholder-count="6">
+            <button data-k="{{ k.k }}" onClick="{{ tog }}" style="border:1px solid {{ bd4s }};border-radius:999px;padding:12px 18px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-family:inherit;background:{{ k.bg }};color:{{ k.fg }};transition:background .3s,color .3s;display:flex;gap:10px;align-items:baseline">{{ k.t }} <span style="opacity:.6;font-size:10px">{{ k.p }}</span></button>
+          </sc-for>
+        </div>
+        <p style="margin:26px 0 0;font-size:12px;line-height:1.7;opacity:.6;max-width:520px">Indicative monthly ranges in CAD. Every range includes filming time, edit and colour grade. 10% off with a 3-month contract.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:space-between;gap:20px;border-left:{{ estBL }};padding-left:{{ estPL }};border-top:{{ estBT }};padding-top:{{ estPT }}">
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Estimated range / month</span>
+        <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,5vw,84px);line-height:1;letter-spacing:-.02em">{{ estLo }} – {{ estHi }}</div>
+        <p style="margin:0;font-size:13px;line-height:1.7;opacity:.7">{{ estNote }}</p>
+        <a href="#contact-4" style="border:1px solid currentColor;padding:16px 22px;text-align:center;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink4 }};color:{{ bg4 }};opacity:1">Request exact quote →</a>
+      </div>
+    </div>
   </section>
 
-  <footer id="quote-a4" style="background:#f5f5f3;color:#050505;padding:130px 6vw 30px">
-    <h2 data-reveal="up" style="margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(56px,10vw,170px);line-height:.88;letter-spacing:-.05em">Let's <span style="font-weight:200">talk.</span></h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:60px;font-size:13px;line-height:1.7">
-      <div><div style="opacity:.5;font-size:10px;letter-spacing:.25em;text-transform:uppercase">Call</div>+1 647-839-1491</div>
-      <div><div style="opacity:.5;font-size:10px;letter-spacing:.25em;text-transform:uppercase">Email</div>Zeusframess@gmail.com</div>
-      <div><div style="opacity:.5;font-size:10px;letter-spacing:.25em;text-transform:uppercase">Studio</div>180 Shaughnessy Blvd<br>North York, ON M2J 1K3</div>
-      <div><div style="opacity:.5;font-size:10px;letter-spacing:.25em;text-transform:uppercase">Social</div><a href="https://www.instagram.com/zeusframes.inc" style="border-bottom:1px solid #050505">@zeusframes.inc</a></div>
+  <footer id="contact-4" style="padding:150px 6vw 30px;border-top:1px solid {{ bd4 }}">
+    <h2 data-reveal="up" style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(72px,14vw,240px);line-height:.85;letter-spacing:-.03em">Let's shoot.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:60px;font-size:13px;line-height:1.8">
+      <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Call</div>+1 647-839-1491</div>
+      <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Email</div>Zeusframess@gmail.com</div>
+      <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Studio</div>180 Shaughnessy Blvd<br>North York, ON M2J 1K3</div>
+      <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Social</div><a href="https://www.instagram.com/zeusframes.inc" style="border-bottom:1px solid currentColor">@zeusframes.inc</a></div>
     </div>
-    <div style="display:flex;justify-content:space-between;margin-top:80px;padding-top:20px;border-top:1px solid rgba(5,5,5,.2);font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.55"><span>© 2026 Zeus Frames Inc.</span><span>Toronto, Canada</span></div>
+    <div style="display:flex;justify-content:space-between;margin-top:80px;padding-top:20px;border-top:1px solid {{ bd4 }};font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55"><span>© 2026 Zeus Frames Inc.</span><span>Toronto, Canada</span></div>
   </footer>
 </div>
 </sc-if>
@@ -665,37 +724,38 @@ video,img{display:block}
 <script type="text/x-dc" data-dc-script data-props="{&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;a1&quot;,&quot;options&quot;:[&quot;a1&quot;,&quot;a2&quot;,&quot;a3&quot;,&quot;a4&quot;,&quot;a5&quot;],&quot;tsType&quot;:&quot;'a1'|'a2'|'a3'|'a4'|'a5'&quot;,&quot;section&quot;:&quot;Layout&quot;},&quot;showSwitcher&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
 class Component extends DCLogic {
   VALID = ['a1', 'a2', 'a3', 'a4', 'a5'];
-  leftRef = React.createRef(); rightRef = React.createRef(); filmRef = React.createRef();
+  afRef = React.createRef(); frRef = React.createRef(); ringRef = React.createRef(); filmRef = React.createRef();
   state = { v: 'a1', intro: true, chap: 0, tc: '00:00:00:00', mx: null, my: null, svc: 0, lb: null, cell: null, dark: false, menu: false, mi: 0, active: '',
-    vh: 800, mob: false, door: null, p: 0,
+    vh: 800, mob: false, lb4: null, shot: false, wh: null, lens: 0, light: false, p: 0,
     pk: { reels: true, film: false, photo: true, drone: false, event: false, studio: false } };
 
   componentDidMount() {
     const h = (location.hash || '').replace('#', '');
     const pv = this.props.variant;
-    if (this.VALID.includes(h)) this.setState({ v: h, intro: h === 'a1' });
-    else if (this.VALID.includes(pv)) this.setState({ v: pv, intro: pv === 'a1' });
-    this.onHash = () => { const x = location.hash.replace('#', ''); if (this.VALID.includes(x) && x !== this.state.v) this.setState({ v: x, intro: x === 'a1' }); };
+    if (this.VALID.includes(h)) this.setState({ v: h, intro: this.hasIntro(h) });
+    else if (this.VALID.includes(pv)) this.setState({ v: pv, intro: this.hasIntro(pv) });
+    this.onHash = () => { const x = location.hash.replace('#', ''); if (this.VALID.includes(x) && x !== this.state.v) this.setState({ v: x, intro: this.hasIntro(x) }); };
     window.addEventListener('hashchange', this.onHash);
     this.introT = setTimeout(() => this.setState({ intro: false }), 2700);
     this.t0 = Date.now();
     this.tcT = setInterval(() => {
-      if (this.state.v !== 'a1') return;
+      if (!this.hasIntro(this.state.v)) return;
       const ms = Date.now() - this.t0, p = n => String(n).padStart(2, '0');
       this.setState({ tc: `${p(Math.floor(ms / 3600000))}:${p(Math.floor(ms / 60000) % 60)}:${p(Math.floor(ms / 1000) % 60)}:${p(Math.floor((ms % 1000) / 41.7))}` });
     }, 250);
     this.io = new IntersectionObserver(es => es.forEach(e => {
-      const dz = e.target.hasAttribute('data-dark-zone');
-      if (e.isIntersecting) { e.target.setAttribute('data-inview', '1'); if (dz) this.setState({ dark: true }); }
-      else if (dz) this.setState({ dark: false });
+      const dz = e.target.hasAttribute('data-dark-zone'), lz = e.target.hasAttribute('data-light-zone');
+      if (e.isIntersecting) { e.target.setAttribute('data-inview', '1'); if (dz) this.setState({ dark: true }); if (lz) this.setState({ light: true }); }
+      else { if (dz) this.setState({ dark: false }); if (lz) this.setState({ light: false }); }
     }), { threshold: 0.12 });
-    this.navIds = ['work-b', 'services-b', 'studio-b', 'packages-b', 'contact-b', 'work-c', 'services-c', 'studio-c', 'packages-c', 'contact-c'];
+    this.navIds = ['work-b', 'services-b', 'studio-b', 'packages-b', 'contact-b', 'work-c', 'services-c', 'studio-c', 'packages-c', 'contact-c', 'work-4', 'services-4', 'studio-4', 'packages-4', 'contact-4'];
     this.inNav = new Set();
     this.navIo = new IntersectionObserver(es => {
       es.forEach(e => { if (e.isIntersecting) this.inNav.add(e.target.id); else this.inNav.delete(e.target.id); });
       const seen = this.navIds.filter(id => this.inNav.has(id)), a = seen.length ? seen[seen.length - 1] : '';
       if (a !== this.state.active) this.setState({ active: a });
     }, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
+    this.lensIo = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const i = +e.target.dataset.lens; if (i !== this.state.lens) this.setState({ lens: i }); } }), { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
     this.onScrollB = () => this.onScroll(); this.onResizeB = () => this.onResize();
     window.addEventListener('scroll', this.onScrollB, { passive: true }); window.addEventListener('resize', this.onResizeB);
     this.embed = /(\?|&)embed=1/.test(location.search);
@@ -709,10 +769,10 @@ class Component extends DCLogic {
       this.sRaf = 0;
       const sy = window.scrollY || document.documentElement.scrollTop || 0, vh = window.innerHeight, v = this.state.v;
       if (v === 'a4') {
-        const L = this.leftRef.current, R = this.rightRef.current; if (!L || !R) return;
-        const k = Math.max(0, Math.min(1, sy / Math.max(1, vh)));
-        L.style.transform = 'translate3d(0,' + (k * 28).toFixed(2) + 'vh,0)'; L.style.opacity = String(1 - k * 0.9);
-        R.style.transform = 'translate3d(0,' + (-k * 55).toFixed(2) + 'vh,0)';
+        if (this.afLocked) { this.afLocked = null; this.afApply(); }
+        const k = Math.min(1, sy / Math.max(1, document.documentElement.scrollHeight - vh));
+        if (this.frRef.current) this.frRef.current.textContent = 'FR ' + String(Math.round(k * 1000)).padStart(4, '0') + ' / 1000';
+        if (this.ringRef.current) this.ringRef.current.style.transform = 'rotate(' + (sy / 9).toFixed(1) + 'deg)';
       } else if (v === 'a5') {
         const F = this.filmRef.current; if (!F) return;
         const p = Math.max(0, Math.min(1, (sy - F.offsetTop) / Math.max(1, F.offsetHeight - vh)));
@@ -729,18 +789,22 @@ class Component extends DCLogic {
   }
   componentDidUpdate(pp, ps) {
     this.refresh();
-    if (pp.variant !== this.props.variant && this.VALID.includes(this.props.variant)) this.setState({ v: this.props.variant, intro: this.props.variant === 'a1' });
-    if (ps.v !== this.state.v) { window.scrollTo(0, 0); this.inNav.clear(); this.setState({ dark: false, lb: null, cell: null, menu: false, active: '', door: null, p: 0 }); requestAnimationFrame(() => this.onScroll()); setTimeout(() => this.onScroll(), 600); }
+    if (pp.variant !== this.props.variant && this.VALID.includes(this.props.variant)) this.setState({ v: this.props.variant, intro: this.hasIntro(this.props.variant) });
+    if (ps.v !== this.state.v) { window.scrollTo(0, 0); this.inNav.clear(); this.afLocked = null; this.setState({ dark: false, light: false, lb: null, cell: null, menu: false, active: '', lb4: null, shot: false, wh: null, lens: 0, p: 0 }); requestAnimationFrame(() => this.onScroll()); setTimeout(() => this.onScroll(), 600); }
     document.body.style.overflow = (this.state.menu && this.state.v === 'a1') ? 'hidden' : '';
   }
-  componentWillUnmount() { clearInterval(this.tcT); clearTimeout(this.introT); if (this.io) this.io.disconnect(); if (this.navIo) this.navIo.disconnect(); window.removeEventListener('scroll', this.onScrollB); window.removeEventListener('resize', this.onResizeB); document.body.style.overflow = ''; window.removeEventListener('hashchange', this.onHash); }
+  componentWillUnmount() { clearInterval(this.tcT); clearTimeout(this.introT); if (this.io) this.io.disconnect(); if (this.navIo) this.navIo.disconnect(); if (this.lensIo) this.lensIo.disconnect(); clearTimeout(this.shotT); clearTimeout(this.shotT2); window.removeEventListener('scroll', this.onScrollB); window.removeEventListener('resize', this.onResizeB); document.body.style.overflow = ''; window.removeEventListener('hashchange', this.onHash); }
   refresh() {
-    document.querySelectorAll('[data-reveal]:not([data-obs]),[data-develop]:not([data-obs]),[data-dark-zone]:not([data-obs])').forEach(el => { el.setAttribute('data-obs', '1'); this.io.observe(el); });
+    document.querySelectorAll('[data-reveal]:not([data-obs]),[data-develop]:not([data-obs]),[data-dark-zone]:not([data-obs]),[data-light-zone]:not([data-obs])').forEach(el => { el.setAttribute('data-obs', '1'); this.io.observe(el); });
+    document.querySelectorAll('[data-lens]:not([data-lens-obs])').forEach(el => { el.setAttribute('data-lens-obs', '1'); this.lensIo.observe(el); });
     document.querySelectorAll('video[data-auto]:not([data-armed])').forEach(v => { v.setAttribute('data-armed', '1'); v.muted = true; v.loop = true; v.playsInline = true; const p = v.play(); if (p) p.catch(() => {}); });
     this.navIds.forEach(id => { const el = document.getElementById(id); if (el && !el.hasAttribute('data-nav-obs')) { el.setAttribute('data-nav-obs', '1'); this.navIo.observe(el); } });
   }
-  go(v) { this.setState({ v, intro: v === 'a1', menu: false }); if (location.hash !== '#' + v) history.replaceState(null, '', '#' + v); if (v === 'a1') { clearTimeout(this.introT); this.introT = setTimeout(() => this.setState({ intro: false }), 2700); } }
+  go(v) { this.setState({ v, intro: this.hasIntro(v), menu: false }); if (location.hash !== '#' + v) history.replaceState(null, '', '#' + v); if (this.hasIntro(v)) { clearTimeout(this.introT); this.introT = setTimeout(() => this.setState({ intro: false }), 2700); } }
 
+  hasIntro(v) { return v === 'a1' || v === 'a4'; }
+  afApply() { const el = this.afRef.current; if (!el) return; const L = this.afLocked; if (L) { el.style.transform = 'translate3d(' + L.left + 'px,' + L.top + 'px,0)'; el.style.width = L.width + 'px'; el.style.height = L.height + 'px'; } else { el.style.transform = 'translate3d(' + ((this.afX || -100) - 22) + 'px,' + ((this.afY || -100) - 22) + 'px,0)'; el.style.width = '44px'; el.style.height = '44px'; } }
+  afLockEl(t) { const r = t.getBoundingClientRect(); this.afLocked = { left: r.left - 8, top: r.top - 8, width: r.width + 16, height: r.height + 16 }; this.afApply(); }
   renderVals() {
     const S = this.state, V = id => `assets/video/${id}.mp4`;
     const svcBase = [
@@ -793,21 +857,17 @@ class Component extends DCLogic {
     const navIdx = navC.findIndex(x => x.on);
     const swMk = (id, t) => ({ id, t, bg: S.v === id ? '#000' : 'transparent', fg: S.v === id ? '#fff' : '#000' });
     const mob = !!S.mob, notMob = !mob, peekW = mob ? 180 : 300, peekH = mob ? 230 : 380;
-    const svcs2 = svcBase.map((s, i) => ({ n: '0' + (i + 1), t: s.t, d: s.d }));
-    const works2 = [
-      { n: '01', t: 'Royal Snooker', c: 'Brand film', src: V(3588888), ar: '16/10' },
-      { n: '02', t: 'Mr. Snooker', c: 'Social reels', src: V(34132691), ar: '4/5' },
-      { n: '03', t: 'Fashion editorial', c: 'Studio', src: V(31850422), ar: '4/5' },
-      { n: '04', t: 'Downtown launch', c: 'Event recap', src: V(35340079), ar: '16/10' },
-      { n: '05', t: 'Product story', c: 'Commerce', src: V(7823380), ar: '1/1' },
-      { n: '06', t: 'Toronto from above', c: 'Aerial', src: V(13580749), ar: '16/10' }
-    ].map((w, i) => ({ ...w, mt: !mob && i % 2 ? '120px' : '0' }));
-    const heroTiles = [
-      { n: '06', t: 'Toronto from above', c: 'Aerial', src: V(13580749), w: '100%', ar: '16/10', al: 'flex-start' },
-      { n: '03', t: 'Fashion editorial', c: 'Studio', src: V(31850422), w: '58%', ar: '4/5', al: 'flex-end' },
-      { n: '04', t: 'Downtown launch', c: 'Event recap', src: V(35340079), w: '86%', ar: '16/10', al: 'flex-start' }
-    ];
-    const door = S.door == null ? null : works2[S.door];
+    const light = !!S.light, bg4 = light ? '#ecebe6' : '#0c0c0c', ink4 = light ? '#0c0c0c' : '#ecebe6', bd4 = light ? 'rgba(12,12,12,.22)' : 'rgba(236,235,230,.22)', bd4s = light ? 'rgba(12,12,12,.5)' : 'rgba(236,235,230,.5)';
+    const works4 = [
+      { n: 'F01', t: 'Royal Snooker', c: 'Brand film', src: V(3588888) }, { n: 'F02', t: 'Studio portraits', c: 'Photography', src: V(31850422) }, { n: 'F03', t: 'Mr. Snooker', c: 'Social reels', src: V(34132691) },
+      { n: 'F04', t: 'Downtown launch', c: 'Event recap', src: V(35340079) }, { n: 'F05', t: 'Product story', c: 'Commerce', src: V(7823380) }, { n: 'F06', t: 'Toronto from above', c: 'Aerial', src: V(13580749) }
+    ].map((w, i) => ({ ...w, delay: (i % 3) * 0.1 + 's', blur: S.wh == null || S.wh === i ? '0px' : '6px', op: S.wh == null || S.wh === i ? 1 : 0.5, sc: S.wh === i ? 1.04 : 1 }));
+    const lb4 = S.lb4 == null ? null : works4[S.lb4];
+    const mm4 = ['24mm', '35mm', '85mm', '50mm'];
+    const svcs4 = svcBase.map((s, i) => ({ n: s.n, t: s.t, d: s.d, mm: mm4[i], op: S.lens === i ? 1 : 0.4 }));
+    const lensVids = svcBase.map((s, i) => ({ src: s.src, r: i <= S.lens ? '75%' : '0%' }));
+    const nav4 = [['Work', 'work-4'], ['Services', 'services-4'], ['Studio', 'studio-4'], ['Packages', 'packages-4']].map(([t, id]) => { const on = S.active === id; return { t, href: '#' + id, op: on ? 1 : 0.5, tick: on ? '28px' : '12px' }; });
+    const pkItems4 = pkDefs.map(k => { const on = !!S.pk[k.k]; return { ...k, bg: on ? ink4 : 'transparent', fg: on ? bg4 : 'inherit' }; });
     const chapData = [
       { kicker: 'Zeus Frames · Toronto media studio', t: 'Your vision, projected.', short: 'Intro', d: 'Video, photography and social content for brands that want to be remembered. Scroll to roll the film.', src: V(12735441) },
       { kicker: 'Reel 02 · Video production', t: 'Brand films that feel like cinema.', short: 'Video', d: 'Scripted, shot and graded in-house — commercials, brand films and cinematic reels.', src: V(3588888) },
@@ -833,13 +893,21 @@ class Component extends DCLogic {
       grida2: mob ? '1fr' : 'minmax(0,1.1fr) minmax(0,1fr)', stickyPos: mob ? 'relative' : 'sticky',
       navGridC: mob ? '1fr max-content' : 'max-content repeat(4,minmax(0,1fr)) max-content', sheetCols: mob ? 'repeat(2,minmax(0,1fr))' : 'repeat(4,minmax(0,1fr))',
       estPad: mob ? '24px' : '44px', estGrid: mob ? '1fr' : 'minmax(0,1.2fr) minmax(0,1fr)', estBL: mob ? 'none' : '1px solid currentColor', estPL: mob ? '0' : '44px', estBT: mob ? '1px solid currentColor' : 'none', estPT: mob ? '28px' : '0',
-      splitCols: mob ? '1fr' : '1fr 1fr', splitRows: mob ? 'auto 55vh' : '1fr', heroH: mob ? 'auto' : '100vh', heroMinH: mob ? '0' : '640px', heroPadL: mob ? '110px 6vw 8vh' : '0 6vw 12vh', workCols: mob ? '1fr' : 'repeat(2,minmax(0,1fr))',
-      swTurn1: [swMk('a1', 'a1 Noir'), swMk('a2', 'a2 Gallery'), swMk('a3', 'a3 Darkroom'), swMk('a4', 'a4 Split'), swMk('a5', 'a5 Projector')],
+      swTurn1: [swMk('a1', 'a1 Noir'), swMk('a2', 'a2 Gallery'), swMk('a3', 'a3 Darkroom'), swMk('a4', 'a4 Viewfinder'), swMk('a5', 'a5 Projector')],
       goV: e => this.go(e.currentTarget.dataset.v),
       hp, hs,
-      leftRef: this.leftRef, rightRef: this.rightRef, svcs2, works2, heroTiles,
-      doorOpen: !!door, doorSrc: door ? door.src : '', doorTitle: door ? door.t : '', doorMeta: door ? door.n + ' — ' + door.c : '',
-      doorOpenFn: e => this.setState({ door: +e.currentTarget.dataset.i }), doorClose: () => this.setState({ door: null }), toEnd: toBottom,
+      toEnd: toBottom, intro4: S.intro && S.v === 'a4', bg4, ink4, bd4, bd4s, exp4: light ? 'ISO 100 · f/8 · 1/250 · EV +2.0' : 'ISO 800 · f/1.8 · 1/50 · EV −1.0',
+      afRef: this.afRef, frRef: this.frRef, ringRef: this.ringRef,
+      afMove: e => { if (this.state.mob) return; this.afX = e.clientX; this.afY = e.clientY; if (!this.afLocked) this.afApply(); },
+      afLock: e => this.afLockEl(e.currentTarget), afFree: () => { this.afLocked = null; this.afApply(); },
+      nav4, works4, workCols4: mob ? '1fr' : 'repeat(3,minmax(0,1fr))',
+      whOn: e => { hp(e); this.afLockEl(e.currentTarget); this.setState({ wh: +e.currentTarget.dataset.i }); },
+      whLeave: e => { hs(e); this.afLocked = null; this.afApply(); }, whOff: () => this.setState({ wh: null }),
+      shoot: e => { const i = +e.currentTarget.dataset.i; this.setState({ shot: true }); clearTimeout(this.shotT); clearTimeout(this.shotT2); this.shotT = setTimeout(() => this.setState({ lb4: i }), 330); this.shotT2 = setTimeout(() => this.setState({ shot: false }), 800); },
+      shotOn: S.shot, lb4Open: !!lb4, lb4Src: lb4 ? lb4.src : '', lb4T: lb4 ? lb4.t : '', lb4N: lb4 ? lb4.n : '', lb4C: lb4 ? lb4.c : '', closeLb4: () => this.setState({ lb4: null }),
+      svcs4, lensVids, lensLabel: svcBase[S.lens].n + ' — ' + svcBase[S.lens].t + ' · ' + mm4[S.lens],
+      lensCols: mob ? 'minmax(0,1fr) 32vw' : 'minmax(0,1fr) minmax(0,1fr)', lensW: mob ? '32vw' : 'min(38vw,70vh)', lensTop: mob ? '72px' : 'calc(50vh - min(19vw,35vh))', ringIn: mob ? '-8px' : '-18px', svcMinH: mob ? '0' : '72vh',
+      pkItems4,
       filmRef: this.filmRef, filmH: (NC + 1) * 100, chapters2, chapNo: '0' + (chapCur + 1),
       screenScale: S.p > 0.9 ? (1 - (S.p - 0.9) / 0.1 * 0.16).toFixed(3) : '1', hintOp: S.p < 0.02 ? 0.7 : 0,
       toChap: e => { const k = +e.currentTarget.dataset.i, F = this.filmRef.current; if (!F) return; window.scrollTo({ top: F.offsetTop + (k / NC + 0.02) * (F.offsetHeight - window.innerHeight), behavior: 'smooth' }); },
