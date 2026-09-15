@@ -85,18 +85,27 @@ video,img{display:block}
   </sc-if>
 
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
-    <div style="position:fixed;inset:0;z-index:780;background:#0c0c0c;color:#ecebe6;padding:90px 8vw 40px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;gap:30px;animation:fade .35s both">
-      <div style="display:flex;flex-direction:column">
-        <sc-for list="{{ pages }}" as="p" hint-placeholder-count="8">
-          <button data-p="{{ p.id }}" onClick="{{ goPage }}" style="text-align:left;display:flex;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid rgba(236,235,230,.18);opacity:{{ p.op }}">
-            <span style="font-size:10px;letter-spacing:.2em">{{ p.n }}</span>
-            <span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,7vw,44px);line-height:1">{{ p.t }}</span>
-          </button>
-        </sc-for>
+    <div style="position:fixed;inset:0;z-index:780;background:#0c0c0c;color:#ecebe6;padding:100px 8vw 40px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;gap:30px;animation:fade .35s both">
+      <div style="display:grid;grid-template-columns:{{ menuCols }};gap:40px 8vw;align-items:start">
+        <div style="display:flex;flex-direction:column">
+          <sc-for list="{{ pages }}" as="p" hint-placeholder-count="5">
+            <button data-p="{{ p.id }}" onClick="{{ goPage }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="text-align:left;display:flex;align-items:baseline;gap:18px;padding:16px 0;border-bottom:1px solid rgba(236,235,230,.18);opacity:{{ p.op }};transition:opacity .3s,padding-left .4s" style-hover="opacity:1;padding-left:12px">
+              <span style="font-size:10px;letter-spacing:.2em;min-width:24px">{{ p.n }}</span>
+              <span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(30px,5.5vw,76px);line-height:1;letter-spacing:-.02em">{{ p.t }}</span>
+              <span style="margin-left:auto;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5;display:{{ deskOnly }}">{{ p.hint }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <div style="display:{{ deskOnly }};flex-direction:column;gap:26px;font-size:13px;line-height:1.7;padding-top:16px">
+          <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Call</div>+1 647-839-1491</div>
+          <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Email</div>Zeusframess@gmail.com</div>
+          <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Studio</div>180 Shaughnessy Blvd<br>North York, ON M2J 1K3</div>
+          <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Social</div><a href="https://www.instagram.com/zeusframes.inc" style="border-bottom:1px solid currentColor">@zeusframes.inc</a></div>
+        </div>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase">
         <img src="assets/logo-h-white.png" alt="Zeus Frames" style="height:26px;width:auto;display:block">
-        <button onClick="{{ closeMenu }}" style="border:1px solid rgba(236,235,230,.5);border-radius:999px;padding:12px 18px">Close ✕</button>
+        <button onClick="{{ closeMenu }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="border:1px solid rgba(236,235,230,.5);border-radius:999px;padding:12px 18px">Close ✕</button>
       </div>
     </div>
   </sc-if>
@@ -108,38 +117,34 @@ video,img{display:block}
     <span style="position:absolute;right:0;bottom:0;width:10px;height:10px;border-right:1.5px solid #fff;border-bottom:1.5px solid #fff"></span>
   </div>
 
+  <div style="position:fixed;left:0;right:0;top:0;height:{{ scrimH }};z-index:499;pointer-events:none;background:linear-gradient(180deg,rgba(12,12,12,.92) 0%,rgba(12,12,12,.7) 45%,rgba(12,12,12,0) 100%)"></div>
   <div style="position:fixed;inset:0;z-index:500;pointer-events:none;mix-blend-mode:difference;color:#fff;font-size:10px;letter-spacing:.2em;text-transform:uppercase">
     <span style="position:absolute;left:16px;top:16px;width:18px;height:18px;border-left:1px solid #fff;border-top:1px solid #fff"></span>
     <span style="position:absolute;right:16px;top:16px;width:18px;height:18px;border-right:1px solid #fff;border-top:1px solid #fff"></span>
-    <span style="position:absolute;left:16px;bottom:16px;width:18px;height:18px;border-left:1px solid #fff;border-bottom:1px solid #fff"></span>
-    <span style="position:absolute;right:16px;bottom:16px;width:18px;height:18px;border-right:1px solid #fff;border-bottom:1px solid #fff"></span>
+    <span style="position:absolute;left:16px;bottom:16px;width:18px;height:18px;border-left:1px solid #fff;border-bottom:1px solid #fff;display:{{ deskOnly }}"></span>
+    <span style="position:absolute;right:16px;bottom:16px;width:18px;height:18px;border-right:1px solid #fff;border-bottom:1px solid #fff;display:{{ deskOnly }}"></span>
     <div style="position:absolute;left:36px;right:36px;top:26px;display:flex;justify-content:space-between;align-items:center;gap:16px">
       <button data-p="home" onClick="{{ goPage }}" aria-label="Zeus Frames — home" style="pointer-events:auto;display:flex;align-items:center;gap:12px"><svg viewBox="0 0 485 541" style="width:28px;height:31px;display:block" aria-hidden="true"><path fill="#fff" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z"></path></svg><span style="display:{{ deskOnly }};letter-spacing:.2em;text-transform:uppercase;font-size:10px;opacity:.75">/ {{ pageName }}</span></button>
       <span style="display:{{ hudRow }};align-items:center;gap:10px;white-space:nowrap"><span style="width:7px;height:7px;border-radius:50%;background:#fff;animation:blink 1.2s steps(1) infinite"></span>REC <span style="opacity:.7;font-variant-numeric:tabular-nums">{{ tc }}</span></span>
       <div style="display:flex;align-items:center;gap:18px">
         <button data-p="contact" onClick="{{ goPage }}" style="pointer-events:auto;border-bottom:1px solid #fff;padding-bottom:3px;white-space:nowrap;letter-spacing:.2em;text-transform:uppercase;font-size:10px">Get a quote</button>
-        <button onClick="{{ openMenu }}" style="pointer-events:auto;display:{{ mobOnly }};letter-spacing:.2em;text-transform:uppercase;font-size:10px">Menu ≡</button>
+        <button onClick="{{ openMenu }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" aria-label="Open menu" style="pointer-events:auto;letter-spacing:.2em;text-transform:uppercase;font-size:10px">Menu ≡</button>
       </div>
     </div>
-    <div style="position:absolute;left:36px;bottom:26px;display:{{ deskOnly }};white-space:nowrap">{{ exp }}</div>
     <div ref="{{ frRef }}" style="position:absolute;right:36px;bottom:26px;font-variant-numeric:tabular-nums;white-space:nowrap;display:{{ deskOnly }}">FR 0000 / 1000</div>
   </div>
 
-  <button ref="{{ topRef }}" onClick="{{ toTop }}" aria-label="Back to top" style="position:fixed;right:36px;bottom:60px;z-index:520;width:44px;height:44px;border:1px solid #fff;border-radius:50%;mix-blend-mode:difference;color:#fff;font-size:14px;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .4s,transform .4s">↑</button>
+  <button ref="{{ topRef }}" onClick="{{ toTop }}" aria-label="Back to top" style="position:fixed;right:20px;bottom:60px;z-index:520;display:{{ deskOnly }};width:44px;height:44px;border:1px solid rgba(236,235,230,.4);border-radius:50%;background:rgba(12,12,12,.72);backdrop-filter:blur(14px);color:#ecebe6;font-size:14px;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .4s,transform .4s">↑</button>
   <sc-if value="{{ mob }}" hint-placeholder-val="{{ false }}">
-    <div style="position:fixed;left:16px;right:16px;bottom:16px;z-index:530;display:grid;grid-template-columns:1fr 1fr auto;gap:8px">
-      <a href="https://wa.me/16478391491" style="display:flex;align-items:center;justify-content:center;gap:8px;height:48px;background:#ecebe6;color:#0c0c0c;font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-radius:999px;box-shadow:0 8px 30px rgba(0,0,0,.35)">WhatsApp</a>
-      <a href="tel:+16478391491" style="display:flex;align-items:center;justify-content:center;gap:8px;height:48px;border:1px solid #ecebe6;background:rgba(12,12,12,.7);backdrop-filter:blur(8px);color:#ecebe6;font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-radius:999px">Call</a>
-      <button data-p="contact" onClick="{{ goPage }}" aria-label="Get a quote" style="width:48px;height:48px;border-radius:50%;border:1px solid #ecebe6;background:rgba(12,12,12,.7);backdrop-filter:blur(8px);color:#ecebe6;font-size:16px">→</button>
+    <div style="position:fixed;left:0;right:0;bottom:0;height:120px;z-index:529;pointer-events:none;background:linear-gradient(0deg,rgba(12,12,12,.95) 0%,rgba(12,12,12,.75) 50%,rgba(12,12,12,0) 100%)"></div>
+    <div style="position:fixed;left:16px;right:16px;bottom:44px;z-index:530;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 48px 48px;gap:8px;align-items:center">
+      <a href="https://wa.me/16478391491" style="display:flex;align-items:center;justify-content:center;height:48px;background:#ecebe6;color:#0c0c0c;font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-radius:999px;white-space:nowrap">WhatsApp</a>
+      <a href="tel:+16478391491" style="display:flex;align-items:center;justify-content:center;height:48px;border:1px solid #ecebe6;color:#ecebe6;font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-radius:999px">Call</a>
+      <button data-p="contact" onClick="{{ goPage }}" aria-label="Get a quote" style="width:48px;height:48px;border-radius:50%;border:1px solid #ecebe6;color:#ecebe6;font-size:16px;display:grid;place-items:center">→</button>
+      <button onClick="{{ toTop }}" aria-label="Back to top" style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(236,235,230,.45);color:#ecebe6;font-size:14px;display:grid;place-items:center">↑</button>
     </div>
   </sc-if>
-  <sc-if value="{{ notMob }}" hint-placeholder-val="{{ true }}">
-    <nav style="position:fixed;right:36px;top:50%;transform:translateY(-50%);z-index:520;display:flex;flex-direction:column;align-items:flex-end;gap:15px;mix-blend-mode:difference;color:#fff;font-size:10px;letter-spacing:.2em;text-transform:uppercase">
-      <sc-for list="{{ pages }}" as="p" hint-placeholder-count="8">
-        <button data-p="{{ p.id }}" onClick="{{ goPage }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;align-items:center;gap:10px;opacity:{{ p.op }};transition:opacity .4s"><span>{{ p.t }}</span><span style="width:{{ p.tick }};height:1px;background:#fff;transition:width .4s"></span></button>
-      </sc-for>
-    </nav>
-  </sc-if>
+
 
   <sc-if value="{{ rangeBar }}" hint-placeholder-val="{{ false }}">
     <button data-p="contact" onClick="{{ goPage }}" style="position:fixed;left:50%;bottom:{{ rangeBottom }};transform:translateX(-50%);z-index:525;display:flex;align-items:center;gap:16px;padding:12px 18px 12px 22px;border-radius:999px;background:#ecebe6;color:#0c0c0c;box-shadow:0 12px 40px rgba(0,0,0,.4);font-size:10px;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;animation:zoom .5s cubic-bezier(.2,.7,.2,1) both;max-width:calc(100vw - 32px)">
@@ -192,7 +197,7 @@ video,img{display:block}
     <section id="services" style="padding:120px 6vw 80px">
       <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:60px">
         <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(46px,7vw,120px);line-height:.9;letter-spacing:-.02em">What we <em>make</em></h2>
-        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Scroll — the lens refocuses</span>
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65;display:{{ deskOnly }}">Scroll — the lens refocuses</span>
       </div>
       <div style="display:grid;grid-template-columns:{{ lensCols }};gap:6vw;align-items:start">
         <div>
@@ -205,7 +210,7 @@ video,img{display:block}
             </div>
           </sc-for>
         </div>
-        <div style="position:sticky;top:{{ lensTop }};width:{{ lensW }};aspect-ratio:1;justify-self:center;z-index:2">
+        <div style="position:sticky;top:{{ lensTop }};width:{{ lensW }};aspect-ratio:1;justify-self:center;z-index:2;display:{{ lensDisplay }}">
           <div ref="{{ ringRef }}" style="position:absolute;inset:{{ ringIn }};border-radius:50%;border:1px dashed {{ bds }};will-change:transform"></div>
           <div style="position:absolute;inset:-6px;border-radius:50%;border:1px solid {{ bd }}"></div>
           <div style="position:absolute;inset:0;border-radius:50%;overflow:hidden;background:#000">
@@ -778,6 +783,8 @@ class Component extends DCLogic {
     else if (this.PAGES.includes(pv)) this.setState({ page: pv });
     this.onHash = () => { const x = location.hash.replace('#', ''); if (this.PAGES.includes(x) && x !== this.state.page) { this.jumpTop(); this.setState({ page: x, menu: false }); } };
     window.addEventListener('hashchange', this.onHash);
+    this.onKey = e => { if (e.key === 'Escape' && this.state.menu) this.setState({ menu: false }); };
+    window.addEventListener('keydown', this.onKey);
     this.embed = /(\?|&)embed=1/.test(location.search);
     if (this.embed) this.setState({ intro: false });
     this.introT = setTimeout(() => this.setState({ intro: false }), this.embed ? 0 : 3500);
@@ -825,7 +832,7 @@ class Component extends DCLogic {
   componentWillUnmount() {
     clearInterval(this.tcT); clearTimeout(this.introT); clearTimeout(this.shotT); clearTimeout(this.shotT2);
     if (this.io) this.io.disconnect(); if (this.lensIo) this.lensIo.disconnect(); if (this.vidIo) this.vidIo.disconnect(); if (this.brandIo) this.brandIo.disconnect();
-    window.removeEventListener('scroll', this.onScrollB); window.removeEventListener('resize', this.onResizeB); if (this.rootRo) this.rootRo.disconnect(); if (this.mq) { if (this.mq.removeEventListener) this.mq.removeEventListener('change', this.onMq); else this.mq.removeListener(this.onMq); } window.removeEventListener('hashchange', this.onHash);
+    window.removeEventListener('scroll', this.onScrollB); window.removeEventListener('resize', this.onResizeB); if (this.rootRo) this.rootRo.disconnect(); if (this.mq) { if (this.mq.removeEventListener) this.mq.removeEventListener('change', this.onMq); else this.mq.removeListener(this.onMq); } window.removeEventListener('hashchange', this.onHash); window.removeEventListener('keydown', this.onKey);
   }
   jumpTop() {
     const el = document.documentElement, body = document.body;
@@ -935,14 +942,15 @@ class Component extends DCLogic {
       pageName: (pageDefs.find(p => p[0] === page) || pageDefs[0])[1],
       topRef: this.topRef, toTop: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
       stop: e => e.stopPropagation(),
-      rangeBar: any && S.touched && page !== 'contact', rangeBottom: mob ? '80px' : '28px',
+      rangeBar: any && S.touched && page !== 'contact', rangeBottom: mob ? '104px' : '28px',
       rootRef: this.rootRef, hudRow: mob ? 'none' : 'flex', bg, ink, bd, bds, mob, notMob: !mob, deskOnly: mob ? 'none' : 'block', mobOnly: mob ? 'block' : 'none',
       intro: S.intro, tc: S.tc, exp: light ? 'ISO 100 · f/8 · 1/250 · EV +2.0' : 'ISO 800 · f/1.8 · 1/50 · EV −1.0',
       afRef: this.afRef, frRef: this.frRef, ringRef: this.ringRef,
       afMove: e => { if (mob) return; this.afX = e.clientX; this.afY = e.clientY; if (!this.afLocked) this.afApply(); },
       afLock: e => this.afLockEl(e.currentTarget), afFree: () => { this.afLocked = null; this.afApply(); },
-      pages: pageDefs.map(([id, t], i) => { const on = page === id; return { id, t, n: '0' + (i + 1), op: on ? 1 : 0.5, tick: on ? '28px' : '12px' }; }),
-      goPage: e => { const p = e.currentTarget.dataset.p; if (!this.PAGES.includes(p)) return; if (p !== this.state.page) this.jumpTop(); this.setState({ page: p }); },
+      pages: pageDefs.map(([id, t], i) => { const on = page === id; const hints = { home: 'Work · Lens · Studio · About', services: 'Video · Social · Events', studio: 'Gallery · Kit · Rates', packages: 'Plans · Estimator · FAQ', contact: 'Three steps · live range' }; return { id, t, n: '0' + (i + 1), op: on ? 1 : 0.6, hint: on ? 'You are here' : hints[id] }; }),
+      menuCols: mob ? '1fr' : 'minmax(0,1.4fr) minmax(0,.6fr)', scrimH: mob ? '96px' : '120px',
+      goPage: e => { const p = e.currentTarget.dataset.p; if (!this.PAGES.includes(p)) return; this.jumpTop(); this.afLocked = null; this.afApply(); this.setState({ page: p, menu: false }); },
       menuOpen: S.menu, openMenu: () => this.setState({ menu: true }), closeMenu: () => this.setState({ menu: false }),
       isHome: page === 'home', isServices: page === 'services', isStudio: page === 'studio', isPackages: page === 'packages', isContact: page === 'contact',
       svcTabs: [['svc-video', 'Video production', '24mm'], ['svc-social', 'Social marketing', '35mm'], ['svc-events', 'Events', '50mm']].map(([id, t, mm]) => ({ href: '#' + id, t, mm })),
@@ -959,7 +967,7 @@ class Component extends DCLogic {
       svcs: svcBase.map((s, i) => ({ ...s, op: S.lens === i ? 1 : 0.4 })),
       lensVids: svcBase.map((s, i) => ({ src: s.src, r: i <= S.lens ? '75%' : '0%' })),
       lensLabel: svcBase[S.lens].n + ' — ' + svcBase[S.lens].t + ' · ' + svcBase[S.lens].mm,
-      lensCols: mob ? 'minmax(0,1fr) 32vw' : 'minmax(0,1fr) minmax(0,1fr)', lensW: mob ? '32vw' : 'min(38vw,70vh)', lensTop: mob ? '72px' : 'calc(50vh - min(19vw,35vh))', ringIn: mob ? '-8px' : '-18px', svcMinH: mob ? '0' : '72vh',
+      lensCols: mob ? '1fr' : 'minmax(0,1fr) minmax(0,1fr)', lensDisplay: mob ? 'none' : 'block', lensW: mob ? '32vw' : 'min(38vw,70vh)', lensTop: mob ? '72px' : 'calc(50vh - min(19vw,35vh))', ringIn: mob ? '-8px' : '-18px', svcMinH: mob ? '0' : '72vh',
       steps: [['01', 'Discovery', 'A 20-minute call: what you sell, who buys, what has worked. We come back with a shot list.'], ['02', 'Pre-production', 'Script, locations, wardrobe and a schedule you sign off before anyone picks up a camera.'], ['03', 'Shoot day', 'One day, two operators, our lighting. You approve frames as we go.'], ['04', 'Delivery', 'First cuts in 48 hours, full set inside ten days, sized for every platform you post on.']].map(([n, t, d], i) => ({ n, t, d, delay: i * 0.1 + 's' })),
       videoKinds: [['01', 'Commercials', 'Thirty and sixty second spots built for paid placement, with alternate cuts for each platform.', '24mm', 'From $1,500'], ['02', 'Brand films', 'A two to three minute story about the people behind the product. The anchor of your site.', '35mm', 'From $2,500'], ['03', 'Product', 'Tabletop, macro and lifestyle coverage — stills and motion from the same session.', '100mm', 'From $499'], ['04', 'Real estate', 'Walkthroughs, drone exteriors and twilight sets, delivered inside 72 hours.', '16mm', 'From $1,200'], ['05', 'Music videos', 'Performance and narrative, single or multi-location, with colour built around the track.', '50mm', 'From $1,800'], ['06', 'Documentary', 'Long-form interviews and vérité coverage for founders, athletes and institutions.', '85mm', 'On request']].map(([n, t, d, mm, price], i) => ({ n, t, d, mm, price, delay: (i % 3) * 0.1 + 's' })),
       checklist: ['Concept and script', 'Location scouting', 'Casting', 'Wardrobe and styling', 'Lighting and grip', 'Sound recording', 'Drone and aerial', 'Gimbal and slider', 'Editing', 'Colour grade', 'VFX and titles', 'Licensed music'].map((t, i) => ({ t, n: String(i + 1).padStart(2, '0') })),
