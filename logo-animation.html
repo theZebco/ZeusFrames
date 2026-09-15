@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0c0c0c;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+@keyframes zfHex{0%{stroke-dashoffset:1;opacity:1}42%{stroke-dashoffset:0}100%{stroke-dashoffset:0}}
+@keyframes zfTri{0%,18%{stroke-dashoffset:1;opacity:1}58%{stroke-dashoffset:0}100%{stroke-dashoffset:0}}
+@keyframes zfCut{0%,40%{stroke-dashoffset:1;opacity:1}72%{stroke-dashoffset:0}100%{stroke-dashoffset:0}}
+@keyframes zfFill{0%,62%{opacity:0}84%,100%{opacity:1}}
+@keyframes zfLines{0%,80%{opacity:1}94%,100%{opacity:0}}
+@keyframes zfDot{0%,60%{opacity:0;transform:scale(.2)}68%{opacity:1;transform:scale(1.1)}76%{opacity:1;transform:scale(1)}88%,100%{opacity:0;transform:scale(.4)}}
+@keyframes zfGlow{0%,66%{opacity:0}80%{opacity:.35}100%{opacity:0}}
+@keyframes zfLoop{to{transform:rotate(360deg)}}
+@keyframes zfPulse{0%,100%{opacity:.2;transform:scale(.97)}50%{opacity:.5;transform:scale(1)}}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#0c0c0c;color:#ecebe6;font-family:'DM Mono',monospace;display:grid;grid-template-rows:auto 1fr auto;gap:30px;padding:40px;box-sizing:border-box">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:16px">
+    <div>
+      <div style="font-size:10px;letter-spacing:.25em;text-transform:uppercase;opacity:.6">Zeus Frames · Logo motion · fit 96.6% to source</div>
+      <div style="margin-top:8px;font-size:13px;line-height:1.6;opacity:.8;max-width:600px">Vector fitted to the original mark pixel-by-pixel. Sequence: the frame is drawn as a hairline → the lens triangle → the three cut-outs → a focus dot blinks → the outline "develops" into the solid mark. Idle: a dashed focus ring orbits.</div>
+    </div>
+    <button onClick="{{ replay }}" style="border:1px solid rgba(236,235,230,.5);border-radius:999px;padding:11px 18px;font-size:10px;letter-spacing:.2em;text-transform:uppercase">Replay ↻</button>
+  </div>
+
+  <div style="display:grid;place-items:center">
+    <div key="{{ runKey }}" style="position:relative;width:min(60vh,420px);aspect-ratio:485/541">
+      <svg viewBox="0 0 485 541" fill="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+        <g style="transform-origin:242px 270px;animation:zfLoop 26s linear infinite"><circle cx="242" cy="270" r="296" stroke="#ecebe6" stroke-width="1" stroke-dasharray="3 14" opacity=".35"></circle></g>
+        <circle cx="242" cy="270" r="266" stroke="#ecebe6" stroke-width="1" style="transform-origin:242px 270px;animation:zfPulse 4s ease-in-out infinite 3s"></circle>
+        <circle cx="242" cy="270" r="220" fill="#ecebe6" opacity="0" style="transform-origin:242px 270px;animation:zfGlow 4s ease-out both;filter:blur(40px)"></circle>
+        <g stroke="#ecebe6" stroke-width="3" stroke-linejoin="round" pathLength="1" style="animation:zfLines 4s ease both">
+          <path d="{{ hex }}" pathLength="1" stroke-dasharray="1" style="animation:zfHex 4s cubic-bezier(.65,0,.2,1) both"></path>
+          <path d="{{ tri }}" pathLength="1" stroke-dasharray="1" style="animation:zfTri 4s cubic-bezier(.65,0,.2,1) both"></path>
+          <path d="{{ cap }}" pathLength="1" stroke-dasharray="1" style="animation:zfCut 4s cubic-bezier(.65,0,.2,1) both"></path>
+          <path d="{{ kl }}" pathLength="1" stroke-dasharray="1" style="animation:zfCut 4s cubic-bezier(.65,0,.2,1) both"></path>
+          <path d="{{ kr }}" pathLength="1" stroke-dasharray="1" style="animation:zfCut 4s cubic-bezier(.65,0,.2,1) both"></path>
+        </g>
+        <path fill="#ecebe6" fill-rule="evenodd" d="{{ mark }}" style="animation:zfFill 4s ease both"></path>
+        <circle cx="242" cy="300" r="12" fill="#ecebe6" opacity="0" style="transform-origin:242px 300px;animation:zfDot 4s cubic-bezier(.2,.8,.2,1) both"></circle>
+      </svg>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-end;justify-content:space-between">
+    <div style="display:flex;gap:28px;align-items:center">
+      <div style="text-align:center"><svg viewBox="0 0 485 541" style="width:40px;height:44px;display:block"><path fill="#ecebe6" fill-rule="evenodd" d="{{ mark }}"></path></svg><div style="margin-top:8px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Vector 40px</div></div>
+      <div style="text-align:center"><img src="assets/logo-mark-white.png" alt="" style="width:40px;height:44px;display:block;object-fit:contain"><div style="margin-top:8px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Source PNG</div></div>
+      <div style="text-align:center"><svg viewBox="0 0 485 541" style="width:120px;height:134px;display:block"><path fill="#ecebe6" fill-rule="evenodd" d="{{ mark }}"></path></svg><div style="margin-top:8px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Vector 120px</div></div>
+      <div style="text-align:center"><img src="assets/logo-mark-white.png" alt="" style="width:120px;height:134px;display:block;object-fit:contain"><div style="margin-top:8px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Source 120px</div></div>
+    </div>
+    <div style="font-size:11px;line-height:1.8;opacity:.7;max-width:480px">Placements once approved: <strong style="font-weight:500;opacity:1">intro iris</strong>, <strong style="font-weight:500;opacity:1">HUD mark</strong> (static vector + idle ring), <strong style="font-weight:500;opacity:1">footer</strong> (draws in on reveal), <strong style="font-weight:500;opacity:1">quote-sent</strong> state.</div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { k: 0 };
+  P = {"hex":"M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z","tri":"M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z","cap":"M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z","kl":"M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z","kr":"M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z"};
+  renderVals() {
+    const P = this.P;
+    return { ...P, mark: [P.hex, P.tri, P.cap, P.kl, P.kr].join(' '), runKey: this.state.k, replay: () => this.setState(s => ({ k: s.k + 1 })) };
+  }
+}
+</script>
+</body>
+</html>

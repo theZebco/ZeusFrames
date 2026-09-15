@@ -1,14 +1,18 @@
-# Zeus Frames — Demos
+# Zeus Frames — Website prototype
 
-Static demo pages for the Zeus Frames landing design.
+Responsive marketing site for Zeus Frames (Toronto media studio), "Viewfinder" concept.
+One page shell, five sections switched by hash: `#home` `#services` `#studio` `#packages` `#contact`.
+Single breakpoint at 760px: the same file renders the phone and desktop layouts.
 
-- `index.html` — entry page linking to the demos
-- `Zeusframes Landing.dc.html` — desktop landing (5 variants)
-- `Zeusframes Mobile.dc.html` — mobile view inside iOS frames
-- `support.js`, `ios-frame.jsx` — runtime and device-frame component
+- `index.html` — the site (desktop + mobile)
+- `logo-animation.html` — isolated logo draw-in animation
+- `support.js` — prototype runtime (loads React from a CDN)
+- `assets/` — logo files, `img/` photos, `video/` web-optimized clips (1080p, no audio)
+- `HANDOFF.md` — full design handoff notes (tokens, pages, motion)
 - `uploads/` — project brief PDF
 
 ## GitHub Pages
 
-Settings → Pages → Source: **Deploy from a branch**, branch `main`, folder `/ (root)`.
-The pages must be served over HTTP (they fetch `ios-frame.jsx` and load React from a CDN), so opening the files directly from disk will not work.
+Deployed from `main`, folder `/ (root)`: https://thezebco.github.io/ZeusFrames/
+
+The page must be served over HTTP; opening `index.html` from disk will not work.
