@@ -1,7 +1,7 @@
 # Zeus Frames — Website prototype
 
 Responsive marketing site for Zeus Frames (Toronto media studio), "Viewfinder" concept.
-One page shell, five sections switched by hash: `#home` `#services` `#studio` `#packages` `#contact`.
+One page shell, seven sections switched by hash: `#home` `#video` `#social` `#events` `#studio` `#packages` `#contact`.
 Single breakpoint at 760px: the same file renders the phone and desktop layouts.
 
 - `index.html` — the site (desktop + mobile)

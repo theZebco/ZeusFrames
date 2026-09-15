@@ -10,7 +10,7 @@
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
 html{scroll-behavior:smooth}
 body{margin:0;background:#0c0c0c;-webkit-font-smoothing:antialiased}
@@ -68,6 +68,18 @@ video,img{display:block}
     </div>
   </sc-if>
 
+  <sc-if value="{{ navFlash }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:840;pointer-events:none;background:#0c0c0c;display:grid;place-items:center;animation:fadeOut .45s .75s both">
+      <svg viewBox="0 0 485 541" style="width:64px;height:72px;overflow:visible" aria-hidden="true"><g stroke="#ecebe6" stroke-width="7" stroke-linejoin="round" fill="none" style="animation:zfLines 1.1s ease 0s both">
+            <path d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z" pathLength="1" stroke-dasharray="1" style="animation:zfHex 1.1s cubic-bezier(.65,0,.2,1) 0s both"></path>
+            <path d="M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z" pathLength="1" stroke-dasharray="1" style="animation:zfTri 1.1s cubic-bezier(.65,0,.2,1) 0s both"></path>
+            <path d="M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 1.1s cubic-bezier(.65,0,.2,1) 0s both"></path>
+            <path d="M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 1.1s cubic-bezier(.65,0,.2,1) 0s both"></path>
+            <path d="M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 1.1s cubic-bezier(.65,0,.2,1) 0s both"></path>
+          </g>
+          <path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" style="animation:zfFill 1.1s ease 0s both"></path></svg>
+    </div>
+  </sc-if>
   <sc-if value="{{ shotOn }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed;inset:0;z-index:850;pointer-events:none;overflow:hidden">
       <div style="position:absolute;left:0;right:0;top:0;height:50%;background:#000;animation:bladeTop .7s cubic-bezier(.76,0,.24,1) both"></div>
@@ -78,7 +90,14 @@ video,img{display:block}
 
   <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ closeLb }}" style="position:fixed;inset:0;z-index:800;background:#000;color:#ecebe6;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:18px;padding:80px 6vw 40px;box-sizing:border-box;animation:fade .5s .3s both;cursor:zoom-out">
-      <div style="display:flex;justify-content:space-between;gap:16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase"><span>{{ lbN }} — {{ lbC }}</span><span>Close ✕</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase"><span style="display:flex;align-items:center;gap:12px"><svg viewBox="0 0 485 541" style="width:20px;height:22px;overflow:visible" aria-hidden="true"><g stroke="#ecebe6" stroke-width="10" stroke-linejoin="round" fill="none" style="animation:zfLines 1.4s ease .2s both">
+            <path d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z" pathLength="1" stroke-dasharray="1" style="animation:zfHex 1.4s cubic-bezier(.65,0,.2,1) .2s both"></path>
+            <path d="M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z" pathLength="1" stroke-dasharray="1" style="animation:zfTri 1.4s cubic-bezier(.65,0,.2,1) .2s both"></path>
+            <path d="M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 1.4s cubic-bezier(.65,0,.2,1) .2s both"></path>
+            <path d="M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 1.4s cubic-bezier(.65,0,.2,1) .2s both"></path>
+            <path d="M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 1.4s cubic-bezier(.65,0,.2,1) .2s both"></path>
+          </g>
+          <path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" style="animation:zfFill 1.4s ease .2s both"></path></svg>{{ lbN }} — {{ lbC }}</span><span>Close ✕</span></div>
       <video data-auto="1" src="{{ lbSrc }}" muted="{{ true }}" autoPlay="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="width:100%;height:100%;object-fit:contain;filter:grayscale(1)"></video>
       <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(32px,5vw,84px);line-height:1">{{ lbT }}</div>
     </div>
@@ -89,18 +108,21 @@ video,img{display:block}
       <div style="display:grid;grid-template-columns:{{ menuCols }};gap:40px 8vw;align-items:start">
         <div style="display:flex;flex-direction:column">
           <sc-for list="{{ pages }}" as="p" hint-placeholder-count="5">
-            <button data-p="{{ p.id }}" onClick="{{ goPage }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="text-align:left;display:flex;align-items:baseline;gap:18px;padding:16px 0;border-bottom:1px solid rgba(236,235,230,.18);opacity:{{ p.op }};transition:opacity .3s,padding-left .4s" style-hover="opacity:1;padding-left:12px">
-              <span style="font-size:10px;letter-spacing:.2em;min-width:24px">{{ p.n }}</span>
-              <span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(30px,5.5vw,76px);line-height:1;letter-spacing:-.02em">{{ p.t }}</span>
-              <span style="margin-left:auto;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5;display:{{ deskOnly }}">{{ p.hint }}</span>
-            </button>
+            <div style="border-bottom:1px solid rgba(236,235,230,.18)">
+              <button data-p="{{ p.id }}" onClick="{{ goPage }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="width:100%;text-align:left;display:flex;align-items:baseline;gap:18px;padding:16px 0;opacity:{{ p.op }};transition:opacity .3s,padding-left .4s;cursor:{{ p.cursor }}" style-hover="opacity:1;padding-left:12px">
+                <span style="font-size:10px;letter-spacing:.2em;min-width:24px">{{ p.n }}</span>
+                <span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(30px,5.5vw,76px);line-height:1;letter-spacing:-.02em">{{ p.t }}</span>
+                <span style="margin-left:auto;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5;display:{{ deskOnly }}">{{ p.hint }}</span>
+              </button>
+              <sc-if value="{{ p.isSvc }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-wrap:wrap;gap:8px 10px;padding:0 0 18px 42px">
+                  <sc-for list="{{ subs }}" as="sp" hint-placeholder-count="3">
+                    <button data-p="{{ sp.id }}" onClick="{{ goPage }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="border:1px solid rgba(236,235,230,.4);border-radius:999px;padding:10px 16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:{{ sp.op }};transition:opacity .3s,background .3s,color .3s" style-hover="opacity:1;background:#ecebe6;color:#0c0c0c">{{ sp.t }}</button>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
           </sc-for>
-        </div>
-        <div style="display:{{ deskOnly }};flex-direction:column;gap:26px;font-size:13px;line-height:1.7;padding-top:16px">
-          <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Call</div>+1 647-839-1491</div>
-          <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Email</div>Zeusframess@gmail.com</div>
-          <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Studio</div>180 Shaughnessy Blvd<br>North York, ON M2J 1K3</div>
-          <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Social</div><a href="https://www.instagram.com/zeusframes.inc" style="border-bottom:1px solid currentColor">@zeusframes.inc</a></div>
         </div>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:10px;letter-spacing:.2em;text-transform:uppercase">
@@ -127,7 +149,7 @@ video,img{display:block}
       <button data-p="home" onClick="{{ goPage }}" aria-label="Zeus Frames — home" style="pointer-events:auto;display:flex;align-items:center;gap:12px"><svg viewBox="0 0 485 541" style="width:28px;height:31px;display:block" aria-hidden="true"><path fill="#fff" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z"></path></svg><span style="display:{{ deskOnly }};letter-spacing:.2em;text-transform:uppercase;font-size:10px;opacity:.75">/ {{ pageName }}</span></button>
       <span style="display:{{ hudRow }};align-items:center;gap:10px;white-space:nowrap"><span style="width:7px;height:7px;border-radius:50%;background:#fff;animation:blink 1.2s steps(1) infinite"></span>REC <span style="opacity:.7;font-variant-numeric:tabular-nums">{{ tc }}</span></span>
       <div style="display:flex;align-items:center;gap:18px">
-        <button data-p="contact" onClick="{{ goPage }}" style="pointer-events:auto;border-bottom:1px solid #fff;padding-bottom:3px;white-space:nowrap;letter-spacing:.2em;text-transform:uppercase;font-size:10px">Get a quote</button>
+        <button data-p="{{ hudCtaPage }}" onClick="{{ goPage }}" style="pointer-events:auto;border-bottom:1px solid #fff;padding-bottom:3px;white-space:nowrap;letter-spacing:.2em;text-transform:uppercase;font-size:10px">{{ hudCtaT }}</button>
         <button onClick="{{ openMenu }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" aria-label="Open menu" style="pointer-events:auto;letter-spacing:.2em;text-transform:uppercase;font-size:10px">Menu ≡</button>
       </div>
     </div>
@@ -157,7 +179,6 @@ video,img{display:block}
   <section style="position:relative;height:{{ heroH }};min-height:560px;overflow:hidden;background:#000;color:#ecebe6">
     <video data-auto="1" data-key="{{ heroVid }}" src="{{ heroVid }}" preload="auto" muted="{{ true }}" autoPlay="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;animation:focusPull 2.4s cubic-bezier(.2,.7,.2,1) both"></video>
     <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 40%,rgba(0,0,0,.55) 100%),linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.6))"></div>
-    <div style="position:absolute;left:50%;top:50%;width:26px;height:26px;transform:translate(-50%,-50%);border:1px solid rgba(236,235,230,.7);animation:afBlink 1.2s ease-in-out 2.2s 2"></div>
     <div style="position:absolute;left:6vw;right:6vw;bottom:13vh">
       <div style="font-size:11px;letter-spacing:.25em;text-transform:uppercase;opacity:.75;animation:fade 1s 1.9s both">{{ heroKicker }}</div>
       <h1 style="margin:14px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:{{ heroSize }};line-height:.88;letter-spacing:-.025em">
@@ -167,7 +188,7 @@ video,img{display:block}
       <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:28px;animation:fade 1s 2.5s both">
         <p style="margin:0;max-width:460px;font-size:14px;line-height:1.7;opacity:.85">{{ heroLead }}</p>
         <div style="display:flex;align-items:center;gap:26px">
-          <button data-p="contact" onClick="{{ goPage }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;align-items:center;gap:14px"><span style="width:56px;height:56px;border-radius:50%;background:#ecebe6;box-shadow:0 0 0 3px #000,0 0 0 4px #ecebe6;transition:transform .4s" style-hover="transform:scale(1.08)"></span><span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase">Get a quote</span></button>
+          <button data-p="{{ heroCtaPage }}" onClick="{{ goPage }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;align-items:center;gap:14px"><span style="width:56px;height:56px;border-radius:50%;background:#ecebe6;box-shadow:0 0 0 3px #000,0 0 0 4px #ecebe6;transition:transform .4s" style-hover="transform:scale(1.08)"></span><span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase">{{ heroCtaT }}</span></button>
           <a href="{{ heroLink }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid rgba(236,235,230,.5);padding-bottom:4px">{{ heroLinkT }}</a>
         </div>
       </div>
@@ -273,7 +294,14 @@ video,img{display:block}
 
     <section id="process" style="padding:130px 6vw">
       <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:50px">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(46px,7vw,120px);line-height:.9;letter-spacing:-.02em">How it <em>runs</em></h2>
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(46px,7vw,120px);line-height:.9;letter-spacing:-.02em;display:flex;align-items:center;gap:.25em">How it <em>runs</em><svg data-revmark="1" viewBox="0 0 485 541" style="width:.5em;height:.56em;overflow:visible" aria-hidden="true"><g stroke="#ecebe6" stroke-width="8" stroke-linejoin="round" fill="none" style="animation:zfLines 2.6s ease 0s both;animation-play-state:paused">
+            <path d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z" pathLength="1" stroke-dasharray="1" style="animation:zfHex 2.6s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
+            <path d="M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z" pathLength="1" stroke-dasharray="1" style="animation:zfTri 2.6s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
+            <path d="M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.6s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
+            <path d="M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.6s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
+            <path d="M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.6s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
+          </g>
+          <path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" style="animation:zfFill 2.6s ease 0s both;animation-play-state:paused"></path></svg></h2>
         <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Four steps · two weeks to first delivery</span>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:1px;background:{{ bd }}">
@@ -341,16 +369,14 @@ video,img{display:block}
 
   
 
-  <sc-if value="{{ isServices }}" hint-placeholder-val="{{ false }}">
-    <div style="position:sticky;top:64px;z-index:400;display:flex;flex-wrap:wrap;gap:8px;padding:14px 6vw;background:{{ bg }};border-bottom:1px solid {{ bd }};transition:background 1.2s ease">
-      <sc-for list="{{ svcTabs }}" as="t" hint-placeholder-count="3">
-        <a href="{{ t.href }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="border:1px solid {{ bds }};border-radius:999px;padding:11px 18px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;display:flex;gap:10px;align-items:baseline"><span>{{ t.t }}</span><span style="opacity:.55">{{ t.mm }}</span></a>
-      </sc-for>
-    </div>
-    <section id="svc-video" style="padding:120px 6vw 0">
-      <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;border-top:1px solid {{ bd }};padding-top:26px">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(46px,7vw,120px);line-height:.9;letter-spacing:-.02em">Video <em>production</em></h2>
-        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">01 · 24mm · from $499</span>
+
+
+  <sc-if value="{{ isVideo }}" hint-placeholder-val="{{ false }}">
+    <section style="padding:90px 6vw 0">
+      <div data-reveal="1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(50%,160px),1fr));gap:1px;background:{{ bd }};border:1px solid {{ bd }}">
+        <sc-for list="{{ videoSpecs }}" as="x" hint-placeholder-count="4">
+          <div style="background:{{ bg }};padding:18px 20px;display:flex;flex-direction:column;gap:6px"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55">{{ x.k }}</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(20px,2vw,30px);line-height:1">{{ x.v }}</span></div>
+        </sc-for>
       </div>
     </section>
     <section style="padding:130px 6vw 90px">
@@ -385,11 +411,62 @@ video,img{display:block}
     </section>
 
 
-    <section id="svc-social" style="padding:120px 6vw 0">
-      <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;border-top:1px solid {{ bd }};padding-top:26px">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(46px,7vw,120px);line-height:.9;letter-spacing:-.02em">Social <em>marketing</em></h2>
-        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">02 · 35mm · from $499 / mo</span>
+    <section id="plans" style="padding:120px 6vw 40px">
+      <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:40px">
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">{{ svcPlansA }} <em>{{ svcPlansB }}</em></h2>
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">{{ svcPlansNote }}</span>
       </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px">
+        <sc-for list="{{ svcPlans }}" as="p" hint-placeholder-count="3">
+          <div data-reveal="1" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="border:1px solid {{ p.bd }};background:{{ p.bg }};padding:34px 30px;display:flex;flex-direction:column;gap:14px;min-height:400px;box-sizing:border-box;transition:background .4s,border-color .4s;transition-delay:{{ p.delay }}">
+            <div style="display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65"><span>{{ p.tag }}</span><span>{{ p.picked }}</span></div>
+            <h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(32px,3.2vw,50px);line-height:.95">{{ p.name }}</h3>
+            <div style="font-size:clamp(26px,2.6vw,40px);letter-spacing:-.02em;line-height:1">{{ p.price }}<span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin-left:8px">{{ p.unit }}</span></div>
+            <div style="display:flex;flex-direction:column;gap:9px;margin-top:6px">
+              <sc-for list="{{ p.items }}" as="it" hint-placeholder-count="4">
+                <div style="display:flex;gap:10px;align-items:baseline;font-size:13px;line-height:1.6;opacity:.85"><span style="opacity:.5">—</span><span>{{ it }}</span></div>
+              </sc-for>
+            </div>
+            <button data-s="{{ p.svc }}" data-id="{{ p.id }}" onClick="{{ pickPlan }}" style="margin-top:auto;align-self:flex-start;border:1px solid currentColor;padding:13px 18px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">{{ p.cta }}</button>
+          </div>
+        </sc-for>
+      </div>
+      <div data-reveal="1" style="margin-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid {{ bd }};padding-top:22px">
+        <span style="font-size:13px;line-height:1.6;opacity:.8">Want to mix services or adjust what's inside? Build it in the configurator.</span>
+        <button data-p="packages" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Open the package builder →</button>
+      </div>
+    </section>
+    <section style="padding:120px 6vw 60px">
+      <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:46px">
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">Recent <em>films</em></h2>
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Click to shoot</span>
+      </div>
+      <div onMouseLeave="{{ whOff }}" style="display:grid;grid-template-columns:{{ workCols }};gap:28px 24px">
+        <sc-for list="{{ works }}" as="w" hint-placeholder-count="6">
+          <figure data-i="{{ $index }}" onClick="{{ shoot }}" onMouseEnter="{{ whOn }}" onMouseLeave="{{ whLeave }}" data-reveal="1" style="margin:0;cursor:pointer;transition-delay:{{ w.delay }}">
+            <div style="overflow:hidden;aspect-ratio:16/10;background:#1a1a1a;position:relative">
+              <video data-lazy="{{ w.src }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) blur({{ w.blur }});transform:scale({{ w.sc }});opacity:{{ w.op }};transition:filter .7s ease,transform .9s cubic-bezier(.2,.7,.2,1),opacity .7s ease"></video>
+              <span style="position:absolute;left:12px;top:10px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#fff;mix-blend-mode:difference">{{ w.n }}</span>
+              <span style="position:absolute;right:12px;bottom:10px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#fff;mix-blend-mode:difference">{{ w.t }}</span>
+            </div>
+            <figcaption style="display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase"><span>{{ w.t }}</span><a href="https://www.instagram.com/zeusframes.inc" target="_blank" rel="noopener" onClick="{{ stop }}" style="opacity:.55;border-bottom:1px solid currentColor;padding-bottom:2px">{{ w.c }} ↗</a></figcaption>
+          </figure>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isSocial }}" hint-placeholder-val="{{ false }}">
+    <section style="padding:80px 0 0;overflow:hidden">
+      <div data-reveal="1" style="display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;padding:0 6vw 8px">
+        <sc-for list="{{ feedTiles }}" as="t" hint-placeholder-count="8">
+          <div onMouseEnter="{{ hp }}" onMouseLeave="{{ hs }}" style="flex:none;width:{{ feedW }};aspect-ratio:9/16;overflow:hidden;background:#1a1a1a;position:relative">
+            <video data-lazy="{{ t.src }}" data-autoplay="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></video>
+            <span style="position:absolute;left:10px;bottom:10px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#fff;mix-blend-mode:difference">{{ t.t }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin-top:14px;padding:0 6vw"><span>The feed · 9:16 first</span><span>Drag to scroll</span></div>
     </section>
     <section style="padding:130px 6vw 90px">
       <div data-reveal="1" style="display:grid;grid-template-columns:{{ twoCol }};gap:6vw;align-items:start">
@@ -432,10 +509,38 @@ video,img{display:block}
     </section>
 
 
-    <section id="svc-events" style="padding:120px 6vw 0">
-      <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;border-top:1px solid {{ bd }};padding-top:26px">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(46px,7vw,120px);line-height:.9;letter-spacing:-.02em">Event <em>coverage</em></h2>
-        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">03 · 50mm · from $400</span>
+    <section id="plans" style="padding:120px 6vw 40px">
+      <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:40px">
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">{{ svcPlansA }} <em>{{ svcPlansB }}</em></h2>
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">{{ svcPlansNote }}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px">
+        <sc-for list="{{ svcPlans }}" as="p" hint-placeholder-count="3">
+          <div data-reveal="1" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="border:1px solid {{ p.bd }};background:{{ p.bg }};padding:34px 30px;display:flex;flex-direction:column;gap:14px;min-height:400px;box-sizing:border-box;transition:background .4s,border-color .4s;transition-delay:{{ p.delay }}">
+            <div style="display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65"><span>{{ p.tag }}</span><span>{{ p.picked }}</span></div>
+            <h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(32px,3.2vw,50px);line-height:.95">{{ p.name }}</h3>
+            <div style="font-size:clamp(26px,2.6vw,40px);letter-spacing:-.02em;line-height:1">{{ p.price }}<span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin-left:8px">{{ p.unit }}</span></div>
+            <div style="display:flex;flex-direction:column;gap:9px;margin-top:6px">
+              <sc-for list="{{ p.items }}" as="it" hint-placeholder-count="4">
+                <div style="display:flex;gap:10px;align-items:baseline;font-size:13px;line-height:1.6;opacity:.85"><span style="opacity:.5">—</span><span>{{ it }}</span></div>
+              </sc-for>
+            </div>
+            <button data-s="{{ p.svc }}" data-id="{{ p.id }}" onClick="{{ pickPlan }}" style="margin-top:auto;align-self:flex-start;border:1px solid currentColor;padding:13px 18px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">{{ p.cta }}</button>
+          </div>
+        </sc-for>
+      </div>
+      <div data-reveal="1" style="margin-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid {{ bd }};padding-top:22px">
+        <span style="font-size:13px;line-height:1.6;opacity:.8">Want to mix services or adjust what's inside? Build it in the configurator.</span>
+        <button data-p="packages" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Open the package builder →</button>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isEvents }}" hint-placeholder-val="{{ false }}">
+    <section style="padding:70px 6vw 0">
+      <div data-reveal="1" style="display:flex;flex-wrap:wrap;gap:10px 28px;align-items:baseline;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.7">
+        <span style="display:flex;align-items:center;gap:10px"><span style="width:7px;height:7px;border-radius:50%;background:#ecebe6;animation:blink 1.2s steps(1) infinite"></span>Live</span>
+        <span>2 operators</span><span>48h recap</span><span>Same-week verticals</span><span>GTA travel included</span>
       </div>
     </section>
     <section style="padding:130px 6vw 90px">
@@ -474,10 +579,35 @@ video,img{display:block}
     </section>
 
 
+    <section id="plans" style="padding:120px 6vw 40px">
+      <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:40px">
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">{{ svcPlansA }} <em>{{ svcPlansB }}</em></h2>
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">{{ svcPlansNote }}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px">
+        <sc-for list="{{ svcPlans }}" as="p" hint-placeholder-count="3">
+          <div data-reveal="1" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="border:1px solid {{ p.bd }};background:{{ p.bg }};padding:34px 30px;display:flex;flex-direction:column;gap:14px;min-height:400px;box-sizing:border-box;transition:background .4s,border-color .4s;transition-delay:{{ p.delay }}">
+            <div style="display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65"><span>{{ p.tag }}</span><span>{{ p.picked }}</span></div>
+            <h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(32px,3.2vw,50px);line-height:.95">{{ p.name }}</h3>
+            <div style="font-size:clamp(26px,2.6vw,40px);letter-spacing:-.02em;line-height:1">{{ p.price }}<span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin-left:8px">{{ p.unit }}</span></div>
+            <div style="display:flex;flex-direction:column;gap:9px;margin-top:6px">
+              <sc-for list="{{ p.items }}" as="it" hint-placeholder-count="4">
+                <div style="display:flex;gap:10px;align-items:baseline;font-size:13px;line-height:1.6;opacity:.85"><span style="opacity:.5">—</span><span>{{ it }}</span></div>
+              </sc-for>
+            </div>
+            <button data-s="{{ p.svc }}" data-id="{{ p.id }}" onClick="{{ pickPlan }}" style="margin-top:auto;align-self:flex-start;border:1px solid currentColor;padding:13px 18px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">{{ p.cta }}</button>
+          </div>
+        </sc-for>
+      </div>
+      <div data-reveal="1" style="margin-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid {{ bd }};padding-top:22px">
+        <span style="font-size:13px;line-height:1.6;opacity:.8">Want to mix services or adjust what's inside? Build it in the configurator.</span>
+        <button data-p="packages" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Open the package builder →</button>
+      </div>
+    </section>
     <section style="padding:120px 6vw 60px">
       <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:46px">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">Across all <em>three</em></h2>
-        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Hover to focus · Click to shoot</span>
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">From the <em>floor</em></h2>
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Click to shoot</span>
       </div>
       <div onMouseLeave="{{ whOff }}" style="display:grid;grid-template-columns:{{ workCols }};gap:28px 24px">
         <sc-for list="{{ works }}" as="w" hint-placeholder-count="6">
@@ -493,6 +623,8 @@ video,img{display:block}
       </div>
     </section>
   </sc-if>
+
+
 
   <sc-if value="{{ isStudio }}" hint-placeholder-val="{{ false }}">
     <section style="padding:130px 6vw 90px">
@@ -529,15 +661,15 @@ video,img{display:block}
 
     <section style="padding:130px 6vw 60px">
       <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:40px">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">Studio <em>rates</em></h2>
+        <h2 id="rates" style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">Studio <em>rates</em></h2>
         <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Extra time $100 / hr</span>
       </div>
       <sc-for list="{{ studioRates }}" as="r" hint-placeholder-count="4">
-        <div data-reveal="1" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:grid;grid-template-columns:{{ rateCols }};gap:20px 24px;align-items:baseline;padding:28px 0;border-top:1px solid {{ bd }};transition:padding-left .5s" style-hover="padding-left:14px">
-          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">{{ r.n }}</span>
+        <button data-s="studio" data-id="{{ r.id }}" onClick="{{ pickPlan }}" data-reveal="1" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="width:100%;text-align:left;display:grid;grid-template-columns:{{ rateCols }};gap:20px 24px;align-items:baseline;padding:28px 0;border-top:1px solid {{ bd }};transition:padding-left .5s" style-hover="padding-left:14px">
+          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">{{ r.n }} · Add →</span>
           <div><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,3vw,46px);line-height:1">{{ r.t }}</h3><p style="margin:8px 0 0;font-size:13px;line-height:1.7;opacity:.8;max-width:520px">{{ r.d }}</p></div>
           <span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(30px,3vw,48px);line-height:1;white-space:nowrap;justify-self:{{ rateAlign }}">{{ r.price }}</span>
-        </div>
+        </button>
       </sc-for>
     </section>
   </sc-if>
@@ -546,52 +678,175 @@ video,img{display:block}
 
   <sc-if value="{{ isPackages }}" hint-placeholder-val="{{ false }}">
     <section style="padding:130px 6vw 40px">
-      <div data-reveal="1" style="display:grid;grid-template-columns:{{ twoCol }};gap:6vw;align-items:start;margin-bottom:60px">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.92;letter-spacing:-.02em">Pick a <em>plan</em> or build your own.</h2>
-        <p style="margin:0;font-size:15px;line-height:1.8;opacity:.82">Monthly subscriptions keep your feed running; single sessions cover one-off needs. Every price includes filming time, editing and colour grade. 10% off with a three-month contract.</p>
+      <div data-reveal="1" style="display:grid;grid-template-columns:{{ twoCol }};gap:6vw;align-items:start;margin-bottom:50px">
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.92;letter-spacing:-.02em">Build <em>exactly</em> what you need.</h2>
+        <p style="margin:0;font-size:15px;line-height:1.8;opacity:.82">Choose a package per service, then adjust what's inside. The range updates as you go. Every price includes filming time, editing and colour grade; 10% off with a three-month contract.</p>
       </div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:34px">
-        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
-          <button data-t="{{ t.id }}" onClick="{{ setTab }}" style="border:1px solid {{ bds }};border-radius:999px;padding:12px 20px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;background:{{ t.bg }};color:{{ t.fg }};transition:background .3s,color .3s">{{ t.t }}</button>
-        </sc-for>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px">
-        <sc-for list="{{ tabPlans }}" as="p" hint-placeholder-count="3">
-          <div onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="border:1px solid {{ bd }};padding:34px 30px;display:flex;flex-direction:column;gap:14px;min-height:400px;box-sizing:border-box;animation:zoom .5s cubic-bezier(.2,.7,.2,1) both;animation-delay:{{ p.delay }}">
-            <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">{{ p.tag }}</span>
-            <h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(32px,3.2vw,50px);line-height:.95">{{ p.name }}</h3>
-            <div style="font-size:clamp(26px,2.6vw,40px);letter-spacing:-.02em;line-height:1">{{ p.price }}<span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin-left:8px">{{ p.unit }}</span></div>
-            <div style="display:flex;flex-direction:column;gap:9px;margin-top:6px">
-              <sc-for list="{{ p.items }}" as="it" hint-placeholder-count="4">
-                <div style="display:flex;gap:10px;align-items:baseline;font-size:13px;line-height:1.6;opacity:.85"><span style="opacity:.5">—</span><span>{{ it }}</span></div>
-              </sc-for>
-            </div>
-            <button data-p="contact" onClick="{{ goPage }}" style="margin-top:auto;align-self:flex-start;font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Choose {{ p.name }} →</button>
-          </div>
+    </section>
+
+    <section style="padding:0 6vw 30px">
+      <div data-reveal="1" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+        <sc-for list="{{ qSteps }}" as="q" hint-placeholder-count="3">
+          <button data-n="{{ q.n }}" onClick="{{ qGo }}" style="text-align:left;border-top:2px solid currentColor;opacity:{{ q.op }};padding-top:10px;display:flex;flex-direction:column;gap:4px;transition:opacity .4s;cursor:{{ q.cursor }};min-width:0"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6;white-space:nowrap">{{ q.n }}</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(17px,2vw,28px);line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ q.t }}</span></button>
         </sc-for>
       </div>
     </section>
 
-    <section id="estimate" style="padding:60px 6vw 40px">
-      <div data-reveal="1" style="border:1px solid {{ bd }};padding:{{ estPad }};display:grid;grid-template-columns:{{ estGrid }};gap:40px">
-        <div>
-          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Build your package · Live estimate</span>
-          <h3 style="margin:14px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,4vw,64px);line-height:.95;letter-spacing:-.02em">Dial in what you need.</h3>
-          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:30px">
-            <sc-for list="{{ pkItems }}" as="k" hint-placeholder-count="6">
-              <button data-k="{{ k.k }}" onClick="{{ tog }}" style="border:1px solid {{ bds }};border-radius:999px;padding:12px 18px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:{{ k.bg }};color:{{ k.fg }};transition:background .3s,color .3s;display:flex;gap:10px;align-items:baseline">{{ k.t }} <span style="opacity:.6;font-size:10px">{{ k.p }}</span></button>
+    <sc-if value="{{ q1 }}" hint-placeholder-val="{{ true }}">
+    <section id="estimate" style="padding:0 6vw 40px">
+      <div style="display:grid;grid-template-columns:{{ cfgCols }};gap:24px;align-items:start">
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <sc-for list="{{ cfg }}" as="c" hint-placeholder-count="4">
+            <div data-reveal="1" style="border:1px solid {{ bd }};padding:{{ estPad }}">
+              <button data-s="{{ c.id }}" onClick="{{ cfgToggle }}" style="width:100%;text-align:left;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:18px;align-items:center">
+                <span style="width:22px;height:22px;border:1px solid currentColor;display:grid;place-items:center;background:{{ c.onBg }};color:{{ c.onFg }};transition:background .3s,color .3s;font-size:12px">{{ c.check }}</span>
+                <span style="display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px"><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(26px,2.6vw,40px);line-height:1">{{ c.t }}</span><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55">{{ c.mm }}</span></span>
+                <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75;white-space:nowrap">{{ c.sum }}</span>
+              </button>
+              <sc-if value="{{ c.on }}" hint-placeholder-val="{{ true }}">
+                <div style="margin-top:22px;animation:fade .35s both">
+                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px">
+                    <sc-for list="{{ c.plans }}" as="p" hint-placeholder-count="3">
+                      <button data-s="{{ c.id }}" data-id="{{ p.id }}" onClick="{{ pickPlan }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="text-align:left;border:1px solid {{ p.bd }};background:{{ p.bg }};color:{{ p.fg }};padding:14px 16px;display:flex;flex-direction:column;gap:6px;transition:background .3s,color .3s,border-color .3s">
+                        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">{{ p.tag }}</span>
+                        <span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:22px;line-height:1">{{ p.name }}</span>
+                        <span style="font-size:12px;letter-spacing:.04em">{{ p.price }} <span style="opacity:.55">{{ p.unit }}</span></span>
+                      </button>
+                    </sc-for>
+                  </div>
+                  <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:8px">
+                    <sc-for list="{{ c.opts }}" as="o" hint-placeholder-count="4">
+                      <button data-s="{{ c.id }}" data-k="{{ o.k }}" onClick="{{ optToggle }}" style="border:1px solid {{ bds }};border-radius:999px;padding:10px 14px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:{{ o.bg }};color:{{ o.fg }};transition:background .3s,color .3s;display:flex;gap:8px;align-items:baseline">{{ o.t }} <span style="opacity:.6">{{ o.p }}</span></button>
+                    </sc-for>
+                  </div>
+                  <div style="margin-top:16px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:12px;line-height:1.6;opacity:.65"><span>{{ c.inc }}</span><button data-p="{{ c.id }}" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:2px">Full details →</button></div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+        <div style="position:{{ stickyPos }};top:110px;border:1px solid {{ bd }};padding:{{ estPad }};display:flex;flex-direction:column;gap:18px">
+          <div style="display:flex;align-items:center;gap:12px"><svg viewBox="0 0 485 541" style="width:22px;height:24px;overflow:visible" aria-hidden="true"><path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z"></path></svg><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Your package</span></div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ summary }}" as="r" hint-placeholder-count="2">
+              <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline;border-top:1px solid {{ bd }};padding-top:10px;font-size:13px;line-height:1.5"><span><span style="opacity:.55">{{ r.svc }} · </span>{{ r.plan }}<span style="display:block;font-size:11px;opacity:.55">{{ r.opts }}</span></span><span style="white-space:nowrap;opacity:.8">{{ r.range }}</span></div>
             </sc-for>
           </div>
-          <p style="margin:26px 0 0;font-size:12px;line-height:1.7;opacity:.6;max-width:520px">Indicative monthly ranges in CAD. Every range includes filming time, edit and colour grade. 10% off with a 3-month contract.</p>
-        </div>
-        <div style="display:flex;flex-direction:column;justify-content:space-between;gap:20px;border-left:{{ estBL }};padding-left:{{ estPL }};border-top:{{ estBT }};padding-top:{{ estPT }}">
-          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Estimated range / month</span>
-          <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,5vw,84px);line-height:1;letter-spacing:-.02em">{{ estLo }} – {{ estHi }}</div>
-          <p style="margin:0;font-size:13px;line-height:1.7;opacity:.7">{{ estNote }}</p>
-          <button data-p="contact" onClick="{{ goPage }}" style="border:1px solid currentColor;padding:16px 22px;text-align:center;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">Request exact quote →</button>
+          <div style="border-top:1px solid {{ bds }};padding-top:16px">
+            <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Estimated range</span>
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,4.4vw,72px);line-height:1;letter-spacing:-.02em;margin-top:8px">{{ estLo }} – {{ estHi }}</div>
+            <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin-top:6px">{{ estUnit }}</div>
+          </div>
+          <button onClick="{{ togContract }}" style="display:flex;align-items:center;gap:12px;font-size:12px;text-align:left"><span style="width:38px;height:22px;border-radius:999px;border:1px solid {{ bds }};position:relative;background:{{ ctBg }};transition:background .3s;flex:none"><span style="position:absolute;top:3px;left:{{ ctKnob }};width:14px;height:14px;border-radius:50%;background:{{ ctKnobBg }};transition:left .3s,background .3s"></span></span><span>3-month contract · 10% off</span></button>
+          <p style="margin:0;font-size:12px;line-height:1.7;opacity:.6">{{ estNote }}</p>
+          <button onClick="{{ qNext }}" style="border:1px solid currentColor;padding:16px 22px;text-align:center;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">{{ q1Cta }}</button>
         </div>
       </div>
     </section>
+    </sc-if>
+
+    <sc-if value="{{ q2 }}" hint-placeholder-val="{{ false }}">
+    <section style="padding:0 6vw 40px">
+      <div style="display:grid;grid-template-columns:{{ cfgCols }};gap:24px;align-items:start">
+        <div data-reveal="1" style="border:1px solid {{ bd }};padding:{{ estPad }};animation:fade .4s both">
+          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Who are we making it for?</span>
+          <h3 style="margin:14px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(30px,3.6vw,56px);line-height:.95;letter-spacing:-.02em">Your details.</h3>
+          <div style="display:grid;grid-template-columns:{{ fieldCols }};gap:22px 24px;margin-top:30px">
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Name<input data-f="name" value="{{ fName }}" onChange="{{ setField }}" placeholder="Your name" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Email<input data-f="email" type="email" value="{{ fEmail }}" onChange="{{ setField }}" placeholder="you@brand.com" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Phone<input data-f="phone" value="{{ fPhone }}" onChange="{{ setField }}" placeholder="+1 647 000 0000" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Business or brand<input data-f="brand" value="{{ fBrand }}" onChange="{{ setField }}" placeholder="Where you work" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
+          </div>
+          <div style="margin-top:30px">
+            <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Industry</span>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
+              <sc-for list="{{ industries }}" as="i" hint-placeholder-count="7">
+                <button data-v="{{ i.t }}" onClick="{{ setInd }}" style="border:1px solid {{ bds }};border-radius:999px;padding:10px 16px;font-size:11px;letter-spacing:.08em;background:{{ i.bg }};color:{{ i.fg }};transition:background .3s,color .3s">{{ i.t }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="margin-top:30px">
+            <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Preferred contact</span>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
+              <sc-for list="{{ contactVia }}" as="i" hint-placeholder-count="3">
+                <button data-v="{{ i.t }}" onClick="{{ setVia }}" style="border:1px solid {{ bds }};border-radius:999px;padding:10px 16px;font-size:11px;letter-spacing:.08em;background:{{ i.bg }};color:{{ i.fg }};transition:background .3s,color .3s">{{ i.t }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <p style="margin:22px 0 0;font-size:12px;line-height:1.6;opacity:.6;min-height:18px">{{ q2Err }}</p>
+          <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:14px;border-top:1px solid {{ bd }};padding-top:24px">
+            <button onClick="{{ qPrev }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">← Back to the builder</button>
+            <button onClick="{{ qNext }}" style="margin-left:auto;border:1px solid currentColor;padding:15px 24px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">Next — the brief →</button>
+          </div>
+        </div>
+        <div data-reveal="1" style="position:{{ stickyPos }};top:110px;border:1px solid {{ bd }};padding:{{ estPad }};display:flex;flex-direction:column;gap:14px;order:{{ sideOrder }}">
+          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Your package</span>
+          <sc-for list="{{ summary }}" as="r" hint-placeholder-count="2">
+            <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline;border-top:1px solid {{ bd }};padding-top:10px;font-size:13px;line-height:1.5"><span><span style="opacity:.55">{{ r.svc }} · </span>{{ r.plan }}<span style="display:block;font-size:11px;opacity:.55">{{ r.opts }}</span></span><span style="white-space:nowrap;opacity:.8">{{ r.range }}</span></div>
+          </sc-for>
+          <div style="border-top:1px solid {{ bds }};padding-top:14px"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Estimated range</span><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(30px,3.4vw,52px);line-height:1;letter-spacing:-.02em;margin-top:6px">{{ estLo }} – {{ estHi }}</div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin-top:6px">{{ contractNote }}</div></div>
+          <button data-n="1" onClick="{{ qGo }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px;align-self:flex-start">Edit package</button>
+        </div>
+      </div>
+    </section>
+    </sc-if>
+
+    <sc-if value="{{ q3 }}" hint-placeholder-val="{{ false }}">
+    <section style="padding:0 6vw 40px">
+      <div style="display:grid;grid-template-columns:{{ cfgCols }};gap:24px;align-items:start">
+        <div data-reveal="1" style="border:1px solid {{ bd }};padding:{{ estPad }};animation:fade .4s both">
+          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">When and why?</span>
+          <h3 style="margin:14px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(30px,3.6vw,56px);line-height:.95;letter-spacing:-.02em">The brief.</h3>
+          <div style="display:grid;grid-template-columns:{{ fieldCols }};gap:22px 24px;margin-top:30px">
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Start date<input data-f="start" value="{{ fStart }}" onChange="{{ setField }}" placeholder="e.g. first week of October" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Deadline or event date<input data-f="deadline" value="{{ fDeadline }}" onChange="{{ setField }}" placeholder="If there is one" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Location<input data-f="location" value="{{ fLocation }}" onChange="{{ setField }}" placeholder="Our studio, your venue, or both" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Budget comfort<input data-f="budget" value="{{ fBudget }}" onChange="{{ setField }}" placeholder="Optional — a number or a range" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
+          </div>
+          <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75;margin-top:28px">What is the content for?<textarea data-f="goal" value="{{ fGoal }}" onChange="{{ setField }}" rows="4" placeholder="Launch, storefront traffic, a new product line, a celebration…" style="border:1px solid {{ bds }};padding:14px;font-size:15px;line-height:1.6;letter-spacing:0;text-transform:none;opacity:1;resize:vertical;width:100%;box-sizing:border-box"></textarea></label>
+          <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75;margin-top:22px">Anything else — references, links, must-haves<textarea data-f="notes" value="{{ fNotes }}" onChange="{{ setField }}" rows="4" placeholder="Paste links to work you like, list people or products to feature, tell us what to avoid." style="border:1px solid {{ bds }};padding:14px;font-size:15px;line-height:1.6;letter-spacing:0;text-transform:none;opacity:1;resize:vertical;width:100%;box-sizing:border-box"></textarea></label>
+          <div style="margin-top:30px;display:flex;flex-wrap:wrap;gap:14px;border-top:1px solid {{ bd }};padding-top:24px">
+            <button onClick="{{ qPrev }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">← Back</button>
+            <button onClick="{{ qSend }}" style="margin-left:auto;border:1px solid currentColor;padding:16px 26px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">Send the request →</button>
+          </div>
+        </div>
+        <div data-reveal="1" style="position:{{ stickyPos }};top:110px;border:1px solid {{ bd }};padding:{{ estPad }};display:flex;flex-direction:column;gap:14px;order:{{ sideOrder }}">
+          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Your package</span>
+          <sc-for list="{{ summary }}" as="r" hint-placeholder-count="2">
+            <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline;border-top:1px solid {{ bd }};padding-top:10px;font-size:13px;line-height:1.5"><span><span style="opacity:.55">{{ r.svc }} · </span>{{ r.plan }}<span style="display:block;font-size:11px;opacity:.55">{{ r.opts }}</span></span><span style="white-space:nowrap;opacity:.8">{{ r.range }}</span></div>
+          </sc-for>
+          <div style="border-top:1px solid {{ bds }};padding-top:14px"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Estimated range</span><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(30px,3.4vw,52px);line-height:1;letter-spacing:-.02em;margin-top:6px">{{ estLo }} – {{ estHi }}</div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin-top:6px">{{ contractNote }}</div></div>
+          <button data-n="1" onClick="{{ qGo }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px;align-self:flex-start">Edit package</button>
+        </div>
+      </div>
+    </section>
+    </sc-if>
+
+    <sc-if value="{{ qSent }}" hint-placeholder-val="{{ false }}">
+    <section style="padding:0 6vw 40px">
+      <div data-reveal="1" style="border:1px solid {{ bd }};padding:{{ estPad }};display:grid;grid-template-columns:{{ cfgCols }};gap:40px;animation:zoom .5s cubic-bezier(.2,.7,.2,1) both">
+        <div>
+          <div style="display:flex;align-items:center;gap:16px"><svg viewBox="0 0 485 541" style="width:34px;height:38px;overflow:visible" aria-hidden="true"><g stroke="#ecebe6" stroke-width="6" stroke-linejoin="round" fill="none" style="animation:zfLines 2.4s ease both"><path d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z" pathLength="1" stroke-dasharray="1" style="animation:zfHex 2.4s cubic-bezier(.65,0,.2,1) both"></path><path d="M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z" pathLength="1" stroke-dasharray="1" style="animation:zfTri 2.4s cubic-bezier(.65,0,.2,1) both"></path><path d="M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.4s cubic-bezier(.65,0,.2,1) both"></path><path d="M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.4s cubic-bezier(.65,0,.2,1) both"></path><path d="M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.4s cubic-bezier(.65,0,.2,1) both"></path></g><path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" style="animation:zfFill 2.4s ease both"></path></svg><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Request logged · {{ sentRef }}</span></div>
+          <h3 style="margin:16px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(32px,4.4vw,64px);line-height:1">Thanks, {{ sentName }} — we'll come back within two working days.</h3>
+          <p style="margin:18px 0 0;font-size:14px;line-height:1.8;opacity:.8;max-width:560px">We'll confirm the exact number, the shoot dates and what to bring, by {{ sentVia }}. A copy of this summary is on its way to {{ sentEmail }}.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:28px">
+            <button onClick="{{ qRestart }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Build another package</button>
+            <button data-p="home" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Back to home</button>
+          </div>
+        </div>
+        <div style="border-left:{{ estBL }};padding-left:{{ estPL }};border-top:{{ estBT }};padding-top:{{ estPT }};display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:1.6">
+          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">What you sent</span>
+          <sc-for list="{{ summary }}" as="r" hint-placeholder-count="2">
+            <div style="display:flex;justify-content:space-between;gap:12px;border-top:1px solid {{ bd }};padding-top:10px"><span><span style="opacity:.55">{{ r.svc }} · </span>{{ r.plan }}<span style="display:block;font-size:11px;opacity:.55">{{ r.opts }}</span></span><span style="white-space:nowrap;opacity:.8">{{ r.range }}</span></div>
+          </sc-for>
+          <div style="display:flex;justify-content:space-between;gap:12px;border-top:1px solid {{ bds }};padding-top:12px"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Estimated range</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:26px;line-height:1">{{ estLo }} – {{ estHi }}</span></div>
+          <sc-for list="{{ sentRows }}" as="r" hint-placeholder-count="6">
+            <div style="display:flex;justify-content:space-between;gap:12px;border-top:1px solid {{ bd }};padding-top:10px"><span style="opacity:.55">{{ r.k }}</span><span style="text-align:right;max-width:60%">{{ r.v }}</span></div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+    </sc-if>
 
     <section style="padding:120px 6vw">
       <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:40px">
@@ -624,107 +879,26 @@ video,img{display:block}
   
 
   <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
-    <section style="padding:130px 6vw 60px">
-      <div style="display:grid;grid-template-columns:{{ formGrid }};gap:6vw;align-items:start">
-        <div data-reveal="1">
-          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Step {{ stepN }} of 3 · {{ stepT }}</span>
-          <h2 style="margin:14px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(36px,4.6vw,76px);line-height:.95;letter-spacing:-.02em">{{ stepHead }}</h2>
-          <div style="display:flex;gap:6px;margin-top:26px">
-            <sc-for list="{{ stepBars }}" as="b" hint-placeholder-count="3">
-              <span style="height:2px;flex:1;background:currentColor;opacity:{{ b.op }};transition:opacity .4s"></span>
-            </sc-for>
+    <section style="padding:130px 6vw 40px">
+      <div style="display:grid;grid-template-columns:{{ twoCol }};gap:6vw;align-items:start">
+        <div data-reveal="1" style="display:flex;flex-direction:column">
+          <a href="tel:+16478391491" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }};transition:padding-left .4s" style-hover="padding-left:12px;opacity:1"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;min-width:90px">Call</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,3.4vw,52px);line-height:1;letter-spacing:-.02em">+1 647-839-1491</span></a>
+          <a href="mailto:Zeusframess@gmail.com" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }};transition:padding-left .4s" style-hover="padding-left:12px;opacity:1"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;min-width:90px">Email</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,2.8vw,44px);line-height:1;letter-spacing:-.02em;word-break:break-all">Zeusframess@gmail.com</span></a>
+          <a href="https://wa.me/16478391491" target="_blank" rel="noopener" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }};transition:padding-left .4s" style-hover="padding-left:12px;opacity:1"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;min-width:90px">WhatsApp</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,3.4vw,52px);line-height:1;letter-spacing:-.02em">Message us ↗</span></a>
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }}"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;min-width:90px">Studio</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,2.8vw,44px);line-height:1.1;letter-spacing:-.02em;text-align:right">180 Shaughnessy Blvd<br>North York, ON M2J 1K3</span></div>
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }};border-bottom:1px solid {{ bd }}"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;min-width:90px">Hours</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,2.8vw,44px);line-height:1;letter-spacing:-.02em">Mon–Sat · 9:00–19:00</span></div>
+          <div style="margin-top:40px">
+            <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55">Follow</span>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:14px">
+              <sc-for list="{{ socials }}" as="x" hint-placeholder-count="4">
+                <a href="{{ x.href }}" target="_blank" rel="noopener" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="border:1px solid {{ bds }};border-radius:999px;padding:12px 18px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;display:flex;gap:10px;align-items:baseline;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }};opacity:1"><span>{{ x.t }}</span><span style="opacity:.55">{{ x.h }}</span></a>
+              </sc-for>
+            </div>
           </div>
-
-          <sc-if value="{{ step1 }}" hint-placeholder-val="{{ true }}">
-            <div style="margin-top:36px;animation:fade .4s both">
-              <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">What do you need?</span>
-              <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:16px">
-                <sc-for list="{{ pkItems }}" as="k" hint-placeholder-count="6">
-                  <button data-k="{{ k.k }}" onClick="{{ tog }}" style="border:1px solid {{ bds }};border-radius:999px;padding:12px 18px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:{{ k.bg }};color:{{ k.fg }};transition:background .3s,color .3s;display:flex;gap:10px;align-items:baseline">{{ k.t }} <span style="opacity:.6;font-size:10px">{{ k.p }}</span></button>
-                </sc-for>
-              </div>
-              <div style="margin-top:34px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;border-top:1px solid {{ bd }};padding-top:24px">
-                <div>
-                  <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Estimated range / month</span>
-                  <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(38px,4.4vw,72px);line-height:1;letter-spacing:-.02em;margin-top:10px">{{ estLo }} – {{ estHi }}</div>
-                </div>
-                <button onClick="{{ nextStep }}" style="border:1px solid currentColor;padding:15px 24px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">Next — your details →</button>
-              </div>
-            </div>
-          </sc-if>
-
-          <sc-if value="{{ step2 }}" hint-placeholder-val="{{ false }}">
-            <div style="margin-top:36px;animation:fade .4s both">
-              <div style="display:grid;grid-template-columns:{{ fieldCols }};gap:22px 24px">
-                <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Name
-                  <input data-f="name" value="{{ fName }}" onChange="{{ setField }}" placeholder="Your name" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1">
-                </label>
-                <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Email
-                  <input data-f="email" type="email" value="{{ fEmail }}" onChange="{{ setField }}" placeholder="you@brand.com" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1">
-                </label>
-                <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Phone
-                  <input data-f="phone" value="{{ fPhone }}" onChange="{{ setField }}" placeholder="+1 647 000 0000" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1">
-                </label>
-                <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Business or brand
-                  <input data-f="brand" value="{{ fBrand }}" onChange="{{ setField }}" placeholder="Where you work" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1">
-                </label>
-              </div>
-              <div style="margin-top:30px">
-                <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Industry</span>
-                <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
-                  <sc-for list="{{ industries }}" as="i" hint-placeholder-count="6">
-                    <button data-v="{{ i.t }}" onClick="{{ setInd }}" style="border:1px solid {{ bds }};border-radius:999px;padding:10px 16px;font-size:11px;letter-spacing:.08em;background:{{ i.bg }};color:{{ i.fg }};transition:background .3s,color .3s">{{ i.t }}</button>
-                  </sc-for>
-                </div>
-              </div>
-              <div style="margin-top:34px;display:flex;flex-wrap:wrap;gap:14px;border-top:1px solid {{ bd }};padding-top:24px">
-                <button onClick="{{ prevStep }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">← Back</button>
-                <button onClick="{{ nextStep }}" style="margin-left:auto;border:1px solid currentColor;padding:15px 24px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">Next — the brief →</button>
-              </div>
-            </div>
-          </sc-if>
-
-          <sc-if value="{{ step3 }}" hint-placeholder-val="{{ false }}">
-            <div style="margin-top:36px;animation:fade .4s both">
-              <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Start date
-                <input data-f="start" value="{{ fStart }}" onChange="{{ setField }}" placeholder="e.g. first week of October" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;max-width:420px">
-              </label>
-              <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75;margin-top:28px">What's the content for?
-                <textarea data-f="goal" value="{{ fGoal }}" onChange="{{ setField }}" rows="5" placeholder="Launch, storefront traffic, a new product line, a wedding…" style="border:1px solid {{ bds }};padding:14px;font-size:15px;line-height:1.6;letter-spacing:0;text-transform:none;opacity:1;resize:vertical"></textarea>
-              </label>
-              <div style="margin-top:34px;display:flex;flex-wrap:wrap;gap:14px;border-top:1px solid {{ bd }};padding-top:24px">
-                <button onClick="{{ prevStep }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">← Back</button>
-                <button onClick="{{ submit }}" style="margin-left:auto;border:1px solid currentColor;padding:16px 26px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">Send the request →</button>
-              </div>
-            </div>
-          </sc-if>
-
-          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
-            <div style="margin-top:36px;border:1px solid {{ bd }};padding:34px;animation:zoom .5s cubic-bezier(.2,.7,.2,1) both">
-              <div style="display:flex;align-items:center;gap:16px"><svg viewBox="0 0 485 541" style="width:34px;height:38px;overflow:visible" aria-hidden="true"><g stroke="#ecebe6" stroke-width="6" stroke-linejoin="round" fill="none" style="animation:zfLines 2.4s ease 0s both">
-            <path d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z" pathLength="1" stroke-dasharray="1" style="animation:zfHex 2.4s cubic-bezier(.65,0,.2,1) 0s both"></path>
-            <path d="M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z" pathLength="1" stroke-dasharray="1" style="animation:zfTri 2.4s cubic-bezier(.65,0,.2,1) 0s both"></path>
-            <path d="M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.4s cubic-bezier(.65,0,.2,1) 0s both"></path>
-            <path d="M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.4s cubic-bezier(.65,0,.2,1) 0s both"></path>
-            <path d="M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.4s cubic-bezier(.65,0,.2,1) 0s both"></path>
-          </g>
-          <path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" style="animation:zfFill 2.4s ease 0s both"></path></svg><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Request logged</span></div>
-              <h3 style="margin:14px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(32px,4vw,60px);line-height:1">Thanks — we'll come back within two working days.</h3>
-              <p style="margin:18px 0 0;font-size:14px;line-height:1.8;opacity:.8">Your selection puts you around {{ estLo }} – {{ estHi }} per month. We'll confirm the exact number, the shoot dates and what to bring.</p>
-              <button onClick="{{ restart }}" style="margin-top:26px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Start another request</button>
-            </div>
-          </sc-if>
         </div>
-
-        <div data-reveal="1" style="display:flex;flex-direction:column;gap:34px">
+        <div data-reveal="1" style="display:flex;flex-direction:column;gap:24px">
           <div style="aspect-ratio:4/5;overflow:hidden;background:#1a1a1a"><img loading="lazy" src="assets/img/1554048612-b6a482bc67e5.jpg" alt="Film camera on a desk" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></div>
-          <div style="display:flex;flex-direction:column;gap:22px;font-size:13px;line-height:1.7">
-            <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Call</div>+1 647-839-1491</div>
-            <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Email</div>Zeusframess@gmail.com</div>
-            <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Studio</div>180 Shaughnessy Blvd<br>North York, ON M2J 1K3</div>
-            <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Hours</div>Mon–Sat · 9:00–19:00</div>
-            <div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Social</div><a href="https://www.instagram.com/zeusframes.inc" style="border-bottom:1px solid currentColor">@zeusframes.inc</a></div>
-          </div>
+          <a href="https://maps.google.com/?q=180+Shaughnessy+Blvd+North+York+ON" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:6px;align-self:flex-start">Open in Maps ↗</a>
         </div>
       </div>
     </section>
@@ -733,8 +907,15 @@ video,img{display:block}
   <sc-if value="{{ showCta }}" hint-placeholder-val="{{ true }}">
     <section style="padding:40px 6vw 0">
       <button data-p="contact" onClick="{{ goPage }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" data-reveal="1" style="width:100%;text-align:left;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid {{ bd }};border-bottom:1px solid {{ bd }};padding:60px 0">
-        <span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,7vw,120px);line-height:.9;letter-spacing:-.02em">Get a <em>quote</em></span>
-        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Three questions · a range in 60 seconds →</span>
+        <span style="display:flex;align-items:center;gap:.3em;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,7vw,120px);line-height:.9;letter-spacing:-.02em"><svg data-revmark="1" viewBox="0 0 485 541" style="width:.55em;height:.62em;overflow:visible;flex:none" aria-hidden="true"><g stroke="#ecebe6" stroke-width="8" stroke-linejoin="round" fill="none" style="animation:zfLines 2.6s ease 0s both;animation-play-state:paused">
+            <path d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z" pathLength="1" stroke-dasharray="1" style="animation:zfHex 2.6s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
+            <path d="M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z" pathLength="1" stroke-dasharray="1" style="animation:zfTri 2.6s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
+            <path d="M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.6s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
+            <path d="M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.6s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
+            <path d="M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.6s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
+          </g>
+          <path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" style="animation:zfFill 2.6s ease 0s both;animation-play-state:paused"></path></svg>Get a <em>quote</em></span>
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Build your package · then call or message →</span>
       </button>
     </section>
   </sc-if>
@@ -742,12 +923,20 @@ video,img{display:block}
   <footer style="padding:110px 6vw 30px">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:34px 24px">
       <div>
+        <svg data-revmark="1" viewBox="0 0 485 541" style="width:44px;height:49px;overflow:visible;margin-bottom:18px" aria-hidden="true"><g stroke="#ecebe6" stroke-width="7" stroke-linejoin="round" fill="none" style="animation:zfLines 3s ease 0s both;animation-play-state:paused">
+            <path d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z" pathLength="1" stroke-dasharray="1" style="animation:zfHex 3s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
+            <path d="M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z" pathLength="1" stroke-dasharray="1" style="animation:zfTri 3s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
+            <path d="M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 3s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
+            <path d="M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 3s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
+            <path d="M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 3s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
+          </g>
+          <path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" style="animation:zfFill 3s ease 0s both;animation-play-state:paused"></path></svg>
         <img src="assets/logo-h-white.png" alt="Zeus Frames — Creative Brand Agency" style="height:38px;width:auto;display:block">
         <p style="margin:14px 0 0;font-size:12px;line-height:1.8;opacity:.7;max-width:260px">A Toronto media studio for video, photography and social content.</p>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Pages</div>
-        <sc-for list="{{ pages }}" as="p" hint-placeholder-count="8">
+        <sc-for list="{{ footPages }}" as="p" hint-placeholder-count="7">
           <button data-p="{{ p.id }}" onClick="{{ goPage }}" style="text-align:left;font-size:13px;opacity:.85">{{ p.t }}</button>
         </sc-for>
       </div>
@@ -767,15 +956,15 @@ video,img{display:block}
       <span>© 2026 Zeus Frames Inc.</span><span>Toronto, Canada</span>
     </div>
   </footer>
-</div>
+
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;page&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;home&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;services&quot;,&quot;studio&quot;,&quot;packages&quot;,&quot;contact&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Site&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;page&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;home&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;video&quot;,&quot;social&quot;,&quot;events&quot;,&quot;studio&quot;,&quot;packages&quot;,&quot;contact&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Site&quot;}}">
 class Component extends DCLogic {
-  PAGES = ['home', 'services', 'studio', 'packages', 'contact'];
+  PAGES = ['home', 'video', 'social', 'events', 'studio', 'packages', 'contact'];
   rootRef = React.createRef(); topRef = React.createRef(); afRef = React.createRef(); frRef = React.createRef(); ringRef = React.createRef();
   state = { page: 'home', intro: true, tc: '00:00:00:00', mob: false, light: false, lens: 0, wh: null, lb: null, shot: false,
-    menu: false, tab: 'sub', faq: 0, step: 1, sent: false, touched: false, brandSeen: false, form: { name: '', email: '', phone: '', brand: '', start: '', goal: '', ind: '' },
-    pk: { reels: true, film: false, photo: true, drone: false, event: false, studio: false } };
+    menu: false, faq: 0, touched: false, brandSeen: false, contract: false, q: 1, qSent: false, qErr: '', form: { name: '', email: '', phone: '', brand: '', ind: '', via: 'WhatsApp', start: '', deadline: '', location: '', budget: '', goal: '', notes: '' },
+    cfg: { video: { on: false, plan: 'growth', opts: {} }, social: { on: true, plan: 'pro', opts: {} }, events: { on: false, plan: 'launch', opts: {} }, studio: { on: false, plan: 'half', opts: {} } } };
 
   componentDidMount() {
     const h = (location.hash || '').replace('#', ''), pv = this.props.page;
@@ -803,6 +992,7 @@ class Component extends DCLogic {
       if (e.isIntersecting) { if (!v.getAttribute('src')) { v.src = v.dataset.lazy; v.preload = 'metadata'; v.load(); v.addEventListener('loadeddata', () => { try { v.currentTime = 0.05; } catch (_) {} }, { once: true }); } if (v.dataset.autoplay) { v.muted = true; const p = v.play(); if (p) p.catch(() => {}); } }
       else if (v.dataset.autoplay && !v.paused) v.pause();
     }), { rootMargin: '300px 0px' });
+    this.revIo = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('[style*="animation-play-state"]').forEach(el => { el.style.animationPlayState = 'running'; }); this.revIo.unobserve(e.target); } }), { threshold: 0.5 });
     this.brandIo = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !this.state.brandSeen) this.setState({ brandSeen: true }); }), { threshold: 0.4 });
     this.lensIo = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const i = +e.target.dataset.lens; if (i !== this.state.lens) this.setState({ lens: i }); } }), { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
     this.onScrollB = () => this.onScroll(); this.onResizeB = () => this.measure();
@@ -825,13 +1015,13 @@ class Component extends DCLogic {
     if (ps.page !== this.state.page) {
       this.jumpTop(); this.afLocked = null;
       if (location.hash !== '#' + this.state.page) history.replaceState(null, '', '#' + this.state.page);
-      this.setState({ light: false, lens: 0, wh: null, lb: null, shot: false, menu: false, brandSeen: false });
+      this.setState({ light: false, lens: 0, wh: null, lb: null, shot: false, menu: false, brandSeen: false, qErr: '' });
       [50, 250, 700, 1500].forEach(ms => setTimeout(() => this.refresh(), ms));
     }
   }
   componentWillUnmount() {
     clearInterval(this.tcT); clearTimeout(this.introT); clearTimeout(this.shotT); clearTimeout(this.shotT2);
-    if (this.io) this.io.disconnect(); if (this.lensIo) this.lensIo.disconnect(); if (this.vidIo) this.vidIo.disconnect(); if (this.brandIo) this.brandIo.disconnect();
+    if (this.io) this.io.disconnect(); if (this.lensIo) this.lensIo.disconnect(); if (this.vidIo) this.vidIo.disconnect(); if (this.brandIo) this.brandIo.disconnect(); if (this.revIo) this.revIo.disconnect(); clearTimeout(this.navT);
     window.removeEventListener('scroll', this.onScrollB); window.removeEventListener('resize', this.onResizeB); if (this.rootRo) this.rootRo.disconnect(); if (this.mq) { if (this.mq.removeEventListener) this.mq.removeEventListener('change', this.onMq); else this.mq.removeListener(this.onMq); } window.removeEventListener('hashchange', this.onHash); window.removeEventListener('keydown', this.onKey);
   }
   jumpTop() {
@@ -844,6 +1034,7 @@ class Component extends DCLogic {
     const vh0 = window.innerHeight; document.querySelectorAll('[data-reveal]:not([data-inview])').forEach(el => { const r = el.getBoundingClientRect(); if (r.bottom > 0 && r.top < vh0 * 0.95 && r.height > 0) el.setAttribute('data-inview', '1'); });
     document.querySelectorAll('video:not([data-err])').forEach(v => { v.setAttribute('data-err', '1'); v.addEventListener('error', () => { v.style.opacity = '0'; }); });
     document.querySelectorAll('video[data-lazy]:not([data-vobs])').forEach(v => { v.setAttribute('data-vobs', '1'); this.vidIo.observe(v); });
+    document.querySelectorAll('[data-revmark]:not([data-robs])').forEach(el => { el.setAttribute('data-robs', '1'); this.revIo.observe(el); });
     document.querySelectorAll('[data-brandmark]:not([data-bobs])').forEach(el => { el.setAttribute('data-bobs', '1'); this.brandIo.observe(el); });
     document.querySelectorAll('[data-lens]:not([data-lens-obs])').forEach(el => { el.setAttribute('data-lens-obs', '1'); this.lensIo.observe(el); });
     document.querySelectorAll('video[data-auto]:not([data-armed])').forEach(v => { v.setAttribute('data-armed', '1'); v.muted = true; v.loop = true; v.playsInline = true; const p = v.play(); if (p) p.catch(() => {}); });
@@ -880,52 +1071,73 @@ class Component extends DCLogic {
     const bd = light ? 'rgba(12,12,12,.22)' : 'rgba(236,235,230,.22)', bds = light ? 'rgba(12,12,12,.5)' : 'rgba(236,235,230,.5)';
     const page = S.page;
     const pageDefs = [['home', 'Home'], ['services', 'Services'], ['studio', 'Studio'], ['packages', 'Packages'], ['contact', 'Contact']];
+    const subDefs = [['video', 'Video production'], ['social', 'Social marketing'], ['events', 'Events']];
     const heroes = {
       home: { k: 'Toronto media studio · Video · Photo · Social', t1: 'Everything', t2: 'in focus.', lead: 'Video, photography and social content from a North York studio — for brands, creators and families who want to be remembered.', vid: V(12735441), link: '#work', linkT: 'See the work', size: 'clamp(60px,11vw,190px)' },
-      services: { k: 'Services · Video · Social · Events', t1: 'Three lenses,', t2: 'one crew.', lead: 'Brand films, a monthly content engine and live event coverage — scripted, shot and graded by the same people.', vid: V(3588888), link: '#svc-video', linkT: 'Jump to a service', size: 'clamp(54px,9.8vw,176px)' },
-      studio: { k: 'The studio · 85mm · f/1.8', t1: 'A room built', t2: 'for light.', lead: 'Portraits, products, podcasts and lookbooks in North York — crew, kit and edit included.', vid: V(31850422), link: '#', linkT: 'Studio rates', size: 'clamp(52px,9.5vw,170px)' },
-      packages: { k: 'Packages · Live estimate', t1: 'Know the cost', t2: 'before you call.', lead: 'Monthly subscriptions and single sessions, with a builder that gives you a real range in seconds.', vid: V(7823380), link: '#estimate', linkT: 'Build a package', size: 'clamp(46px,8.4vw,150px)' },
-      contact: { k: 'Get a quote · Two working days', t1: 'Tell us what', t2: "you're making.", lead: 'Three questions and you have a range. We confirm the exact number, the dates and what to bring.', vid: V(12987888), link: '#', linkT: 'Studio details', size: 'clamp(48px,8.6vw,156px)' }
+      video: { k: 'Video production · 24mm · f/2.8', t1: 'Brand films', t2: 'with a pulse.', lead: 'Commercials, brand films, product spots and property tours — scripted, shot and graded by the same crew.', vid: V(3588888), link: '#plans', linkT: 'See video packages', size: 'clamp(52px,9.5vw,170px)' },
+      social: { k: 'Social marketing · 35mm · f/2', t1: 'A feed that', t2: 'never sleeps.', lead: 'Monthly reels, captions, scheduling and reporting. One production day becomes thirty days of content.', vid: V(34132691), link: '#plans', linkT: 'See monthly plans', size: 'clamp(52px,9.5vw,170px)' },
+      events: { k: 'Events · 50mm · f/1.4', t1: 'The night,', t2: 'kept.', lead: 'Launches, galas, tournaments and celebrations — filmed live, recapped within 48 hours.', vid: V(35340079), link: '#plans', linkT: 'Coverage packages', size: 'clamp(56px,10vw,180px)' },
+      _services: { k: 'Services · Video · Social · Events', t1: 'Three lenses,', t2: 'one crew.', lead: 'Brand films, a monthly content engine and live event coverage — scripted, shot and graded by the same people.', vid: V(3588888), link: '#svc-video', linkT: 'Jump to a service', size: 'clamp(54px,9.8vw,176px)' },
+      studio: { k: 'The studio · 85mm · f/1.8', t1: 'A room built', t2: 'for light.', lead: 'Portraits, products, podcasts and lookbooks in North York — crew, kit and edit included.', vid: V(31850422), link: '#rates', linkT: 'Studio rates', size: 'clamp(52px,9.5vw,170px)' },
+      packages: { k: 'Packages · Live estimate', t1: 'Build it.', t2: 'Send it.', lead: 'Pick a package per service, adjust what is inside, and get a real range in seconds.', vid: V(7823380), link: '#estimate', linkT: 'Build a package', size: 'clamp(46px,8.4vw,150px)' },
+      contact: { k: 'Contact · North York studio', t1: 'Say hello.', t2: "We're quick.", lead: 'Call, message or drop by the studio. Build your package first and we come back with an exact number within two working days.', vid: V(12987888), link: 'https://wa.me/16478391491', linkT: 'WhatsApp us', size: 'clamp(48px,8.6vw,156px)' }
     };
     const H = heroes[page] || heroes.home;
     const svcBase = [
-      { n: '01', t: 'Video Production', d: 'Brand films, commercials and cinematic reels — scripted, shot and graded in-house.', src: V(32896750), mm: '24mm', page: 'services', cta: 'Video production' },
-      { n: '02', t: 'Social Marketing', d: 'A monthly content engine: reels, captions, scheduling and reporting, so every scroll finds you.', src: V(34132691), mm: '35mm', page: 'services', cta: 'Social marketing' },
+      { n: '01', t: 'Video Production', d: 'Brand films, commercials and cinematic reels — scripted, shot and graded in-house.', src: V(32896750), mm: '24mm', page: 'video', cta: 'Video production' },
+      { n: '02', t: 'Social Marketing', d: 'A monthly content engine: reels, captions, scheduling and reporting, so every scroll finds you.', src: V(34132691), mm: '35mm', page: 'social', cta: 'Social marketing' },
       { n: '03', t: 'Studio', d: 'A physical studio in North York for portraits, products and podcasts — lit, staffed, ready.', src: V(31850422), mm: '85mm', page: 'studio', cta: 'The studio' },
-      { n: '04', t: 'Events', d: 'Launches, galas and shows — captured live and recapped the same week.', src: V(35340079), mm: '50mm', page: 'services', cta: 'Event coverage' }
+      { n: '04', t: 'Events', d: 'Launches, galas and shows — captured live and recapped the same week.', src: V(35340079), mm: '50mm', page: 'events', cta: 'Event coverage' }
     ];
     const workSets = {
       home: [['F01', 'Royal Snooker', 'Brand film', 3588888], ['F02', 'Studio portraits', 'Photography', 31850422], ['F03', 'Mr. Snooker', 'Social reels', 34132691], ['F04', 'Downtown launch', 'Event recap', 35340079], ['F05', 'Product story', 'Commerce', 7823380], ['F06', 'Toronto from above', 'Aerial', 13580749]],
+      video: [['V01', 'Royal Snooker', 'Brand film', 3588888], ['V02', 'Product story', 'Commerce', 7823380], ['V03', 'Toronto from above', 'Aerial', 13580749], ['V04', 'Night shift', 'Documentary', 8084901], ['V05', 'Studio session', 'Fashion', 31850422], ['V06', 'Mr. Snooker', 'Social reels', 34132691]],
+      events: [['E01', 'Downtown launch', 'Launch party', 35340079], ['E02', 'Tournament final', 'Sports', 3588888], ['E03', 'Gala dinner', 'Corporate', 12987888], ['E04', 'Street festival', 'Community', 12735441], ['E05', 'Family celebration', 'Private', 30603141], ['E06', 'After hours', 'Recap', 8084901]],
       services: [['S01', 'Royal Snooker', 'Brand film', 3588888], ['S02', 'Mr. Snooker', 'Social reels', 34132691], ['S03', 'Downtown launch', 'Event recap', 35340079], ['S04', 'Product story', 'Commerce', 7823380], ['S05', 'Gala dinner', 'Corporate', 12987888], ['S06', 'Toronto from above', 'Aerial', 13580749]]
     };
     const works = (workSets[page] || workSets.home).map(([n, t, c, id], i) => ({ n, t, c, src: V(id), delay: (i % 3) * 0.1 + 's', blur: S.wh == null || S.wh === i ? '0px' : '6px', op: S.wh == null || S.wh === i ? 1 : 0.5, sc: S.wh === i ? 1.04 : 1 }));
     const lb = S.lb == null ? null : works[S.lb];
-    const plans = [
-      { tag: 'Starter', name: 'Basic Presence', price: '$499', d: '3 reels · up to 3h filming · 5 photos · basic edit and captions.', delay: '0s', unit: '/ mo', items: ['3 reels per month', 'Up to 3h filming', '5 edited photos', 'Captions and hashtags', 'One revision round'] },
-      { tag: 'Most popular', name: 'Pro Essentials', price: '$1,990', d: '8 cinematic reels · 6h filming · lighting · colour grade · drone · 4 revisions.', delay: '.12s', unit: '/ mo', items: ['8 cinematic reels', '6h filming with lighting', '10 edited photos', 'Drone coverage', 'Colour grade', 'Four revision rounds'] },
-      { tag: 'Full production', name: 'Elite Cinematic', price: '$4,000', d: '8 campaign reels · one brand film · 10 photos · licensed music · unlimited revisions.', delay: '.24s', unit: '/ mo', items: ['8 campaign reels', 'One brand film per quarter', '10 retouched photos', 'Licensed music and VFX', 'Scheduling and reporting', 'Unlimited revisions'] }
-    ];
-    const prodPlans = [
-      { tag: 'One-off', name: 'Essential', price: '$899', unit: 'project', delay: '0s', items: ['One shoot day', 'Three deliverables', 'Basic grade', 'Two revisions'] },
-      { tag: 'Campaign', name: 'Growth', price: '$2,499', unit: 'project', delay: '.12s', items: ['Two shoot days', 'Eight deliverables', 'Lighting crew', 'Drone and product table', 'Four revisions'] },
-      { tag: 'Flagship', name: 'Signature', price: '$6,000', unit: 'project', delay: '.24s', items: ['Full production week', 'Brand film plus 12 cuts', 'Casting and wardrobe', 'VFX and licensed score', 'Unlimited revisions'] }
-    ];
-    const sessionPlans = [
-      { tag: 'Photography', name: 'Product', price: '$199', unit: 'session', delay: '0s', items: ['Up to 2h in studio', '10 retouched images', 'White or styled set'] },
-      { tag: 'Photography', name: 'Real estate', price: '$499', unit: 'session', delay: '.1s', items: ['Up to 3000 sq ft', '25 images', 'Twilight exterior option'] },
-      { tag: 'Videography', name: 'Social media', price: '$399', unit: 'session', delay: '.2s', items: ['Half-day filming', 'Three vertical cuts', 'Captions included'] },
-      { tag: 'Videography', name: 'Real estate tour', price: '$1,200', unit: 'session', delay: '.3s', items: ['Full-day filming', 'Cinematic tour plus vertical cut', 'Drone exterior'] }
-    ];
-    const tabMap = { sub: plans, project: prodPlans, session: sessionPlans };
-    const tabs = [['sub', 'Monthly'], ['project', 'Projects'], ['session', 'Single sessions']].map(([id, t]) => ({ id, t, bg: S.tab === id ? ink : 'transparent', fg: S.tab === id ? bg : 'inherit' }));
-    const pkDefs = [
-      { k: 'reels', t: '8 reels / month', p: '$1.6k–2.4k', lo: 1600, hi: 2400 }, { k: 'film', t: 'Brand film', p: '$1.5k–4k', lo: 1500, hi: 4000 },
-      { k: 'photo', t: 'Product photography', p: '$200–900', lo: 200, hi: 900 }, { k: 'drone', t: 'Drone coverage', p: '$300–600', lo: 300, hi: 600 },
-      { k: 'event', t: 'Event coverage', p: '$400–1.2k', lo: 400, hi: 1200 }, { k: 'studio', t: 'Studio session', p: '$250–500', lo: 250, hi: 500 }
-    ];
-    let lo = 0, hi = 0, any = false;
-    const pkItems = pkDefs.map(k => { const on = !!S.pk[k.k]; if (on) { lo += k.lo; hi += k.hi; any = true; } return { ...k, bg: on ? ink : 'transparent', fg: on ? bg : 'inherit' }; });
-    const money = n => '$' + n.toLocaleString('en-CA');
+    const CAT = {
+      video: { t: 'Video production', mm: '24mm', unit: 'project', inc: 'Includes shoot day, edit, colour grade and two revision rounds.', plans: [
+        { id: 'essential', tag: 'One-off', name: 'Essential', lo: 899, hi: 1200, items: ['One shoot day', 'Three deliverables', 'Basic grade', 'Two revisions'] },
+        { id: 'growth', tag: 'Campaign', name: 'Growth', lo: 2499, hi: 3200, items: ['Two shoot days', 'Eight deliverables', 'Lighting crew', 'Drone and product table', 'Four revisions'] },
+        { id: 'signature', tag: 'Flagship', name: 'Signature', lo: 6000, hi: 8500, items: ['Full production week', 'Brand film plus 12 cuts', 'Casting and wardrobe', 'VFX and licensed score', 'Unlimited revisions'] } ],
+        opts: [['drone', 'Drone', 300, 600], ['second', 'Second operator', 250, 250], ['vfx', 'VFX / motion titles', 150, 600], ['music', 'Licensed track', 80, 250], ['rush', 'Rush 24h', 0.25, 0.25, 'pct']] },
+      social: { t: 'Social marketing', mm: '35mm', unit: '/ mo', inc: 'Includes content day, three cuts per reel, captions and scheduling.', plans: [
+        { id: 'basic', tag: 'Starter', name: 'Basic Presence', lo: 499, hi: 499, items: ['3 reels per month', 'Up to 3h filming', '5 edited photos', 'Captions and hashtags', 'One revision round'] },
+        { id: 'pro', tag: 'Most popular', name: 'Pro Essentials', lo: 1990, hi: 1990, items: ['8 cinematic reels', '6h filming with lighting', '10 edited photos', 'Drone coverage', 'Colour grade', 'Four revision rounds'] },
+        { id: 'elite', tag: 'Full production', name: 'Elite Cinematic', lo: 4000, hi: 4000, items: ['8 campaign reels', 'One brand film per quarter', '10 retouched photos', 'Licensed music and VFX', 'Scheduling and reporting', 'Unlimited revisions'] } ],
+        opts: [['reels4', '+4 reels', 700, 900], ['photos', '+10 photos', 300, 400], ['community', 'Community replies', 250, 250], ['paid', 'Paid-social cuts', 300, 500], ['subs', 'Subtitles · extra language', 40, 120]] },
+      events: { t: 'Events', mm: '50mm', unit: 'event', inc: 'Includes two operators, discreet lighting and a 48h recap edit.', plans: [
+        { id: 'launch', tag: 'Half day', name: 'Launch', lo: 700, hi: 900, items: ['Up to 4h coverage', 'Two operators', '60s recap in 48h', 'Photo selection'] },
+        { id: 'corporate', tag: 'Full day', name: 'Corporate', lo: 1200, hi: 1800, items: ['Up to 8h coverage', 'Stage and candids', 'Speaker cutdowns', 'Sponsor deliverables'] },
+        { id: 'tournament', tag: 'Multi-day', name: 'Tournament', lo: 900, hi: 2400, items: ['Per-day pricing', 'Multi-angle coverage', 'Highlight reels', 'Same-day social cuts'] } ],
+        opts: [['verticals', 'Same-week verticals', 300, 300], ['photog', 'Dedicated photographer', 350, 450], ['live', 'Live stream', 500, 900], ['drone', 'Drone', 300, 600], ['travel', 'Outside GTA', 120, 400]] },
+      studio: { t: 'Studio', mm: '85mm', unit: 'session', inc: 'Includes operator, lighting and the set of your choice.', plans: [
+        { id: 'portrait', tag: '90 min', name: 'Portrait', lo: 250, hi: 250, items: ['Three looks', '10 retouched images'] },
+        { id: 'half', tag: '4 hours', name: 'Half day', lo: 450, hi: 450, items: ['One operator', 'Unlimited set changes'] },
+        { id: 'podcast', tag: '2 hours', name: 'Podcast', lo: 350, hi: 350, items: ['Up to four mics', 'Multicam and clean mix'] },
+        { id: 'full', tag: '8 hours', name: 'Full day', lo: 850, hi: 850, items: ['Two operators', 'Client lounge'] } ],
+        opts: [['hour', 'Extra hour', 100, 100], ['stylist', 'Stylist', 250, 350], ['retouch', '+10 retouched', 200, 250], ['second', 'Second operator', 250, 250]] }
+    };
+    const money = n => '$' + Math.round(n).toLocaleString('en-CA');
+    let lo = 0, hi = 0, any = false; const summary = [];
+    const cfg = Object.keys(CAT).map(id => {
+      const C = CAT[id], st = S.cfg[id] || { on: false, plan: C.plans[0].id, opts: {} };
+      const plan = C.plans.find(p => p.id === st.plan) || C.plans[0];
+      let plo = plan.lo, phi = plan.hi, pctLo = 0, pctHi = 0; const optNames = [];
+      const opts = C.opts.map(([k, t, a, b, kind]) => { const on = !!st.opts[k]; if (on) { if (kind === 'pct') { pctLo += a; pctHi += b; } else { plo += a; phi += b; } optNames.push(t); }
+        return { k, t, p: kind === 'pct' ? '+' + Math.round(a * 100) + '%' : (a === b ? money(a) : money(a) + '–' + money(b)), bg: on ? ink : 'transparent', fg: on ? bg : 'inherit' }; });
+      plo *= 1 + pctLo; phi *= 1 + pctHi;
+      if (st.on) { lo += plo; hi += phi; any = true; summary.push({ svc: C.t, plan: plan.name, opts: optNames.length ? '+ ' + optNames.join(', ') : 'No add-ons', range: plo === phi ? money(plo) : money(plo) + ' – ' + money(phi) }); }
+      return { id, t: C.t, mm: C.mm, on: st.on, check: st.on ? '✓' : '', onBg: st.on ? ink : 'transparent', onFg: st.on ? bg : 'inherit', planName: plan.name, inc: C.inc,
+        sum: st.on ? (plo === phi ? money(plo) : money(plo) + ' – ' + money(phi)) + ' ' + C.unit : 'Not included',
+        plans: C.plans.map(p => { const sel = p.id === plan.id; return { id: p.id, tag: p.tag, name: p.name, price: p.lo === p.hi ? money(p.lo) : money(p.lo) + '–' + money(p.hi), unit: C.unit, bd: sel ? ink : bd, bg: sel ? ink : 'transparent', fg: sel ? bg : 'inherit' }; }), opts };
+    });
+    if (S.contract) { lo *= 0.9; hi *= 0.9; }
+    const svcKey = ['video', 'social', 'events'].includes(page) ? page : null;
+    const svcPlans = svcKey ? CAT[svcKey].plans.map((p, i) => { const sel = S.cfg[svcKey].on && S.cfg[svcKey].plan === p.id; return { id: p.id, svc: svcKey, tag: p.tag, name: p.name, price: p.lo === p.hi ? money(p.lo) : money(p.lo) + '–' + money(p.hi), unit: CAT[svcKey].unit, items: p.items, delay: i * 0.1 + 's', bd: sel ? bds : bd, bg: sel ? 'rgba(236,235,230,.06)' : 'transparent', picked: sel ? 'In your package ✓' : '', cta: sel ? 'Selected — open builder →' : 'Add ' + p.name + ' →' }; }) : [];
+
     const faqData = [
       ['How fast do we get the first cut?', 'Reels land within 48 hours of the shoot. Brand films take seven to ten working days, including one revision round.'],
       ['Do you write the scripts and captions?', 'Yes. We draft the script, the on-screen text and the captions, then you edit the words you want changed.'],
@@ -934,30 +1146,60 @@ class Component extends DCLogic {
       ['Is there a contract?', 'Monthly plans run month to month. A three-month commitment takes 10% off the whole plan.']
     ];
     const faq = faqData.map(([q, a], i) => { const on = S.faq === i; return { q, a, rot: on ? '45deg' : '0deg', op: on ? 0.8 : 0, mh: on ? '200px' : '0px', pb: on ? '26px' : '0px' }; });
-    const industries = ['Social / creator', 'Real estate', 'Restaurant', 'Retail', 'Construction', 'Fashion', 'Family'].map(t => ({ t, bg: S.form.ind === t ? ink : 'transparent', fg: S.form.ind === t ? bg : 'inherit' }));
-    const stepHeads = { 1: 'What are we making?', 2: 'Who are we making it for?', 3: 'When and why?' };
-    const stepTitles = { 1: 'Scope', 2: 'Details', 3: 'Brief' };
     return {
       label: page.charAt(0).toUpperCase() + page.slice(1) + ' — Viewfinder',
-      pageName: (pageDefs.find(p => p[0] === page) || pageDefs[0])[1],
+      pageName: (subDefs.find(p => p[0] === page) ? 'Services / ' + subDefs.find(p => p[0] === page)[1] : (pageDefs.find(p => p[0] === page) || pageDefs[0])[1]),
       topRef: this.topRef, toTop: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
       stop: e => e.stopPropagation(),
-      rangeBar: any && S.touched && page !== 'contact', rangeBottom: mob ? '104px' : '28px',
+      rangeBar: any && S.touched && page !== 'contact' && page !== 'packages', rangeBottom: mob ? '104px' : '28px',
       rootRef: this.rootRef, hudRow: mob ? 'none' : 'flex', bg, ink, bd, bds, mob, notMob: !mob, deskOnly: mob ? 'none' : 'block', mobOnly: mob ? 'block' : 'none',
       intro: S.intro, tc: S.tc, exp: light ? 'ISO 100 · f/8 · 1/250 · EV +2.0' : 'ISO 800 · f/1.8 · 1/50 · EV −1.0',
       afRef: this.afRef, frRef: this.frRef, ringRef: this.ringRef,
       afMove: e => { if (mob) return; this.afX = e.clientX; this.afY = e.clientY; if (!this.afLocked) this.afApply(); },
       afLock: e => this.afLockEl(e.currentTarget), afFree: () => { this.afLocked = null; this.afApply(); },
-      pages: pageDefs.map(([id, t], i) => { const on = page === id; const hints = { home: 'Work · Lens · Studio · About', services: 'Video · Social · Events', studio: 'Gallery · Kit · Rates', packages: 'Plans · Estimator · FAQ', contact: 'Three steps · live range' }; return { id, t, n: '0' + (i + 1), op: on ? 1 : 0.6, hint: on ? 'You are here' : hints[id] }; }),
-      menuCols: mob ? '1fr' : 'minmax(0,1.4fr) minmax(0,.6fr)', scrimH: mob ? '96px' : '120px',
-      goPage: e => { const p = e.currentTarget.dataset.p; if (!this.PAGES.includes(p)) return; this.jumpTop(); this.afLocked = null; this.afApply(); this.setState({ page: p, menu: false }); },
-      menuOpen: S.menu, openMenu: () => this.setState({ menu: true }), closeMenu: () => this.setState({ menu: false }),
-      isHome: page === 'home', isServices: page === 'services', isStudio: page === 'studio', isPackages: page === 'packages', isContact: page === 'contact',
-      svcTabs: [['svc-video', 'Video production', '24mm'], ['svc-social', 'Social marketing', '35mm'], ['svc-events', 'Events', '50mm']].map(([id, t, mm]) => ({ href: '#' + id, t, mm })),
-      showCta: page !== 'contact',
+      pages: pageDefs.map(([id, t], i) => { const on = page === id; const hints = { home: 'Work · Lens · Studio · About', services: 'Video · Social · Events', studio: 'Gallery · Kit · Rates', packages: 'Per-service builder · FAQ', contact: 'Call · WhatsApp · Studio' }; return { id, t, n: '0' + (i + 1), op: on || (id === 'services' && ['video', 'social', 'events'].includes(page)) ? 1 : 0.6, hint: on ? 'You are here' : hints[id], isSvc: id === 'services', cursor: id === 'services' ? 'default' : 'pointer' }; }),
+      footPages: [['home', 'Home'], ...subDefs, ['studio', 'Studio'], ['packages', 'Packages'], ['contact', 'Contact']].map(([id, t]) => ({ id, t })),
+      menuCols: '1fr', scrimH: mob ? '96px' : '120px',
+      goPage: e => { const p = e.currentTarget.dataset.p; if (!this.PAGES.includes(p)) return; const changed = p !== this.state.page; this.jumpTop(); this.afLocked = null; this.afApply(); this.setState({ page: p, menu: false, navFlash: changed && !this.embed }); if (changed) { clearTimeout(this.navT); this.navT = setTimeout(() => this.setState({ navFlash: false }), 1250); } },
+      navFlash: !!S.navFlash, menuOpen: S.menu, openMenu: () => this.setState({ menu: true }), closeMenu: () => this.setState({ menu: false }),
+      isHome: page === 'home', isServices: page === 'services', isVideo: page === 'video', isSocial: page === 'social', isEvents: page === 'events', isStudio: page === 'studio', isPackages: page === 'packages', isContact: page === 'contact',
+      subs: subDefs.map(([id, t]) => ({ id, t, op: page === id ? 1 : 0.6, hint: page === id ? ' · here' : '' })),
+      doors: [['video', '01', '24mm', 'Video production', 'Brand films, commercials, product and property.', 'From $899', V(3588888)], ['social', '02', '35mm', 'Social marketing', 'A monthly content engine for your feed.', 'From $499 / mo', V(34132691)], ['events', '03', '50mm', 'Events', 'Filmed live, recapped within 48 hours.', 'From $700', V(35340079)]].map(([id, n, mm, t, d, from, src], i) => ({ id, n, mm, t, d, from, src, delay: i * 0.1 + 's' })),
+      doorOn: e => this.afLockEl(e.currentTarget), doorOff: () => { this.afLocked = null; this.afApply(); },
+      videoSpecs: [['Formats', '6'], ['First cut', '7–10 days'], ['Crew', '2–4'], ['From', '$899']].map(([k, v]) => ({ k, v })),
+      feedTiles: [34132691, 31850422, 10276471, 3588888, 35340079, 7823380, 30603141, 8084901].map((id, i) => ({ src: V(id), t: 'R0' + (i + 1) })), feedW: mob ? '150px' : '190px',
+      socials: [['Instagram', '@zeusframes.inc', 'https://www.instagram.com/zeusframes.inc'], ['TikTok', '@zeusframes', 'https://www.tiktok.com/@zeusframes'], ['YouTube', 'Zeus Frames', 'https://www.youtube.com/@zeusframes'], ['LinkedIn', 'Zeus Frames Inc.', 'https://www.linkedin.com/company/zeusframes']].map(([t, h, href]) => ({ t, h, href })),
+      qSteps: [[1, 'Build'], [2, 'Details'], [3, 'Brief']].map(([n, t]) => ({ n, t, op: S.q === n ? 1 : (n < S.q ? 0.7 : 0.35), cursor: n < S.q ? 'pointer' : 'default' })),
+      q1: S.q === 1 && !S.qSent, q2: S.q === 2 && !S.qSent, q3: S.q === 3 && !S.qSent, qSent: S.qSent,
+      q1Cta: any ? 'Continue — your details →' : 'Pick at least one service',
+      qGo: e => { const n = +e.currentTarget.dataset.n; if (n < this.state.q) { this.setState({ q: n, qErr: '' }); this.jumpTop(); } },
+      qNext: () => { const st = this.state; if (st.q === 1) { if (!any) return; this.setState({ q: 2 }); } else if (st.q === 2) { const f = st.form; if (!f.name.trim() || !/.+@.+\..+/.test(f.email)) { this.setState({ qErr: 'Please add your name and a valid email so we can reply.' }); return; } this.setState({ q: 3, qErr: '' }); } this.jumpTop(); },
+      qPrev: () => { this.setState(s => ({ q: Math.max(1, s.q - 1), qErr: '' })); window.scrollTo({ top: 0, behavior: 'smooth' }); },
+      qSend: () => { const ref = 'ZF-' + new Date().toISOString().slice(2, 10).replace(/-/g, '') + '-' + Math.floor(100 + Math.random() * 900); this.setState({ qSent: true, sentRef: ref }); window.scrollTo({ top: 0, behavior: 'smooth' }); },
+      qRestart: () => this.setState({ qSent: false, q: 1, qErr: '' }),
+      sideOrder: mob ? 2 : 0, q2Err: S.qErr, fieldCols: mob ? '1fr' : 'repeat(2,minmax(0,1fr))',
+      setField: e => { const f = e.currentTarget.dataset.f, v = e.currentTarget.value; this.setState(s => ({ form: { ...s.form, [f]: v } })); },
+      setInd: e => { const v = e.currentTarget.dataset.v; this.setState(s => ({ form: { ...s.form, ind: s.form.ind === v ? '' : v } })); },
+      setVia: e => { const v = e.currentTarget.dataset.v; this.setState(s => ({ form: { ...s.form, via: v } })); },
+      industries: ['Social / creator', 'Real estate', 'Restaurant', 'Retail', 'Construction', 'Fashion', 'Family'].map(t => ({ t, bg: S.form.ind === t ? ink : 'transparent', fg: S.form.ind === t ? bg : 'inherit' })),
+      contactVia: ['WhatsApp', 'Phone call', 'Email'].map(t => ({ t, bg: S.form.via === t ? ink : 'transparent', fg: S.form.via === t ? bg : 'inherit' })),
+      fName: S.form.name, fEmail: S.form.email, fPhone: S.form.phone, fBrand: S.form.brand, fStart: S.form.start, fDeadline: S.form.deadline, fLocation: S.form.location, fBudget: S.form.budget, fGoal: S.form.goal, fNotes: S.form.notes,
+      contractNote: S.contract ? '3-month contract · 10% applied' : 'Month to month',
+      sentRef: S.sentRef || '', sentName: S.form.name.split(' ')[0] || 'there', sentVia: (S.form.via || 'email').toLowerCase(), sentEmail: S.form.email || 'your inbox',
+      sentRows: [['Name', S.form.name], ['Brand', S.form.brand], ['Industry', S.form.ind], ['Phone', S.form.phone], ['Start', S.form.start], ['Deadline', S.form.deadline], ['Location', S.form.location], ['Budget', S.form.budget], ['Goal', S.form.goal], ['Notes', S.form.notes]].filter(([k, v]) => v && v.trim()).map(([k, v]) => ({ k, v })),
+      cfg, summary, cfgCols: mob ? '1fr' : 'minmax(0,1.4fr) minmax(0,.7fr)', stickyPos: mob ? 'relative' : 'sticky',
+      cfgToggle: e => { const id = e.currentTarget.dataset.s; this.setState(s => ({ touched: true, cfg: { ...s.cfg, [id]: { ...s.cfg[id], on: !s.cfg[id].on } } })); },
+      pickPlan: e => { const id = e.currentTarget.dataset.s, pid = e.currentTarget.dataset.id; this.setState(s => ({ touched: true, cfg: { ...s.cfg, [id]: { ...s.cfg[id], on: true, plan: pid } } })); if (this.state.page !== 'packages') { this.jumpTop(); this.setState({ page: 'packages' }); } },
+      optToggle: e => { const id = e.currentTarget.dataset.s, k = e.currentTarget.dataset.k; this.setState(s => ({ touched: true, cfg: { ...s.cfg, [id]: { ...s.cfg[id], opts: { ...s.cfg[id].opts, [k]: !s.cfg[id].opts[k] } } } })); },
+      togContract: () => this.setState(s => ({ contract: !s.contract })), ctBg: S.contract ? ink : 'transparent', ctKnob: S.contract ? '19px' : '3px', ctKnobBg: S.contract ? bg : ink,
+      estUnit: summary.length ? (summary.length === 1 ? 'for ' + summary[0].svc.toLowerCase() : summary.length + ' services · mixed billing') : '',
+      svcPlans, svcPlansA: svcKey === 'social' ? 'Monthly' : svcKey === 'events' ? 'Coverage' : 'Video', svcPlansB: svcKey === 'social' ? 'plans' : 'packages', svcPlansNote: svcKey ? CAT[svcKey].inc : '',
+      showCta: page !== 'contact' && page !== 'packages',
+      hudCtaPage: page === 'packages' ? 'contact' : 'packages', hudCtaT: page === 'packages' ? 'Contact' : 'Packages',
+      heroCtaPage: page === 'contact' || page === 'packages' ? 'packages' : 'contact', heroCtaT: page === 'contact' ? 'Build a package' : page === 'packages' ? 'Start below' : 'Get a quote',
       brandPlay: S.brandSeen ? 'running' : 'paused', stageW: mob ? 'min(80vh,92vw)' : 'min(84vh,88vw)',
       heroH: page === 'home' ? '100vh' : mob ? '86vh' : '82vh', heroVid: H.vid, heroKicker: H.k, heroT1: H.t1, heroT2: H.t2, heroLead: H.lead, heroLink: H.link, heroLinkT: H.linkT, heroSize: H.size,
-      twoCol: mob ? '1fr' : 'minmax(0,1fr) minmax(0,1fr)', threeCol: mob ? '1fr' : 'repeat(3,minmax(0,1fr))', formGrid: mob ? '1fr' : 'minmax(0,1.3fr) minmax(0,.7fr)', fieldCols: mob ? '1fr' : 'repeat(2,minmax(0,1fr))',
+      twoCol: mob ? '1fr' : 'minmax(0,1fr) minmax(0,1fr)', threeCol: mob ? '1fr' : 'repeat(3,minmax(0,1fr))',
       workCols: mob ? '1fr' : 'repeat(3,minmax(0,1fr))', galCols: mob ? 'repeat(2,minmax(0,1fr))' : 'repeat(4,minmax(0,1fr))', rateCols: mob ? '1fr' : '90px minmax(0,1fr) auto', rateAlign: mob ? 'start' : 'end',
       works, hp: e => { const v = e.currentTarget.querySelector('video'); if (v) { v.muted = true; const p = v.play(); if (p) p.catch(() => {}); } }, hs: e => { const v = e.currentTarget.querySelector('video'); if (v) v.pause(); },
       whOn: e => { const v = e.currentTarget.querySelector('video'); if (v) { v.muted = true; const p = v.play(); if (p) p.catch(() => {}); } this.afLockEl(e.currentTarget); this.setState({ wh: +e.currentTarget.dataset.i }); },
@@ -981,15 +1223,12 @@ class Component extends DCLogic {
         { src: U('1516724562728-afc824a36e84', 1400), alt: 'Lighting detail', ar: '16/10', col: mob ? '1 / -1' : 'span 3', delay: '.4s' }
       ],
       kit: [['01', 'Cinema bodies', 'Full-frame cinema cameras with prime and zoom glass from 16mm to 135mm.'], ['02', 'Lighting', 'Continuous LED panels, strobes, softboxes and practicals — plus a white cyc wall.'], ['03', 'Sound', 'Treated room, shotgun and lavalier mics, and a podcast table for two to four people.'], ['04', 'Sets', 'Product table, seamless backdrops, furniture and props for lifestyle frames.'], ['05', 'Client space', 'Lounge, wifi, monitor feed and a changing area with a mirror and steamer.'], ['06', 'Crew', 'Every booking includes an operator; add a second shooter or stylist on request.']].map(([n, t, d]) => ({ n, t, d })),
-      studioRates: [['01', 'Half day in studio', 'Four hours with an operator, lighting and the set of your choice.', '$450'], ['02', 'Full day in studio', 'Eight hours, two operators, unlimited set changes.', '$850'], ['03', 'Podcast session', 'Two hours, up to four mics, multicam recording and a clean mix.', '$350'], ['04', 'Portrait session', 'Ninety minutes, three looks, ten retouched images.', '$250']].map(([n, t, d, price]) => ({ n, t, d, price })),
+      studioRates: [['01', 'half', 'Half day in studio', 'Four hours with an operator, lighting and the set of your choice.', '$450'], ['02', 'full', 'Full day in studio', 'Eight hours, two operators, unlimited set changes.', '$850'], ['03', 'podcast', 'Podcast session', 'Two hours, up to four mics, multicam recording and a clean mix.', '$350'], ['04', 'portrait', 'Portrait session', 'Ninety minutes, three looks, ten retouched images.', '$250']].map(([n, id, t, d, price]) => ({ n, id, t, d, price })),
       eventKinds: [['01', 'Launches', 'Two operators, roaming coverage, and a 60-second recap for the next morning.', 'From $700'], ['02', 'Corporate', 'Conferences, galas and award nights — stage, candids and sponsor deliverables.', 'From $1,200'], ['03', 'Tournaments', 'Sports and league play with multi-angle coverage and highlight cutdowns.', 'From $900'], ['04', 'Openings', 'Storefront and restaurant openings, filmed for both feed and future ads.', 'From $600'], ['05', 'Family', 'Milestones, engagements and celebrations, shot discreetly and delivered privately.', 'From $400'], ['06', 'Same-week recap', 'Add vertical cuts and a photo set inside five days of the event.', '+$300']].map(([n, t, d, price], i) => ({ n, t, d, price, delay: (i % 3) * 0.1 + 's' })),
       timeline: [['−1 wk', 'Walkthrough', 'We visit the venue, map the light and agree the must-have moments.'], ['T−2h', 'Load in', 'Discreet rigging before guests arrive. Nothing blocks a sightline.'], ['Live', 'Coverage', 'Two operators: one on the room, one on the stage and speeches.'], ['+48h', 'Recap cut', 'A 60-second edit in your inbox while the room is still talking.'], ['+5d', 'Full set', 'Long-form edit, vertical cuts and the photo selection.']].map(([time, t, d], i) => ({ time, t, d, delay: i * 0.08 + 's' })),
-      tabs, tabPlans: tabMap[S.tab] || plans, setTab: e => this.setState({ tab: e.currentTarget.dataset.t }),
-      plans,
       addons: [['Extra filming hour', '$100 / hr'], ['Additional edited photo', '$50'], ['VFX and motion graphics', 'From $150'], ['Second operator', '$250 / day'], ['Licensed music track', 'From $80'], ['Rush 24-hour delivery', '+25%'], ['Drone add-on', '$300'], ['Subtitles per language', '$40']].map(([t, p]) => ({ t, p })),
       faq, togFaq: e => { const i = +e.currentTarget.dataset.i; this.setState(s => ({ faq: s.faq === i ? -1 : i })); },
-      pkItems, tog: e => { const k = e.currentTarget.dataset.k; this.setState(s => ({ touched: true, pk: { ...s.pk, [k]: !s.pk[k] } })); },
-      estLo: money(lo), estHi: money(hi), estNote: any ? 'Combine services to see the range move. We confirm the exact number within two working days.' : 'Select at least one service to see a range.',
+      estLo: money(lo), estHi: money(hi), estNote: any ? 'Indicative CAD range. We confirm the exact number, dates and what to bring within two working days.' : 'Tick at least one service to see a range.',
       estPad: mob ? '24px' : '44px', estGrid: mob ? '1fr' : 'minmax(0,1.2fr) minmax(0,1fr)', estBL: mob ? 'none' : '1px solid ' + bd, estPL: mob ? '0' : '44px', estBT: mob ? '1px solid ' + bd : 'none', estPT: mob ? '28px' : '0',
       stats: [['24', 'Projects delivered'], ['6', 'Industries served'], ['48h', 'First cut turnaround'], ['1', 'Studio in North York']].map(([v, t], i) => ({ v, t, delay: i * 0.08 + 's' })),
       crew: [
@@ -999,14 +1238,6 @@ class Component extends DCLogic {
         { t: 'Producer', d: 'Schedules, permits, wardrobe and everything that makes a day run.', src: U('1516035069371-29a1b244cc32'), alt: 'Producer planning a shoot', delay: '.3s' }
       ],
       beliefs: [['01', 'The story first', 'A camera cannot rescue a thin idea. We spend the first hour on what you want people to remember.'], ['02', 'One roof', 'Script, shoot, edit and grade happen with the same crew — nothing gets lost in a handoff.'], ['03', 'Real prices', 'Every package on this site shows a number. No discovery call needed to learn the range.'], ['04', 'Made to be posted', 'Films are delivered in the sizes you actually publish, the week you need them.']].map(([n, t, d]) => ({ n, t, d })),
-      stepN: S.step, stepT: stepTitles[S.step], stepHead: stepHeads[S.step],
-      step1: S.step === 1 && !S.sent, step2: S.step === 2 && !S.sent, step3: S.step === 3 && !S.sent, sent: S.sent,
-      stepBars: [1, 2, 3].map(i => ({ op: S.step >= i ? 1 : 0.25 })),
-      nextStep: () => this.setState(s => ({ step: Math.min(3, s.step + 1) })), prevStep: () => this.setState(s => ({ step: Math.max(1, s.step - 1) })),
-      submit: () => this.setState({ sent: true }), restart: () => this.setState({ sent: false, step: 1 }),
-      setField: e => { const f = e.currentTarget.dataset.f, v = e.currentTarget.value; this.setState(s => ({ form: { ...s.form, [f]: v } })); },
-      setInd: e => { const v = e.currentTarget.dataset.v; this.setState(s => ({ form: { ...s.form, ind: s.form.ind === v ? '' : v } })); },
-      industries, fName: S.form.name, fEmail: S.form.email, fPhone: S.form.phone, fBrand: S.form.brand, fStart: S.form.start, fGoal: S.form.goal
     };
   }
 }

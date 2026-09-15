@@ -3,7 +3,7 @@
 ## Overview
 Marketing site for **Zeus Frames**, a Toronto (North York) media studio: video production, photography, social content, a physical studio, event coverage. Goal of the site: show packages fast and get visitors to a quote. Brand is strictly black & white. The concept is a camera **viewfinder**: HUD chrome (REC, timecode, frame counter, exposure readout), an autofocus reticle that follows the cursor, lens-style rings, shutter/flash transitions.
 
-5 pages, one shared shell: **Home · Services · Studio · Packages · Get a Quote**.
+7 pages, one shared shell: **Home · Video production · Social marketing · Events · Studio · Packages · Contact**. Video/Social/Events are grouped under a non-clickable “Services” heading in the menu.
 
 ## About the design files
 Everything in this bundle is a **design reference built in HTML** (a live prototype), not production code. Recreate it in the target stack (Next.js/React recommended; any framework is fine) using its own component and routing conventions. Do not ship the `.dc.html` / `support.js` runtime.
@@ -52,18 +52,18 @@ Motion
 
 ## Global shell (every page)
 
-**Intro (first load only, not on client-side page change, skipped when `?embed=1`)**
+**Intro (first load only, not on client-side page change, skipped when `?embed=1`)** — note: page background is always dark; there are no light zones.
 Black full-screen. The logo mark draws itself in (see "Logo animation", 1.7s, stroke 6) centered at 72×80px; at 1.7s an **iris** opens (a circle with a 250vmax black box-shadow whose width/height animate 0→300vmax over 1.7s, ease mechanical). Hero text starts at 1.9s. Overlay removed at 3.5s.
 
 **HUD (fixed, z 500, pointer-events none except buttons, white + difference blend)**
 - 18×18 corner brackets at 16px from each corner (1px lines).
 - A fixed dark scrim sits behind the top row on all sizes: `linear-gradient(180deg, rgba(12,12,12,.92) 0%, rgba(12,12,12,.7) 45%, transparent 100%)`, height 120px desktop / 96px mobile.
-- Top row at 26px / 36px inset: left = logo mark (28×31 vector) + `/ PAGE NAME` label (desktop only); center = blinking 7px dot + `REC` + live timecode `HH:MM:SS:FF` (desktop only, 250ms tick); right = `Get a quote` (underlined) + `Menu ≡` (all sizes).
+- Top row at 26px / 36px inset: left = logo mark (28×31 vector) + `/ PAGE NAME` label (desktop only); center = blinking 7px dot + `REC` + live timecode `HH:MM:SS:FF` (desktop only, 250ms tick); right = `Packages` (underlined; reads `Contact` on the Packages page) + `Menu ≡` (all sizes).
 - Bottom-right (desktop): `FR 0000 / 1000` = scroll progress ×1000. Bottom corner brackets are desktop only.
-- **Navigation = full-screen menu on all sizes** (no rail). `Menu ≡` opens a `#0c0c0c` overlay (fade .35s): list of 5 pages, each row = number `01`–`05` + Cormorant title `clamp(30px,5.5vw,76px)` + hairline bottom; hover shifts padding-left 12px and lifts opacity .6→1; desktop shows a right-aligned hint per row (`Video · Social · Events`, … / `You are here` for the current page) and a second column with Call / Email / Studio / Social. Bottom row: horizontal lockup logo + `Close ✕` pill. Clicking any item closes the menu and jumps to the top of the target page; Esc closes.
+- **Navigation = full-screen menu on all sizes** (no rail). `Menu ≡` opens a `#0c0c0c` overlay (fade .35s): rows Home · **Services** (heading, not clickable — under it three pill links Video production / Social marketing / Events) · Studio · Packages · Contact. Row = number + Cormorant title `clamp(30px,5.5vw,76px)` + hairline bottom; hover shifts padding-left 12px and lifts opacity .6→1; desktop shows a right-aligned hint per row (`You are here` for the current page). Bottom row: horizontal lockup logo + `Close ✕` pill. Clicking any item closes the menu, jumps to the top of the target page and plays a ~1s **page-transition stamp** (dark overlay, small logo draw-in). Esc closes.
 - AF reticle (desktop only): 44×44 box made of four 10px corner brackets (1.5px), fixed, follows the cursor (offset −22,−22) with `transform .22s`. On hover of any CTA/card/nav item it **locks**: moves to the element's bounding box +8px padding (width/height animate .35s). Unlocks on mouseleave or scroll.
 - Back-to-top (desktop): 44px round button, fixed right 20px bottom 60px, `rgba(12,12,12,.72)` + blur + `rgba(236,235,230,.4)` border, shows after 1 viewport of scroll.
-- Range pill (after the visitor has toggled any estimator chip, all pages except Contact): fixed bottom-center pill `Your range  $X – $Y  →` (paper background, ink text) linking to Contact. Bottom 28px desktop / 80px mobile.
+- Range pill (after the visitor has changed anything in the builder; all pages except Packages and Contact): fixed bottom-center pill `Your range  $X – $Y  →` (paper background, ink text) linking to Contact. Bottom 28px desktop / 80px mobile.
 - Mobile dock (mobile only): fixed bottom 44px, inset 16px, grid `1fr 1fr 48px 48px` gap 8px, all 48px tall: `WhatsApp` (filled pill → `https://wa.me/16478391491`), `Call` (outline pill → `tel:+16478391491`), round `→` (Get a quote), round `↑` (back to top, .45 border). Behind it a 120px bottom gradient scrim (`rgba(12,12,12,.95)` → transparent). Range pill sits at bottom 104px on mobile.
 
 **Page change behavior**
@@ -95,38 +95,52 @@ Hero copy per page (kicker / line1 / line2 / lead):
 6. **How it runs** — 4 hairline cards (auto-fit min 220px, min-height 240): 01 Discovery / 02 Pre-production / 03 Shoot day / 04 Delivery with short paragraphs.
 7. **About** (folded into Home) — 2-col intro ("A small crew with a *big* lens." + two paragraphs), stats row (`24 Projects delivered`, `6 Industries served`, `48h First cut turnaround`, `1 Studio in North York`), **The crew** 4 cards (3:4 image, role, one line: Director / Camera / Editor / Producer), **What we believe** 4 numbered rows (The story first / One roof / Real prices / Made to be posted).
 
-### 2. Services (three chapters on one page)
-- Sticky **anchor bar** under the HUD (top 64px, page background, hairline bottom): three pill links `Video production 24mm`, `Social marketing 35mm`, `Events 50mm` → `#svc-video`, `#svc-social`, `#svc-events`.
-- Each chapter opens with a hairline-topped header row: H2 (`Video *production*` / `Social *marketing*` / `Event *coverage*`) + right label (`01 · 24mm · from $499`, `02 · 35mm · from $499 / mo`, `03 · 50mm · from $400`).
-- **Video**: 2-col intro ("Films that *sell* without looking like ads." + paragraph); 6 hairline cards (3-col, min-height 250): Commercials 24mm from $1,500 · Brand films 35mm from $2,500 · Product 100mm from $499 · Real estate 16mm from $1,200 · Music videos 50mm from $1,800 · Documentary 85mm on request; **The full production** checklist: 12 items in auto-fit columns (Concept and script … Licensed music), each `NN` + label with hairline top.
-- **Social**: 2-col intro ("One shoot day. A *month* of content."); 6 cards (Content days, Editing and captions, Scheduling, Community, Reporting, Paid support); **Vertical first** block: text with stats `8 reels / month`, `3 cuts per reel`, `48h first delivery` | 3 × 9:16 video tiles (iris reveal, play on hover).
-- **Events**: 2-col intro ("Filmed live. Posted *while* it still matters."); 6 cards with prices (Launches from $700, Corporate from $1,200, Tournaments from $900, Openings from $600, Family from $400, Same-week recap +$300); **Event day** timeline: 5 columns (`−1 wk Walkthrough`, `T−2h Load in`, `Live Coverage`, `+48h Recap cut`, `+5d Full set`).
-- Closing **Across all *three*** work grid (same component as Home, 6 items S01–S06).
+### 2. Video production (`#video`)
+- Spec strip under the hero: 4 hairline cells — Formats 6 · First cut 7–10 days · Crew 2–4 · From $899.
+- 2-col intro ("Films that *sell* without looking like ads."); 6 hairline format cards with lens label + "From" price (Commercials $1,500 · Brand films $2,500 · Product $499 · Real estate $1,200 · Music videos $1,800 · Documentary on request); **The full production** 12-item checklist.
+- **Video packages** (`#plans`): 3 cards from the catalog (Essential $899–1,200 · Growth $2,499–3,200 · Signature $6,000–8,500, per project) with bullet items; button "Add <plan> →" selects that plan in the builder state and navigates to Packages; a selected plan shows "In your package ✓" and a faint fill. Footer row links to the builder.
+- Recent films work grid (6).
+
+### 2b. Social marketing (`#social`)
+- Horizontal 9:16 feed strip under the hero (8 tiles 190px / 150px mobile, autoplay when visible, scrollable).
+- 2-col intro ("One shoot day. A *month* of content."); 6 cards (Content days … Paid support); **Vertical first** block with stats 8 / 3 / 48h + three 9:16 tiles.
+- **Monthly plans** (`#plans`): Basic Presence $499 · Pro Essentials $1,990 · Elite Cinematic $4,000 (/ mo) — same card component as above.
+
+### 2c. Events (`#events`)
+- Live strip under the hero: blinking dot + "Live · 2 operators · 48h recap · Same-week verticals · GTA travel included".
+- 2-col intro ("Filmed live. Posted *while* it still matters."); 6 coverage cards with prices; **Event day** 5-column timeline.
+- **Coverage packages** (`#plans`): Launch $700–900 · Corporate $1,200–1,800 · Tournament $900–2,400 (per event).
+- From the floor work grid (6).
 
 ### 3. Studio
 - 2-col intro ("Book the room, *keep* the crew." + paragraph).
 - Gallery: 4-col grid (2-col mobile), gap 16, iris reveal, hover scale 1.04: 16:10 span 2 · 4:5 · 4:5 · 4:5 · 16:10 span 3 (mobile: wide tiles span full row).
 - **Kit list**: 2-col (label + H2 "Kit *list*" + paragraph | 6 numbered rows: Cinema bodies, Lighting, Sound, Sets, Client space, Crew).
-- **Studio rates**: header + label `Extra time $100 / hr`; 4 hairline rows (`01 Half day in studio $450`, `02 Full day in studio $850`, `03 Podcast session $350`, `04 Portrait session $250`), grid `90px | 1fr | auto`, hover shifts padding-left 14px.
+- **Studio rates** (`#rates`): header + label `Extra time $100 / hr`; 4 hairline rows (`01 Half day in studio $450`, `02 Full day in studio $850`, `03 Podcast session $350`, `04 Portrait session $250`), grid `90px | 1fr | auto`, hover shifts padding-left 14px. Each row is a button “NN · Add →” that selects that studio plan in the builder and navigates to Packages.
 
-### 4. Packages
-- 2-col intro ("Pick a *plan* or build your own.").
-- Tabs (pills, active = paper bg/ink text): **Monthly** / **Projects** / **Single sessions**. Cards animate in with `zoom` (opacity+scale .94) staggered .12s.
-  - Monthly: Basic Presence $499 /mo (Starter) · Pro Essentials $1,990 /mo (Most popular) · Elite Cinematic $4,000 /mo (Full production) — each with 5–6 bullet items and `Choose <name> →`.
-  - Projects: Essential $899 · Growth $2,499 · Signature $6,000 (per project).
-  - Single sessions: Product $199 · Real estate $499 · Social media $399 · Real estate tour $1,200.
-- **Live estimator** (`#estimate`, hairline box, 2-col `1.2fr | 1fr`, mobile stacked with hairline divider): label `Build your package · Live estimate`, H3 "Dial in what you need.", 6 toggle chips (pill, active = paper/ink): `8 reels / month $1.6k–2.4k` (1600–2400) · `Brand film $1.5k–4k` (1500–4000) · `Product photography $200–900` · `Drone coverage $300–600` · `Event coverage $400–1.2k` · `Studio session $250–500`. Defaults on: reels + photo. Right: `Estimated range / month` → Cormorant `$lo – $hi` (sum of selected; en-CA formatting) + note + outline button `Request exact quote →`. Toggling any chip sets a global `touched` flag that shows the Range pill.
-- **Add-ons**: 8 hairline rows in auto-fit columns (Extra filming hour $100 / hr, Additional edited photo $50, VFX and motion graphics From $150, Second operator $250 / day, Licensed music track From $80, Rush 24-hour delivery +25%, Drone add-on $300, Subtitles per language $40).
-- **Common questions**: 5 accordion rows (first open; `+` rotates 45°, answer max-height/opacity transition .5s). Q/A copy is in the file — confirm with client.
+### 4. Packages — per-service builder + 3-step send (`#packages`)
+Intro 2-col ("Build *exactly* what you need."). Then a **3-step bar** (Build · Details · Brief; completed steps clickable) and one of four states:
 
-### 5. Get a Quote (Contact)
-- 2-col `1.3fr | .7fr` (stacked mobile). Right column: 4:5 image + Call / Email / Studio / Hours / Social.
-- Left: 3-step form. Header `Step N of 3 · Scope|Details|Brief`, H2 changes per step ("What are we making?", "Who are we making it for?", "When and why?"), 3 progress bars (2px, opacity 1 done / .25 pending).
-  - Step 1: the same 6 estimator chips (shared state) + live range + `Next — your details →`.
-  - Step 2: 2-col fields (Name, Email, Phone, Business or brand — underline inputs, 15px), Industry chips (Social / creator, Real estate, Restaurant, Retail, Construction, Fashion, Family; single-select), `← Back` / `Next — the brief →`.
-  - Step 3: Start date input, textarea "What's the content for?", `← Back` / `Send the request →`.
-  - Sent state: hairline box with drawing logo (34×38) + `Request logged`, italic H3 "Thanks — we'll come back within two working days.", paragraph repeating the range, `Start another request`.
-- No backend in the prototype; validation is not implemented (add soft email/phone validation in production).
+**Step 1 · Build** — grid `1.4fr | .7fr` (stacked mobile). Left: one hairline card per service (Video production 24mm · Social marketing 35mm · Events 50mm · Studio 85mm). Card header = 22px checkbox + service name + right-aligned running sum ("$2,290 – $2,890 / mo" or "Not included"). When checked the card expands (fade .35s): plan tiles (auto-fit min 150px; selected = paper fill/ink text) + option chips (pill; selected = paper/ink) + include note + "Full details →" link to the service page. Right, sticky top 110px: **Your package** panel (mark icon + label), one row per active service (service · plan, add-ons line, range), total **Estimated range** in Cormorant clamp(40,4.4vw,72), unit note ("for social marketing" / "2 services · mixed billing"), **3-month contract · 10% off** toggle (38×22 pill switch, multiplies total by .9), note, button "Continue — your details →" (disabled copy "Pick at least one service" when nothing is on).
+
+Catalog (all CAD; lo–hi used for the range):
+- Video (project): Essential 899–1200 · Growth 2499–3200 · Signature 6000–8500. Options: Drone 300–600 · Second operator 250 · VFX / motion titles 150–600 · Licensed track 80–250 · Rush 24h +25% (percentage of plan).
+- Social (/ mo): Basic Presence 499 · Pro Essentials 1990 · Elite Cinematic 4000. Options: +4 reels 700–900 · +10 photos 300–400 · Community replies 250 · Paid-social cuts 300–500 · Subtitles extra language 40–120.
+- Events (event): Launch 700–900 · Corporate 1200–1800 · Tournament 900–2400. Options: Same-week verticals 300 · Dedicated photographer 350–450 · Live stream 500–900 · Drone 300–600 · Outside GTA 120–400.
+- Studio (session): Portrait 250 · Half day 450 · Podcast 350 · Full day 850. Options: Extra hour 100 · Stylist 250–350 · +10 retouched 200–250 · Second operator 250.
+Defaults: Social on with Pro Essentials; others off. State is global — service pages, the range pill, and the send flow all read it.
+
+**Step 2 · Details** — hairline card: Name, Email, Phone, Business or brand (underline inputs, 2-col desktop), Industry chips (single-select: Social / creator, Real estate, Restaurant, Retail, Construction, Fashion, Family), **Preferred contact** chips (WhatsApp default / Phone call / Email). Soft validation: name + valid email required, error line under the fields. "← Back to the builder" / "Next — the brief →". Right (below on mobile): compact sticky summary with "Edit package".
+
+**Step 3 · Brief** — Start date, Deadline or event date, Location, Budget comfort (optional), textarea "What is the content for?", textarea "Anything else — references, links, must-haves". "← Back" / "Send the request →".
+
+**Sent** — hairline card with drawing mark + "Request logged · ZF-YYMMDD-NNN", italic H3 "Thanks, <first name> — we'll come back within two working days.", note naming the chosen contact channel and email; buttons "Build another package" / "Back to home". Right column: full echo of what was sent — services/plans/add-ons/range + every non-empty field. Submission is simulated in the prototype; wire to email/CRM in production.
+
+Below all states: **Add-ons** list and **Common questions** accordion (unchanged). The range pill and the bottom "Get a quote" band are hidden on this page.
+
+### 5. Contact (`#contact`)
+- No form. 2-col (stacked mobile). Left: big hairline rows in Cormorant clamp(24–52px): **Call** +1 647-839-1491 (tel:) · **Email** Zeusframess@gmail.com (mailto:) · **WhatsApp** "Message us ↗" (wa.me) · **Studio** address · **Hours** Mon–Sat 9:00–19:00; hover shifts padding-left 12px. Then **Follow** pills: Instagram @zeusframes.inc · TikTok · YouTube · LinkedIn (last three URLs are placeholders — confirm). Right: 4:5 image + "Open in Maps ↗".
+- Hero: "Say hello. / We're quick."; primary CTA becomes "Build a package" → Packages; secondary "WhatsApp us".
 
 ---
 
@@ -134,7 +148,7 @@ Hero copy per page (kicker / line1 / line2 / lead):
 
 Vector mark reconstructed from the client PNG (pixel IoU 96.6%). `assets/logo-mark.svg` = final static mark (viewBox `0 0 485 541`, single `fill-rule="evenodd"` path). `assets/logo-paths.json` = the 5 sub-paths (`hex` outer rounded hexagon, `tri` central inverted triangle cut-out, `cap` top cut-out, `kl`/`kr` side cut-outs) used for the draw-in.
 
-**Logo draw-in animation** (duration D; used at 1.7s intro, 2.4s sent-state, 6s brand stage):
+**Logo draw-in animation** (duration D). Placements: intro iris (1.7s) · page-transition stamp (1.1s) · HUD mark (static) · lens centre on Home (static) · full-screen “mark stage” on Home (6s, with shutter flash at 70%) · inside the “How it runs” heading and the “Get a quote” band (2.6s, plays when scrolled into view) · lightbox header (1.4s) · Your-package panel icon (static) · footer above the lockup (3s, on reveal) · sent state (2.4s).
 - Five hairline strokes (`pathLength=1`, `stroke-dasharray:1`), color paper, width 4–6:
   - hex: dashoffset 1→0 over 0–42% of D
   - tri: 18%–58%
@@ -152,7 +166,7 @@ PNG lockups (transparent): `logo-h-white/black.png` horizontal "ZEUS FRAMES · C
 All video/photo in the prototype is **placeholder stock** (Pexels video downloads, Unsplash photos, grayscale filter applied in CSS). Replace with client footage; provide a poster image per clip (the prototype has none — it relies on `preload="metadata"` + seeking to 0.05s to paint a first frame). Lazy-load grid videos (IntersectionObserver), autoplay muted/inline, pause when off-screen. Hide a video that errors (opacity 0) so the `#1a1a1a` tile remains.
 
 ## State (client)
-`page`, `mob`, `intro`, `tc` (timecode), `lens` (active service row), `wh` (hovered work tile), `lb` (lightbox index), `shot` (shutter running), `menu`, `tab`, `faq`, `pk` (estimator selections — shared across Packages & Contact), `touched`, `step`, `sent`, `form`, `brandSeen`.
+`page`, `mob`, `intro`, `navFlash`, `tc` (timecode), `lens`, `wh`, `lb`, `shot`, `menu`, `faq`, `brandSeen`, `touched`, `contract`, `cfg` ({video|social|events|studio: {on, plan, opts{}}} — the single source of truth for the package), `q` (1–3), `qSent`, `qErr`, `sentRef`, `form` (name, email, phone, brand, ind, via, start, deadline, location, budget, goal, notes).
 
 ## Contact data
 +1 647-839-1491 · Zeusframess@gmail.com · 180 Shaughnessy Blvd, North York, ON M2J 1K3 · Mon–Sat 9:00–19:00 · instagram.com/zeusframes.inc
