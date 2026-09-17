@@ -44,6 +44,13 @@ s = re.sub(r'https://www\.pexels\.com/download/video/([0-9]+)/',
 s = s.replace('src="assets/', 'src="{{ assetBase }}assets/')
 need('      svcOpts: this.SVC_OPTS,', 'render values')
 s = s.replace('      svcOpts: this.SVC_OPTS,', '      assetBase: AB, svcOpts: this.SVC_OPTS,', 1)
+# Poster assignment compares v.poster (which reads back as an absolute URL) against the
+# root-relative path we store in data-poster, so the two never match and the poster is
+# rewritten on every refresh — about 4x a second, repainting the still over playing video.
+# Comparing the raw attribute makes it settle after the first assignment.
+need("v.poster !== p) v.poster = p;", 'poster assignment')
+s = s.replace("v.poster !== p) v.poster = p;", "v.getAttribute('poster') !== p) v.poster = p;", 1)
+
 # The export falls back to Pexels' CDN when a video fails to load, and derives the id
 # from "video/<digits>" — which also matches our local assets/video/<id>.mp4 paths, so it
 # would replace working local files with remote ones (and return nothing for unlisted ids).

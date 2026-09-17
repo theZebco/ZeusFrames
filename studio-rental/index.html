@@ -1072,7 +1072,7 @@ class Component extends DCLogic {
     const vh0 = window.innerHeight; document.querySelectorAll('[data-reveal]:not([data-inview])').forEach(el => { const r = el.getBoundingClientRect(); if (r.bottom > 0 && r.top < vh0 * 0.95 && r.height > 0) el.setAttribute('data-inview', '1'); });
     document.querySelectorAll('video:not([data-err])').forEach(v => { v.setAttribute('data-err', '1'); v.addEventListener('error', () => { v.style.opacity = '0'; }); });
     document.querySelectorAll('img[data-img]').forEach(im => { const u = im.dataset.img; if (u && u.indexOf('{{') < 0 && im.getAttribute('src') !== u) im.src = u; });
-    document.querySelectorAll('video[data-poster]').forEach(v => { const p = v.dataset.poster; if (p && p.indexOf('{{') < 0 && v.poster !== p) v.poster = p; });
+    document.querySelectorAll('video[data-poster]').forEach(v => { const p = v.dataset.poster; if (p && p.indexOf('{{') < 0 && v.getAttribute('poster') !== p) v.poster = p; });
     document.querySelectorAll('video[data-lazy]:not([data-vobs])').forEach(v => { if ((v.dataset.lazy || '').indexOf('{{') >= 0) return; v.setAttribute('data-vobs', '1'); this.vidIo.observe(v); });
     clearTimeout(this.vqT); this.vqT = setTimeout(() => { document.querySelectorAll('video[data-lazy]:not([data-queued]):not([data-auto])').forEach(v => { if ((v.dataset.lazy || '').indexOf('{{') < 0) this.queueVid(v); }); }, 900);
     document.querySelectorAll('[data-revmark]:not([data-robs])').forEach(el => { el.setAttribute('data-robs', '1'); this.revIo.observe(el); });
