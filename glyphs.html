@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#0c0c0c;color:#ecebe6;-webkit-font-smoothing:antialiased}button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}</style>
+</helmet>
+<div style="min-height:100vh;padding:48px 6vw 80px;box-sizing:border-box;font-family:'DM Mono',monospace;background:{{ bg }};color:{{ ink }};transition:background .6s,color .6s">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 30px;margin-bottom:40px">
+    <div><span style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;opacity:.6">ZeusFrames · abstract service glyphs</span><h1 style="margin:12px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(36px,5vw,72px);line-height:.95;letter-spacing:-.02em">Twelve marks, <em>one family.</em></h1><p style="margin:14px 0 0;max-width:560px;font-size:13px;line-height:1.7;opacity:.75">Thick rounded strokes, mostly enclosed, non-representational — all drawn on the logo's hexagon grid so they sit next to the ZeusFrames mark. Pick four (one per service) and tell me the numbers.</p></div>
+    <div style="display:flex;gap:8px"><button onClick="{{ toggle }}" style="border:1px solid currentColor;padding:10px 16px;border-radius:999px;font-size:10px;letter-spacing:.2em;text-transform:uppercase">{{ themeT }}</button><button onClick="{{ toggleW }}" style="border:1px solid currentColor;padding:10px 16px;border-radius:999px;font-size:10px;letter-spacing:.2em;text-transform:uppercase">Stroke {{ swT }}</button></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:{{ bd }};border:1px solid {{ bd }}">
+    <sc-for list="{{ glyphs }}" as="g" hint-placeholder-count="12">
+      <div style="background:{{ bg }};padding:28px 22px 22px;display:flex;flex-direction:column;gap:18px;transition:background .6s">
+        <div style="display:flex;justify-content:space-between;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55"><span>{{ g.n }}</span><span>{{ g.k }}</span></div>
+        <svg viewBox="0 0 100 100" style="width:100%;aspect-ratio:1;display:block" fill="none" stroke="currentColor" stroke-width="{{ sw }}" stroke-linecap="round" stroke-linejoin="round"><path d="{{ g.d }}"></path></svg>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px"><span style="font-family:'Cormorant Garamond',serif;font-size:22px;line-height:1">{{ g.t }}</span><svg viewBox="0 0 100 100" style="width:18px;height:18px" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ g.d }}"></path></svg></div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="margin-top:40px;display:flex;flex-wrap:wrap;gap:30px;align-items:center;font-size:12px;opacity:.75">
+    <span>In context:</span>
+    <sc-for list="{{ sample }}" as="x" hint-placeholder-count="4">
+      <span style="display:flex;align-items:center;gap:12px;font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.4vw,34px);line-height:1"><svg viewBox="0 0 100 100" style="width:.8em;height:.8em" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="{{ x.d }}"></path></svg>{{ x.t }}</span>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { light: false, sw: 6 };
+  HEX = 'M50 8 L86 29 L86 71 L50 92 L14 71 L14 29 Z';
+  G = [
+    ['01', 'Lens', 'Hex · nested', 'M50 8 L86 29 L86 71 L50 92 L14 71 L14 29 Z M50 26 L70 38 L70 62 L50 74 L30 62 L30 38 Z M50 44 L56 50 L50 56 L44 50 Z'],
+    ['02', 'Aperture', 'Circle · blades', 'M50 12 A38 38 0 1 1 49.9 12 Z M50 12 L50 50 M83 31 L50 50 M83 69 L50 50 M50 88 L50 50 M17 69 L50 50 M17 31 L50 50'],
+    ['03', 'Bloom', 'Hex · petals', 'M50 8 L86 29 L86 71 L50 92 L14 71 L14 29 Z M50 50 C50 34 58 26 50 18 C42 26 50 34 50 50 Z M50 50 C64 42 76 46 78 36 C68 32 60 40 50 50 Z M50 50 C64 58 76 54 78 64 C68 68 60 60 50 50 Z M50 50 C50 66 58 74 50 82 C42 74 50 66 50 50 Z M50 50 C36 58 24 54 22 64 C32 68 40 60 50 50 Z M50 50 C36 42 24 46 22 36 C32 32 40 40 50 50 Z'],
+    ['04', 'Star', 'Hex · six rays', 'M50 8 L86 29 L86 71 L50 92 L14 71 L14 29 Z M50 24 L50 76 M27 37 L73 63 M27 63 L73 37 M50 42 L57 50 L50 58 L43 50 Z'],
+    ['05', 'Iris', 'Circle · hex core', 'M50 12 A38 38 0 1 1 49.9 12 Z M50 26 L71 38 L71 62 L50 74 L29 62 L29 38 Z M50 40 L59 45 L59 55 L50 60 L41 55 L41 45 Z'],
+    ['06', 'Shutter', 'Hex · spokes', 'M50 8 L86 29 L86 71 L50 92 L14 71 L14 29 Z M50 8 L50 34 M86 29 L64 42 M86 71 L64 58 M50 92 L50 66 M14 71 L36 58 M14 29 L36 42 M50 34 L64 42 L64 58 L50 66 L36 58 L36 42 Z'],
+    ['07', 'Cell', 'Hex · triads', 'M50 8 L86 29 L86 71 L50 92 L14 71 L14 29 Z M50 50 L50 8 M50 50 L86 71 M50 50 L14 71 M50 30 L68 40 M50 30 L32 40 M68 61 L68 40 M32 61 L32 40 M68 61 L50 71 M32 61 L50 71'],
+    ['08', 'Orbit', 'Circle · rings + hex', 'M50 12 A38 38 0 1 1 49.9 12 Z M50 24 A26 26 0 1 1 49.9 24 Z M50 36 L62 43 L62 57 L50 64 L38 57 L38 43 Z'],
+    ['09', 'Facet', 'Hex · cube', 'M50 8 L86 29 L86 71 L50 92 L14 71 L14 29 Z M50 50 L86 29 M50 50 L14 29 M50 50 L50 92 M32 40 L50 50 L68 40 L68 60 L50 71 L32 60 Z'],
+    ['10', 'Pupil', 'Circle · triangle', 'M50 12 A38 38 0 1 1 49.9 12 Z M50 24 L74 66 L26 66 Z M50 42 A8 8 0 1 1 49.9 42 Z'],
+    ['11', 'Weave', 'Hex · lattice', 'M50 8 L86 29 L86 71 L50 92 L14 71 L14 29 Z M32 40 L68 60 M32 60 L68 40 M50 29 L50 71 M38 34 L62 34 M38 66 L62 66'],
+    ['12', 'Halo', 'Circle · petal ring', 'M50 12 A38 38 0 1 1 49.9 12 Z M50 50 C50 38 56 30 50 24 C44 30 50 38 50 50 Z M50 50 C60 44 70 46 72 38 C64 36 58 42 50 50 Z M50 50 C60 56 70 54 72 62 C64 64 58 58 50 50 Z M50 50 C50 62 56 70 50 76 C44 70 50 62 50 50 Z M50 50 C40 56 30 54 28 62 C36 64 42 58 50 50 Z M50 50 C40 44 30 46 28 38 C36 36 42 42 50 50 Z']
+  ];
+  renderVals() {
+    const S = this.state, light = S.light;
+    const gl = this.G.map(([n, t, k, d]) => ({ n, t, k, d }));
+    return {
+      bg: light ? '#ecebe6' : '#0c0c0c', ink: light ? '#0c0c0c' : '#ecebe6', bd: light ? 'rgba(12,12,12,.22)' : 'rgba(236,235,230,.22)',
+      toggle: () => this.setState({ light: !light }), themeT: light ? 'Dark' : 'Light',
+      toggleW: () => this.setState({ sw: S.sw === 6 ? 4 : S.sw === 4 ? 8 : 6 }), swT: S.sw === 6 ? 'medium' : S.sw === 4 ? 'thin' : 'bold', sw: S.sw,
+      glyphs: gl,
+      sample: [['Motherhood & Family', gl[2].d], ['Fashion & Branding', gl[1].d], ['Video Art Films', gl[0].d], ['Studio & Commercial', gl[8].d]].map(([t, d]) => ({ t, d }))
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=Manrope:wght@400;500;600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Figtree:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#0c0c0c;color:#ecebe6;-webkit-font-smoothing:antialiased}button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}</style>
+</helmet>
+<div style="min-height:100vh;padding:48px 6vw 80px;box-sizing:border-box;background:{{ bg }};color:{{ ink }};transition:background .6s,color .6s;font-family:'DM Mono',monospace">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 30px;margin-bottom:40px">
+    <div><span style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;opacity:.6">ZeusFrames · type options</span><h1 style="margin:12px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,4.6vw,64px);line-height:.95;letter-spacing:-.02em">Five pairings, <em>same content.</em></h1><p style="margin:14px 0 0;max-width:600px;font-size:13px;line-height:1.7;opacity:.75">Option A is what the site uses now. B–E keep the editorial serif headline but swap the monospace body for a humanist sans (larger x-height, wider letterforms) — that's where most of the legibility gain is. Toggle the theme to judge both.</p></div>
+    <button onClick="{{ toggle }}" style="border:1px solid currentColor;padding:10px 16px;border-radius:999px;font-size:10px;letter-spacing:.2em;text-transform:uppercase">{{ themeT }}</button>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:1px;background:{{ bd }};border:1px solid {{ bd }}">
+    <sc-for list="{{ pairs }}" as="p" hint-placeholder-count="5">
+      <div style="background:{{ bg }};padding:34px 28px;display:grid;grid-template-columns:{{ cols }};gap:26px 5vw;align-items:start;transition:background .6s">
+        <div>
+          <div style="display:flex;gap:14px;align-items:baseline;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6;font-family:'DM Mono',monospace"><span>{{ p.id }}</span><span>{{ p.name }}</span></div>
+          <h2 style="margin:16px 0 0;font-family:{{ p.head }};font-weight:{{ p.hw }};font-size:clamp(34px,4.2vw,60px);line-height:.98;letter-spacing:{{ p.ls }}">Motherhood, Family &amp; Fashion <em style="font-style:italic">Stories in Stouffville.</em></h2>
+          <div style="margin-top:18px;display:flex;gap:16px;align-items:baseline"><span style="font-family:{{ p.head }};font-size:34px;line-height:1">$1,280</span><span style="font-family:{{ p.body }};font-size:{{ p.labelSize }};letter-spacing:.18em;text-transform:uppercase;opacity:.65">Bump, Baby &amp; Family · + HST</span></div>
+        </div>
+        <div style="font-family:{{ p.body }};font-size:{{ p.size }};line-height:1.7">
+          <span style="display:block;font-size:{{ p.labelSize }};letter-spacing:.2em;text-transform:uppercase;opacity:.65;margin-bottom:10px">02 — Pick a session</span>
+          <p style="margin:0;opacity:.88">Motherhood moves quickly. ZeusFrames exists to slow it down — minimal‑modern, dreamy maternity, newborn, kidsgraphy and family sessions for parents across Stouffville and the GTA. Each session is guided, calm, and designed around your comfort.</p>
+          <p style="margin:12px 0 0;font-size:{{ p.small }};opacity:.7">Single sessions require a 50% retainer to hold your date, with the balance due on or before the session. Journey bundles can be paid per session, in two installments, or in full upfront.</p>
+          <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap"><span style="border:1px solid currentColor;padding:10px 16px;border-radius:999px;font-size:{{ p.labelSize }};letter-spacing:.18em;text-transform:uppercase">Continue to inquiry →</span><span style="border:1px solid {{ bd }};padding:10px 16px;border-radius:999px;font-size:{{ p.labelSize }};letter-spacing:.18em;text-transform:uppercase;opacity:.7">Menu ≡</span></div>
+          <p style="margin:14px 0 0;font-size:{{ p.small }};opacity:.55;font-family:'DM Mono',monospace">{{ p.note }}</p>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { light: false, mob: false };
+  componentDidMount() { this.r = () => this.setState({ mob: window.innerWidth < 760 }); this.r(); window.addEventListener('resize', this.r); }
+  componentWillUnmount() { window.removeEventListener('resize', this.r); }
+  renderVals() {
+    const S = this.state, light = S.light;
+    return {
+      bg: light ? '#ecebe6' : '#0c0c0c', ink: light ? '#0c0c0c' : '#ecebe6', bd: light ? 'rgba(12,12,12,.22)' : 'rgba(236,235,230,.22)',
+      toggle: () => this.setState({ light: !light }), themeT: light ? 'Dark' : 'Light', cols: S.mob ? '1fr' : 'minmax(0,1fr) minmax(0,1fr)',
+      pairs: [
+        { id: 'A', name: 'Current — Cormorant Garamond + DM Mono', head: "'Cormorant Garamond',serif", hw: 300, ls: '-.02em', body: "'DM Mono',monospace", size: '14px', small: '12px', labelSize: '10px', note: 'Elegant but light: thin strokes and a monospace body read slower at small sizes.' },
+        { id: 'B', name: 'Cormorant Garamond + Instrument Sans', head: "'Cormorant Garamond',serif", hw: 300, ls: '-.02em', body: "'Instrument Sans',sans-serif", size: '16px', small: '13px', labelSize: '11px', note: 'Smallest change: keep the headline, swap the body to a clean humanist sans. Easiest win.' },
+        { id: 'C', name: 'Newsreader + Manrope', head: "'Newsreader',serif", hw: 300, ls: '-.015em', body: "'Manrope',sans-serif", size: '16px', small: '13px', labelSize: '11px', note: 'Warmer serif with sturdier strokes; Manrope is very open and legible for UI and prices.' },
+        { id: 'D', name: 'Playfair Display + Figtree', head: "'Playfair Display',serif", hw: 400, ls: '-.01em', body: "'Figtree',sans-serif", size: '16px', small: '13px', labelSize: '11px', note: 'High-contrast fashion serif, more presence in the hero; Figtree is friendly and rounded.' },
+        { id: 'E', name: 'EB Garamond + Work Sans', head: "'EB Garamond',serif", hw: 400, ls: '-.01em', body: "'Work Sans',sans-serif", size: '16px', small: '13px', labelSize: '11px', note: 'Classic book serif, heavier than Cormorant; Work Sans is neutral and highly readable.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

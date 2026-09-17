@@ -1,11 +1,13 @@
 # ZeusFrames Studio — website handoff (v2)
 
-Prototype of the full site for **ZeusFrames**, a boutique photo + video studio in Stouffville, ON. Theme: "Viewfinder" — always-dark (#0c0c0c / #ecebe6), Cormorant Garamond display + DM Mono UI, hairline grids, camera-HUD chrome, logo draw-in animations. Content, packages and pricing follow the two client PDFs in `source/`.
+Prototype of the full site for **ZeusFrames**, a boutique photo + video studio in Stouffville, ON. Theme: "Viewfinder" — Cormorant Garamond display + **Instrument Sans** UI (15px base), hairline grids, logo draw-in animations. **Light and dark modes** (sun/moon toggle in the header, iris-wipe transition, saved to localStorage; dark is default). The camera frame overlay (corner brackets, AF square, REC/timecode, frame counter) has been removed. Content, packages and pricing follow the two client PDFs in `source/`.
 
 ## Files
 - `Zeusframes Site v2.dc.html` — desktop/responsive site, 8 pages in one file (client-side routing via `#hash`).
 - `Zeusframes Mobile v2.dc.html` — phone-frame gallery that iframes each page of the site at 390px (`?embed=1#page` skips the intro).
 - `Zeusframes Logo Animation.dc.html` — the logo draw-in sequence in isolation (vector fitted 96.6% to the source PNG).
+- `Zeusframes Glyphs.dc.html` — the 12 abstract service glyphs; the site uses 12 Halo (Motherhood), 10 Pupil (Fashion), 02 Aperture, 11 Weave, thin stroke.
+- `Zeusframes Type.dc.html` — the five type pairings compared; the site uses option B.
 - `support.js`, `ios-frame.jsx` — runtime + phone frame (required to open the .dc.html files).
 - `assets/` — logo marks (SVG path + PNG lockups).
 - `source/` — client blueprint + packages PDFs (the source of truth for copy and prices).
