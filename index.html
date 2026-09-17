@@ -98,6 +98,8 @@ video,img{display:block}
             <path d="M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 1.4s cubic-bezier(.65,0,.2,1) .2s both"></path>
           </g>
           <path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" style="animation:zfFill 1.4s ease .2s both"></path></svg>{{ lbN }} — {{ lbC }}</span><span>Close ✕</span></div>
+      <button onClick="{{ lbPrev }}" aria-label="Previous" style="position:absolute;left:6vw;top:50%;transform:translateY(-50%);width:48px;height:48px;border:1px solid rgba(236,235,230,.35);border-radius:50%;display:{{ lbNavDisp }};place-items:center;font-size:16px;transition:background .3s,color .3s" style-hover="background:#ecebe6;color:#0c0c0c">←</button>
+      <button onClick="{{ lbNext }}" aria-label="Next" style="position:absolute;right:6vw;top:50%;transform:translateY(-50%);width:48px;height:48px;border:1px solid rgba(236,235,230,.35);border-radius:50%;display:{{ lbNavDisp }};place-items:center;font-size:16px;transition:background .3s,color .3s" style-hover="background:#ecebe6;color:#0c0c0c">→</button>
       <video data-auto="1" src="{{ lbSrc }}" muted="{{ true }}" autoPlay="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="width:100%;height:100%;object-fit:contain;filter:grayscale(1)"></video>
       <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(32px,5vw,84px);line-height:1">{{ lbT }}</div>
     </div>
@@ -169,11 +171,14 @@ video,img{display:block}
 
 
   <sc-if value="{{ rangeBar }}" hint-placeholder-val="{{ false }}">
-    <button data-p="contact" onClick="{{ goPage }}" style="position:fixed;left:50%;bottom:{{ rangeBottom }};transform:translateX(-50%);z-index:525;display:flex;align-items:center;gap:16px;padding:12px 18px 12px 22px;border-radius:999px;background:#ecebe6;color:#0c0c0c;box-shadow:0 12px 40px rgba(0,0,0,.4);font-size:10px;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;animation:zoom .5s cubic-bezier(.2,.7,.2,1) both;max-width:calc(100vw - 32px)">
-      <span style="opacity:.6">Your range</span>
-      <span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:22px;letter-spacing:0;text-transform:none;line-height:1">{{ estLo }} – {{ estHi }}</span>
-      <span style="width:36px;height:36px;border-radius:50%;background:#0c0c0c;color:#ecebe6;display:grid;place-items:center;font-size:14px">→</span>
-    </button>
+    <div style="position:fixed;left:50%;bottom:{{ rangeBottom }};transform:translateX(-50%);z-index:525;display:flex;align-items:center;gap:4px;padding:6px 6px 6px 8px;border-radius:999px;background:#ecebe6;color:#0c0c0c;box-shadow:0 12px 40px rgba(0,0,0,.4);font-size:10px;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;animation:zoom .5s cubic-bezier(.2,.7,.2,1) both;max-width:calc(100vw - 32px)">
+      <button onClick="{{ rangeHide }}" aria-label="Hide" style="width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:13px;opacity:.55;transition:opacity .3s,background .3s" style-hover="opacity:1;background:rgba(12,12,12,.08)">✕</button>
+      <button data-p="contact" onClick="{{ goPage }}" style="display:flex;align-items:center;gap:16px;padding:6px 6px 6px 10px;border-radius:999px;color:inherit">
+        <span style="opacity:.6">Your total</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:22px;letter-spacing:0;text-transform:none;line-height:1">{{ estText }}</span>
+        <span style="width:36px;height:36px;border-radius:50%;background:#0c0c0c;color:#ecebe6;display:grid;place-items:center;font-size:14px">→</span>
+      </button>
+    </div>
   </sc-if>
 
   <section style="position:relative;height:{{ heroH }};min-height:560px;overflow:hidden;background:#000;color:#ecebe6">
@@ -187,7 +192,7 @@ video,img{display:block}
       </h1>
       <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:28px;animation:fade 1s 2.5s both">
         <p style="margin:0;max-width:460px;font-size:14px;line-height:1.7;opacity:.85">{{ heroLead }}</p>
-        <div style="display:flex;align-items:center;gap:26px">
+        <div style="display:{{ heroCtaDisplay }};align-items:center;gap:26px">
           <button data-p="{{ heroCtaPage }}" onClick="{{ goPage }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;align-items:center;gap:14px"><span style="width:56px;height:56px;border-radius:50%;background:#ecebe6;box-shadow:0 0 0 3px #000,0 0 0 4px #ecebe6;transition:transform .4s" style-hover="transform:scale(1.08)"></span><span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase">{{ heroCtaT }}</span></button>
           <a href="{{ heroLink }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid rgba(236,235,230,.5);padding-bottom:4px">{{ heroLinkT }}</a>
         </div>
@@ -198,8 +203,8 @@ video,img{display:block}
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     <section id="work" style="padding:140px 6vw 100px">
       <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:50px">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(46px,7vw,120px);line-height:.9;letter-spacing:-.02em">Selected <em>work</em></h2>
-        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Hover to focus · Click to shoot</span>
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(46px,7vw,120px);line-height:.9;letter-spacing:-.02em">Recent <em>stories</em></h2>
+        <div style="display:flex;flex-wrap:wrap;gap:12px 28px;align-items:baseline"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Hover to focus · Click to shoot</span><button data-p="portfolio" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">View full portfolio →</button></div>
       </div>
       <div onMouseLeave="{{ whOff }}" style="display:grid;grid-template-columns:{{ workCols }};gap:28px 24px">
         <sc-for list="{{ works }}" as="w" hint-placeholder-count="6">
@@ -247,15 +252,15 @@ video,img{display:block}
 
     <section id="studio-teaser" style="padding:160px 6vw;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:70px;align-items:center">
       <div data-reveal="1">
-        <div style="display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65"><span>Studio · North York</span><span>85mm · f/1.8</span></div>
-        <h2 style="margin:20px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,5.6vw,96px);line-height:.92;letter-spacing:-.02em">A room <em>built</em> for light.</h2>
-        <p style="margin:26px 0 0;max-width:460px;font-size:14px;line-height:1.7;opacity:.8">Portraits, products, podcasts and lookbooks — our studio comes with the crew, the kit and the edit. One production day becomes a month of content.</p>
+        <div style="display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65"><span>Journeys · Stouffville</span><span>Bump · Baby · Family</span></div>
+        <h2 style="margin:20px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,5.6vw,96px);line-height:.92;letter-spacing:-.02em">Motherhood &amp; Family <em>Journeys</em></h2>
+        <p style="margin:26px 0 0;max-width:460px;font-size:14px;line-height:1.7;opacity:.8">Our Journey bundles follow you from bump to baby to family, combining photo sessions and optional video art films. Each chapter feels consistent and connected, so your story unfolds in a cohesive way over time.</p>
         <div style="display:flex;flex-wrap:wrap;gap:36px 50px;margin-top:44px">
-          <div><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,4.6vw,76px);line-height:1">$250</div><div style="margin-top:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">per reel</div></div>
-          <div><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,4.6vw,76px);line-height:1">$499</div><div style="margin-top:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">subscription / month</div></div>
-          <div><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,4.6vw,76px);line-height:1">10%</div><div style="margin-top:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">off · 3-month contract</div></div>
+          <div><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,4.6vw,76px);line-height:1">$900</div><div style="margin-top:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">Bump to Baby · + HST</div></div>
+          <div><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,4.6vw,76px);line-height:1">$1,280</div><div style="margin-top:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">Bump, Baby &amp; Family · + HST</div></div>
+          <div><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,4.6vw,76px);line-height:1">$2,050</div><div style="margin-top:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">Legacy ArtFilm Journey · + HST</div></div>
         </div>
-        <button data-p="studio" onClick="{{ goPage }}" style="margin-top:40px;border:1px solid currentColor;padding:15px 22px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">See the studio →</button>
+        <button data-p="video" data-anchor="journeys" onClick="{{ goPage }}" style="margin-top:40px;border:1px solid currentColor;padding:15px 22px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">Explore Journey packages →</button>
       </div>
       <div data-reveal="iris" style="aspect-ratio:4/5;overflow:hidden;background:#c9c8c3"><img loading="lazy" src="assets/img/1516035069371-29a1b244cc32.jpg" alt="Camera in the studio" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></div>
     </section>
@@ -264,7 +269,7 @@ video,img{display:block}
       <div style="position:relative;width:{{ stageW }};aspect-ratio:1;display:grid;place-items:center">
         <svg viewBox="0 0 1000 1000" fill="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:hidden" aria-hidden="true">
           <g style="transform-origin:500px 500px;animation:zfLoop 120s linear infinite">
-            <path id="zfArcA" d="M 38 500 A 462 462 0 1 1 962 500 A 462 462 0 1 1 38 500" fill="none"></path><text font-family="'DM Mono',monospace" font-size="15" letter-spacing="4.5" fill="#ecebe6" opacity=".55"><textPath href="#zfArcA" startOffset="0">ZEUS FRAMES · CREATIVE BRAND AGENCY · TORONTO · VIDEO · PHOTO · SOCIAL · STUDIO · EVENTS · ZEUS FRAMES · CREATIVE BRAND AGENCY · TORONTO · VIDEO · PHOTO · SOCIAL · STUDIO · EVENTS · </textPath></text>
+            <path id="zfArcA" d="M 38 500 A 462 462 0 1 1 962 500 A 462 462 0 1 1 38 500" fill="none"></path><text font-family="'DM Mono',monospace" font-size="15" letter-spacing="4.5" fill="#ecebe6" opacity=".55"><textPath href="#zfArcA" startOffset="0">ZEUSFRAMES · STOUFFVILLE · MOTHERHOOD · FAMILY · FASHION · VIDEO ART · STUDIO · ZEUSFRAMES · STOUFFVILLE · MOTHERHOOD · FAMILY · FASHION · VIDEO ART · STUDIO · </textPath></text>
           </g>
           <circle cx="500" cy="500" r="440" stroke="#ecebe6" stroke-width="1" opacity=".35"></circle>
           <g style="transform-origin:500px 500px;animation:zfLoop 90s linear infinite"><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(0 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(5 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(10 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(15 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(20 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(25 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(30 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(35 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(40 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(45 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(50 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(55 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(60 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(65 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(70 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(75 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(80 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(85 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(90 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(95 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(100 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(105 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(110 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(115 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(120 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(125 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(130 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(135 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(140 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(145 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(150 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(155 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(160 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(165 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(170 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(175 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(180 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(185 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(190 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(195 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(200 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(205 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(210 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(215 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(220 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(225 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(230 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(235 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(240 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(245 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(250 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(255 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(260 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(265 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(270 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(275 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(280 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(285 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(290 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(295 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(300 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(305 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(310 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(315 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(320 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(325 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(330 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(335 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(340 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(345 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(350 500 500)"></line><line x1="500" y1="60" x2="500" y2="72" stroke="#ecebe6" stroke-width="1" opacity="0.4" transform="rotate(355 500 500)"></line><line x1="500" y1="60" x2="500" y2="86" stroke="#ecebe6" stroke-width="1.5" opacity="0.8" transform="rotate(0 500 500)"></line><line x1="500" y1="60" x2="500" y2="86" stroke="#ecebe6" stroke-width="1.5" opacity="0.8" transform="rotate(30 500 500)"></line><line x1="500" y1="60" x2="500" y2="86" stroke="#ecebe6" stroke-width="1.5" opacity="0.8" transform="rotate(60 500 500)"></line><line x1="500" y1="60" x2="500" y2="86" stroke="#ecebe6" stroke-width="1.5" opacity="0.8" transform="rotate(90 500 500)"></line><line x1="500" y1="60" x2="500" y2="86" stroke="#ecebe6" stroke-width="1.5" opacity="0.8" transform="rotate(120 500 500)"></line><line x1="500" y1="60" x2="500" y2="86" stroke="#ecebe6" stroke-width="1.5" opacity="0.8" transform="rotate(150 500 500)"></line><line x1="500" y1="60" x2="500" y2="86" stroke="#ecebe6" stroke-width="1.5" opacity="0.8" transform="rotate(180 500 500)"></line><line x1="500" y1="60" x2="500" y2="86" stroke="#ecebe6" stroke-width="1.5" opacity="0.8" transform="rotate(210 500 500)"></line><line x1="500" y1="60" x2="500" y2="86" stroke="#ecebe6" stroke-width="1.5" opacity="0.8" transform="rotate(240 500 500)"></line><line x1="500" y1="60" x2="500" y2="86" stroke="#ecebe6" stroke-width="1.5" opacity="0.8" transform="rotate(270 500 500)"></line><line x1="500" y1="60" x2="500" y2="86" stroke="#ecebe6" stroke-width="1.5" opacity="0.8" transform="rotate(300 500 500)"></line><line x1="500" y1="60" x2="500" y2="86" stroke="#ecebe6" stroke-width="1.5" opacity="0.8" transform="rotate(330 500 500)"></line></g>
@@ -292,6 +297,26 @@ video,img{display:block}
       </div>
     </section>
 
+    <section id="words" style="padding:130px 6vw 0;display:grid;grid-template-columns:{{ twoCol }};gap:40px 6vw;align-items:start">
+      <div data-reveal="1">
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Testimonials · sample quotes until real reviews arrive</span>
+        <h2 style="margin:16px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(46px,7vw,120px);line-height:.9;letter-spacing:-.02em">Words from <em>our clients</em></h2>
+        <button data-p="contact" onClick="{{ goPage }}" style="margin-top:34px;border:1px solid currentColor;padding:15px 22px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">Plan your session →</button>
+      </div>
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ quotes }}" as="q" hint-placeholder-count="2">
+          <blockquote data-reveal="1" style="margin:0;padding:34px 0;border-top:1px solid {{ bd }};display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;transition-delay:{{ q.delay }}">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:64px;line-height:.6;opacity:.35">“</span>
+            <div>
+              <p style="margin:0;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(22px,2.4vw,34px);line-height:1.3;letter-spacing:-.01em">{{ q.t }}</p>
+              <footer style="margin-top:16px;display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6"><span>{{ q.w }}</span><span>{{ q.s }}</span></footer>
+            </div>
+          </blockquote>
+        </sc-for>
+        <div style="border-top:1px solid {{ bd }}"></div>
+      </div>
+    </section>
+
     <section id="process" style="padding:130px 6vw">
       <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:50px">
         <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(46px,7vw,120px);line-height:.9;letter-spacing:-.02em;display:flex;align-items:center;gap:.25em">How it <em>runs</em><svg data-revmark="1" viewBox="0 0 485 541" style="width:.5em;height:.56em;overflow:visible" aria-hidden="true"><g stroke="#ecebe6" stroke-width="8" stroke-linejoin="round" fill="none" style="animation:zfLines 2.6s ease 0s both;animation-play-state:paused">
@@ -302,65 +327,18 @@ video,img{display:block}
             <path d="M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.6s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
           </g>
           <path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" style="animation:zfFill 2.6s ease 0s both;animation-play-state:paused"></path></svg></h2>
-        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Four steps · two weeks to first delivery</span>
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Five steps · calm from first message to delivery</span>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:1px;background:{{ bd }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:1px;background:{{ bd }}">
         <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
           <div data-reveal="1" style="background:{{ bg }};padding:32px 26px;min-height:240px;display:flex;flex-direction:column;justify-content:space-between;gap:20px;box-sizing:border-box;transition-delay:{{ s.delay }}">
             <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">{{ s.n }}</span>
             <div>
-              <h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,2.8vw,42px);line-height:1">{{ s.t }}</h3>
+              <h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,2vw,34px);line-height:1;overflow-wrap:anywhere;text-wrap:balance;min-width:0">{{ s.t }}</h3>
               <p style="margin:12px 0 0;font-size:13px;line-height:1.7;opacity:.8">{{ s.d }}</p>
             </div>
           </div>
         </sc-for>
-      </div>
-    </section>
-    <section style="padding:130px 6vw 60px">
-      <div data-reveal="1" style="display:grid;grid-template-columns:{{ twoCol }};gap:6vw;align-items:start">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.92;letter-spacing:-.02em">A small crew with a <em>big</em> lens.</h2>
-        <div style="font-size:15px;line-height:1.8;opacity:.82;display:flex;flex-direction:column;gap:18px">
-          <p style="margin:0">Zeus Frames started with one camera and a rented room. Today it's a studio in North York, a crew that shoots across the GTA, and a client list that runs from snooker halls to family businesses.</p>
-          <p style="margin:0">We're built for the people the big agencies quote out of the room: small businesses, creators and families who deserve the same lighting, the same grade and the same care as a national brand.</p>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:24px;margin-top:80px">
-        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
-          <div data-reveal="1" style="border-top:1px solid {{ bd }};padding-top:20px;transition-delay:{{ s.delay }}">
-            <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,4.6vw,80px);line-height:1">{{ s.v }}</div>
-            <div style="margin-top:10px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">{{ s.t }}</div>
-          </div>
-        </sc-for>
-      </div>
-    </section>
-
-    <section style="padding:140px 6vw">
-      <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:46px">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">The <em>crew</em></h2>
-        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Roles, not job titles</span>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:24px">
-        <sc-for list="{{ crew }}" as="c" hint-placeholder-count="4">
-          <div data-reveal="1" style="transition-delay:{{ c.delay }}">
-            <div style="aspect-ratio:3/4;overflow:hidden;background:#c9c8c3"><img src="{{ c.src }}" loading="lazy" alt="{{ c.alt }}" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></div>
-            <h3 style="margin:16px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,2.4vw,34px);line-height:1">{{ c.t }}</h3>
-            <p style="margin:8px 0 0;font-size:13px;line-height:1.7;opacity:.8">{{ c.d }}</p>
-          </div>
-        </sc-for>
-      </div>
-    </section>
-
-    <section style="padding:130px 6vw 60px">
-      <div data-reveal="1" style="display:grid;grid-template-columns:{{ twoCol }};gap:6vw;align-items:start">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.92;letter-spacing:-.02em">What we <em>believe</em></h2>
-        <div>
-          <sc-for list="{{ beliefs }}" as="b" hint-placeholder-count="4">
-            <div data-reveal="1" style="display:grid;grid-template-columns:70px minmax(0,1fr);gap:20px;align-items:baseline;padding:24px 0;border-top:1px solid {{ bd }}">
-              <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">{{ b.n }}</span>
-              <div><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,2.4vw,38px);line-height:1">{{ b.t }}</h3><p style="margin:10px 0 0;font-size:13px;line-height:1.7;opacity:.8">{{ b.d }}</p></div>
-            </div>
-          </sc-for>
-        </div>
       </div>
     </section>
   </sc-if>
@@ -381,18 +359,19 @@ video,img{display:block}
     </section>
     <section style="padding:130px 6vw 90px">
       <div data-reveal="1" style="display:grid;grid-template-columns:{{ twoCol }};gap:6vw;align-items:start">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.92;letter-spacing:-.02em">Films that <em>sell</em> without looking like ads.</h2>
-        <p style="margin:0;font-size:15px;line-height:1.8;opacity:.82">Every project starts with the story, not the camera. We script, shoot and grade in-house — so the film that lands in your feed is the film we planned on day one. Commercials, brand films, product spots and real-estate tours, shot across the GTA and finished in our North York studio.</p>
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.92;letter-spacing:-.02em">Our approach to <em>motherhood</em> sessions.</h2>
+        <p style="margin:0;font-size:15px;line-height:1.8;opacity:.82">We keep sets simple, clean, and modern: soft neutrals, gentle props, and flattering light. For newborns, the studio stays warm and quiet, with plenty of time for feeding, changing, and breaks. We guide posing lightly so you never feel stiff, and we always prioritize safety and consent, especially with babies and kids.</p>
       </div>
       <div style="display:grid;grid-template-columns:{{ threeCol }};gap:1px;background:{{ bd }};margin-top:70px">
         <sc-for list="{{ videoKinds }}" as="k" hint-placeholder-count="6">
-          <div data-reveal="1" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="background:{{ bg }};padding:30px 26px 34px;min-height:250px;display:flex;flex-direction:column;justify-content:space-between;gap:18px;box-sizing:border-box;transition-delay:{{ k.delay }}">
-            <div style="display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65"><span>{{ k.n }}</span><span>{{ k.mm }}</span></div>
-            <div>
+          <div data-reveal="1" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="background:{{ bg }};padding:0 0 30px;min-height:0;display:flex;flex-direction:column;justify-content:space-between;gap:18px;box-sizing:border-box;transition-delay:{{ k.delay }}">
+            <div style="aspect-ratio:4/3;overflow:hidden;background:#1a1a1a;margin-bottom:22px"><img loading="lazy" src="{{ k.img }}" alt="{{ k.t }} — ZeusFrames studio Stouffville" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .8s" style-hover="transform:scale(1.04);filter:grayscale(0)"></div>
+            <div style="display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65;padding:0 26px"><span>{{ k.n }}</span><span>{{ k.mm }}</span></div>
+            <div style="padding:0 26px">
               <h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(26px,2.6vw,40px);line-height:1">{{ k.t }}</h3>
               <p style="margin:12px 0 0;font-size:13px;line-height:1.7;opacity:.8">{{ k.d }}</p>
             </div>
-            <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">{{ k.price }}</span>
+            <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65;padding:0 26px">{{ k.price }}</span>
           </div>
         </sc-for>
       </div>
@@ -400,8 +379,8 @@ video,img{display:block}
 
     <section style="padding:140px 6vw">
       <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:46px">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">The <em>full</em> production</h2>
-        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Everything included, nothing outsourced</span>
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">What every <em>session</em> includes</h2>
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Calm, guided, designed around your comfort</span>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(50%,190px),1fr));gap:14px 24px">
         <sc-for list="{{ checklist }}" as="c" hint-placeholder-count="12">
@@ -432,14 +411,86 @@ video,img{display:block}
         </sc-for>
       </div>
       <div data-reveal="1" style="margin-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid {{ bd }};padding-top:22px">
-        <span style="font-size:13px;line-height:1.6;opacity:.8">Want to mix services or adjust what's inside? Build it in the configurator.</span>
-        <button data-p="packages" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Open the package builder →</button>
+        <span style="font-size:13px;line-height:1.6;opacity:.8">Want several chapters captured? Journey bundles save 10–13%.</span>
+        <a href="#journeys" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">See Journey bundles ↓</a>
       </div>
+    </section>
+
+    <section id="artfilm" style="margin-top:110px;position:relative;height:{{ afBandH }};overflow:hidden;background:#000">
+      <video data-auto="1" src="assets/video/7572130.mp4" muted="{{ true }}" autoPlay="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);opacity:.7"></video>
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(12,12,12,.75),rgba(12,12,12,.15) 60%,rgba(12,12,12,.6))"></div>
+      <div style="position:absolute;left:6vw;right:6vw;top:0;bottom:0;display:grid;grid-template-columns:{{ twoCol }};gap:30px 6vw;align-items:end;padding:0 0 60px">
+        <div data-reveal="1">
+          <span style="display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.8"><span style="width:7px;height:7px;border-radius:50%;background:#ecebe6;animation:blink 1.2s steps(1) infinite"></span>ArtFilm · 60–90 s · +$300 + HST</span>
+          <h2 style="margin:16px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.6vw,96px);line-height:.92;letter-spacing:-.02em">Not just how you looked — <em>how it felt.</em></h2>
+        </div>
+        <p data-reveal="1" style="margin:0;max-width:460px;font-size:14px;line-height:1.8;opacity:.85">Your maternity, newborn, or family shoot becomes a short video art piece, edited with music and a simple scenario. Add it to any session, or choose the Legacy ArtFilm Journey below.</p>
+      </div>
+    </section>
+
+    <section id="journeys" style="padding:110px 6vw 0">
+      <div data-reveal="1" style="display:grid;grid-template-columns:{{ twoCol }};gap:20px 6vw;align-items:end;margin-bottom:40px">
+        <div><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Motherhood &amp; Family · Journey bundles</span><h2 style="margin:16px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.2vw,88px);line-height:.92;letter-spacing:-.02em">Bump to baby <em>to family.</em></h2></div>
+        <p style="margin:0;font-size:15px;line-height:1.8;opacity:.82">Our Journey bundles follow your family over time, with built‑in savings and flexible payment options. Pick a bundle, then a payment option — the total updates. Book once; each chapter is scheduled when the time is right.</p>
+      </div>
+      <div style="border-top:1px solid {{ bd }}">
+        <sc-for list="{{ journeys }}" as="j" hint-placeholder-count="3">
+          <button data-i="{{ $index }}" onClick="{{ pickJourney }}" data-reveal="1" style="width:100%;display:grid;grid-template-columns:{{ jRowCols }};gap:14px 32px;align-items:start;text-align:left;padding:{{ jRowPad }};border-bottom:1px solid {{ bd }};background:{{ j.bg }};color:{{ j.fg }};transition:background .35s,color .35s,padding-left .4s;transition-delay:{{ j.delay }}" style-hover="padding-left:{{ jRowPadHover }}">
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,4vw,64px);line-height:.9;letter-spacing:-.02em">{{ j.l }}</span><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">{{ j.off }}</span></div>
+            <div style="min-width:0"><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(26px,2.6vw,40px);line-height:1;letter-spacing:-.02em">{{ j.t }}</h3><div style="display:flex;flex-wrap:wrap;gap:6px 10px;margin-top:14px;font-size:12px;line-height:1.5;opacity:.85"><sc-for list="{{ j.items }}" as="it" hint-placeholder-count="3"><span style="border:1px solid {{ j.line }};padding:5px 10px;border-radius:999px;white-space:nowrap">{{ it }}</span></sc-for></div><p style="margin:14px 0 0;max-width:520px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;line-height:1.35;opacity:.75">{{ j.pos }}</p></div>
+            <div style="display:flex;flex-direction:{{ jPriceDir }};align-items:{{ jPriceAlign }};justify-content:space-between;gap:6px 16px;flex-wrap:wrap"><div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3vw,44px);line-height:1">{{ j.price }}</span><span style="font-size:11px;opacity:.55;text-decoration:line-through">{{ j.value }} separately</span></div><span style="margin-top:{{ jCtaMt }};font-size:10px;letter-spacing:.2em;text-transform:uppercase;border:1px solid {{ j.line }};padding:9px 14px;border-radius:999px">{{ j.cta }}</span></div>
+          </button>
+        </sc-for>
+      </div>
+      <div data-reveal="1" style="display:grid;grid-template-columns:{{ jPayCols }};gap:1px;background:{{ bd }};border:1px solid {{ bd }};border-top:0;margin-top:0">
+        <sc-for list="{{ payOpts }}" as="o" hint-placeholder-count="3">
+          <button data-k="{{ o.k }}" onClick="{{ pickPay }}" style="text-align:left;display:flex;flex-direction:column;gap:10px;padding:24px 26px;min-height:150px;background:{{ o.bg }};color:{{ o.fg }};transition:background .3s,color .3s"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">{{ o.step }}</span><span style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2vw,28px);line-height:1.05">{{ o.t }}</span><span style="font-size:11px;line-height:1.5;opacity:.7">{{ o.n }}</span><span style="margin-top:auto;font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1">{{ o.p }}</span></button>
+        </sc-for>
+        <div style="padding:24px 26px;background:{{ bg }};display:flex;flex-direction:column;gap:10px;grid-column:{{ jTotalCol }}">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">Total · {{ jSel.t }}</span><svg viewBox="0 0 485 541" style="width:14px;height:16px;opacity:.6"><path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z"></path></svg></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,4vw,64px);line-height:1;letter-spacing:-.02em">{{ jTotal }}<span style="font-size:12px;font-family:'DM Mono',monospace;letter-spacing:.1em;margin-left:10px;opacity:.6">+ HST</span></div>
+          <span style="font-size:11px;line-height:1.5;opacity:.7">{{ jNote }} · 50% retainer confirms the first date · chapters scheduled as your journey unfolds.</span>
+          <button data-p="contact" data-svc="__journey" onClick="{{ goPage }}" style="margin-top:auto;align-self:flex-start;border:1px solid currentColor;padding:14px 22px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">Plan this journey →</button>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:120px 6vw 0">
+      <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:40px">
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.9;letter-spacing:-.02em">Add-<em>ons</em></h2>
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Attach to any session · + HST</span>
+      </div>
+      <div style="display:grid;grid-template-columns:{{ addonCols }};gap:40px 6vw;align-items:start">
+        <div data-reveal="wipe" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div style="aspect-ratio:3/4;overflow:hidden;background:#1a1a1a"><img loading="lazy" src="assets/img/1519689680058-324335c77eba.jpg" alt="Newborn wrapped in a blanket — ZeusFrames studio" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></div>
+          <div style="aspect-ratio:3/4;overflow:hidden;background:#1a1a1a;margin-top:40px"><img loading="lazy" src="assets/img/1511895426328-dc8714191300.jpg" alt="Family portrait — ZeusFrames studio" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></div>
+        </div>
+      <div style="display:grid;grid-template-columns:1fr;gap:14px 24px">
+        <sc-for list="{{ addons }}" as="a" hint-placeholder-count="6">
+          <div data-reveal="1" style="display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:18px 0;border-top:1px solid {{ bd }};font-size:13px"><span>{{ a.t }}</span><span style="opacity:.65;white-space:nowrap">{{ a.p }}</span></div>
+        </sc-for>
+      </div>
+      </div>
+    </section>
+
+    <section id="faq" style="padding:110px 6vw 60px">
+      <div data-reveal="1" style="margin-bottom:36px">
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.9;letter-spacing:-.02em">Motherhood &amp; Family <em>FAQ</em></h2>
+      </div>
+      <sc-for list="{{ faq }}" as="f" hint-placeholder-count="5">
+        <div data-reveal="1" style="border-top:1px solid {{ bd }}">
+          <button data-i="{{ $index }}" onClick="{{ togFaq }}" style="width:100%;text-align:left;display:flex;justify-content:space-between;gap:24px;align-items:baseline;padding:26px 0">
+            <span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(22px,2.4vw,36px);line-height:1.1">{{ f.q }}</span>
+            <span style="font-size:20px;line-height:1;transform:rotate({{ f.rot }});transition:transform .4s">+</span>
+          </button>
+          <p style="margin:0;max-width:760px;font-size:14px;line-height:1.8;opacity:{{ f.op }};max-height:{{ f.mh }};overflow:hidden;padding-bottom:{{ f.pb }};transition:max-height .5s ease,opacity .5s ease,padding-bottom .5s ease">{{ f.a }}</p>
+        </div>
+      </sc-for>
     </section>
     <section style="padding:120px 6vw 60px">
       <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:46px">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">Recent <em>films</em></h2>
-        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Click to shoot</span>
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">Recent <em>chapters</em></h2>
+        <div style="display:flex;flex-wrap:wrap;gap:12px 28px;align-items:baseline"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Hover to focus · Click to shoot</span><button data-p="portfolio" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Full portfolio →</button></div>
       </div>
       <div onMouseLeave="{{ whOff }}" style="display:grid;grid-template-columns:{{ workCols }};gap:28px 24px">
         <sc-for list="{{ works }}" as="w" hint-placeholder-count="6">
@@ -466,12 +517,12 @@ video,img{display:block}
           </div>
         </sc-for>
       </div>
-      <div style="display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin-top:14px;padding:0 6vw"><span>The feed · 9:16 first</span><span>Drag to scroll</span></div>
+      <div style="display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin-top:14px;padding:0 6vw"><span>Looks · creator reels · 9:16</span><span>Drag to scroll</span></div>
     </section>
     <section style="padding:130px 6vw 90px">
       <div data-reveal="1" style="display:grid;grid-template-columns:{{ twoCol }};gap:6vw;align-items:start">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.92;letter-spacing:-.02em">One shoot day. A <em>month</em> of content.</h2>
-        <p style="margin:0;font-size:15px;line-height:1.8;opacity:.82">We film in bulk, cut for every platform, write the captions and schedule the posts — then report on what actually moved. You show up for one day; your feed stays alive for thirty.</p>
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.92;letter-spacing:-.02em">Magazine‑ready. <em>Still</em> you.</h2>
+        <p style="margin:0;font-size:15px;line-height:1.8;opacity:.82">We collaborate with you on moodboards, wardrobe, and posing so each look supports your brand or portfolio goals. The studio is ready for clean e‑commerce shots, creative editorial concepts, and social‑focused content — so you leave with a cohesive set of visuals that work across platforms.</p>
       </div>
       <div style="display:grid;grid-template-columns:{{ threeCol }};gap:1px;background:{{ bd }};margin-top:70px">
         <sc-for list="{{ socialCards }}" as="k" hint-placeholder-count="6">
@@ -489,13 +540,13 @@ video,img{display:block}
     <section style="padding:140px 6vw">
       <div data-reveal="1" style="display:grid;grid-template-columns:{{ twoCol }};gap:6vw;align-items:center">
         <div>
-          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Vertical first</span>
-          <h2 style="margin:16px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.2vw,88px);line-height:.92;letter-spacing:-.02em">Cut for the <em>scroll</em>, not the screening room.</h2>
-          <p style="margin:24px 0 0;max-width:460px;font-size:14px;line-height:1.8;opacity:.8">Every reel is framed 9:16 at capture, subtitled, and delivered in three lengths — 7s hook, 15s cut, 30s story. Same footage, three chances to land.</p>
+          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Creator content day</span>
+          <h2 style="margin:16px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.2vw,88px);line-height:.92;letter-spacing:-.02em">Photos and <em>reels</em> for a month of posts.</h2>
+          <p style="margin:24px 0 0;max-width:460px;font-size:14px;line-height:1.8;opacity:.8">Three hours, three sets, 30 edited photos and six short vertical reels — planned so every look becomes several posts. Launching: first 10 bookings get 10% off.</p>
           <div style="display:flex;flex-wrap:wrap;gap:36px 50px;margin-top:40px">
-            <div><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,4.4vw,72px);line-height:1">8</div><div style="margin-top:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">reels / month</div></div>
-            <div><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,4.4vw,72px);line-height:1">3</div><div style="margin-top:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">cuts per reel</div></div>
-            <div><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,4.4vw,72px);line-height:1">48h</div><div style="margin-top:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">first delivery</div></div>
+            <div><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,4.4vw,72px);line-height:1">3</div><div style="margin-top:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">sets per day</div></div>
+            <div><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,4.4vw,72px);line-height:1">30</div><div style="margin-top:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">edited photos</div></div>
+            <div><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,4.4vw,72px);line-height:1">6</div><div style="margin-top:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">vertical reels</div></div>
           </div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
@@ -530,8 +581,8 @@ video,img{display:block}
         </sc-for>
       </div>
       <div data-reveal="1" style="margin-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid {{ bd }};padding-top:22px">
-        <span style="font-size:13px;line-height:1.6;opacity:.8">Want to mix services or adjust what's inside? Build it in the configurator.</span>
-        <button data-p="packages" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Open the package builder →</button>
+        <span style="font-size:13px;line-height:1.6;opacity:.8">Not sure which fits? Tell us what you have in mind and we'll recommend.</span>
+        <button data-p="contact" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Ask us →</button>
       </div>
     </section>
   </sc-if>
@@ -539,14 +590,14 @@ video,img{display:block}
   <sc-if value="{{ isEvents }}" hint-placeholder-val="{{ false }}">
     <section style="padding:70px 6vw 0">
       <div data-reveal="1" style="display:flex;flex-wrap:wrap;gap:10px 28px;align-items:baseline;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.7">
-        <span style="display:flex;align-items:center;gap:10px"><span style="width:7px;height:7px;border-radius:50%;background:#ecebe6;animation:blink 1.2s steps(1) infinite"></span>Live</span>
-        <span>2 operators</span><span>48h recap</span><span>Same-week verticals</span><span>GTA travel included</span>
+        <span style="display:flex;align-items:center;gap:10px"><span style="width:7px;height:7px;border-radius:50%;background:#ecebe6;animation:blink 1.2s steps(1) infinite"></span>Custom</span>
+        <span>FX5 + Alpha</span><span>Nanlite · Aputure</span><span>Configurable studio</span><span>Stouffville · GTA</span>
       </div>
     </section>
     <section style="padding:130px 6vw 90px">
       <div data-reveal="1" style="display:grid;grid-template-columns:{{ twoCol }};gap:6vw;align-items:start">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.92;letter-spacing:-.02em">Filmed live. Posted <em>while</em> it still matters.</h2>
-        <p style="margin:0;font-size:15px;line-height:1.8;opacity:.82">Launches, galas, tournaments, openings and family celebrations. Two operators, discreet lighting, and a recap edit in your hands within 48 hours — plus vertical cuts for the feed the same week.</p>
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.92;letter-spacing:-.02em">Content that <em>works</em> for small businesses and indie artists.</h2>
+        <p style="margin:0;font-size:15px;line-height:1.8;opacity:.82">Beyond motherhood and fashion, ZeusFrames produces commercial content and music videos. With FX5 and Alpha cameras, Nanlite and Aputure lighting, and a configurable studio layout, we build treatments and shot lists that fit your budget, release plan, and visual style.</p>
       </div>
       <div style="display:grid;grid-template-columns:{{ threeCol }};gap:1px;background:{{ bd }};margin-top:70px">
         <sc-for list="{{ eventKinds }}" as="k" hint-placeholder-count="6">
@@ -564,8 +615,8 @@ video,img{display:block}
 
     <section style="padding:140px 6vw">
       <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:46px">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">Event <em>day</em></h2>
-        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">A typical run of show</span>
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">How a <em>project</em> runs</h2>
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">From inquiry to delivery</span>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:24px">
         <sc-for list="{{ timeline }}" as="t" hint-placeholder-count="5">
@@ -600,14 +651,14 @@ video,img{display:block}
         </sc-for>
       </div>
       <div data-reveal="1" style="margin-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid {{ bd }};padding-top:22px">
-        <span style="font-size:13px;line-height:1.6;opacity:.8">Want to mix services or adjust what's inside? Build it in the configurator.</span>
-        <button data-p="packages" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Open the package builder →</button>
+        <span style="font-size:13px;line-height:1.6;opacity:.8">Not sure which fits? Tell us what you have in mind and we'll recommend.</span>
+        <button data-p="contact" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Ask us →</button>
       </div>
     </section>
     <section style="padding:120px 6vw 60px">
       <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:46px">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">From the <em>floor</em></h2>
-        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Click to shoot</span>
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">Recent <em>projects</em></h2>
+        <div style="display:flex;flex-wrap:wrap;gap:12px 28px;align-items:baseline"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Hover to focus · Click to shoot</span><button data-p="portfolio" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Full portfolio →</button></div>
       </div>
       <div onMouseLeave="{{ whOff }}" style="display:grid;grid-template-columns:{{ workCols }};gap:28px 24px">
         <sc-for list="{{ works }}" as="w" hint-placeholder-count="6">
@@ -626,11 +677,95 @@ video,img{display:block}
 
 
 
+  <sc-if value="{{ isPortfolio }}" hint-placeholder-val="{{ false }}">
+    <section style="padding:90px 6vw 0">
+      <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 30px;border-bottom:1px solid {{ bd }};padding-bottom:20px">
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <sc-for list="{{ pfTabs }}" as="t" hint-placeholder-count="6">
+            <button data-k="{{ t.k }}" onClick="{{ pfSet }}" style="border:1px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }};padding:10px 16px;border-radius:999px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;display:flex;gap:10px;align-items:baseline;transition:background .3s,color .3s,border-color .3s"><span>{{ t.t }}</span><span style="opacity:.55;font-size:9px">{{ t.n }}</span></button>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px 28px;align-items:baseline"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">{{ pfCount }} stories · Hover to play · Click to open</span><button data-p="{{ pfSvcPage }}" onClick="{{ goPage }}" style="display:{{ pfSvcDisp }};font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">About {{ pfSvcT }} →</button></div>
+      </div>
+      <div onMouseLeave="{{ whOff }}" style="display:grid;grid-template-columns:{{ pfCols }};grid-auto-rows:{{ pfRow }};grid-auto-flow:dense;gap:14px;margin-top:30px">
+        <sc-for list="{{ pfItems }}" as="w" hint-placeholder-count="9">
+          <figure data-i="{{ w.i }}" onClick="{{ pfOpen }}" onMouseEnter="{{ whOn }}" onMouseLeave="{{ whLeave }}" style="margin:0;position:relative;overflow:hidden;background:#1a1a1a;cursor:zoom-in;grid-column:{{ w.col }};grid-row:{{ w.row }};animation:fade .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:{{ w.delay }}">
+            <video data-lazy="{{ w.src }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:transform 1s cubic-bezier(.2,.7,.2,1)" style-hover="transform:scale(1.04)"></video>
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.55));pointer-events:none"></div>
+            <figcaption style="position:absolute;left:16px;right:16px;bottom:14px;display:flex;justify-content:space-between;gap:12px;align-items:baseline"><span style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,1.6vw,24px);line-height:1.1">{{ w.t }}</span><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75;white-space:nowrap">{{ w.c }}</span></figcaption>
+            <span style="position:absolute;left:16px;top:14px;font-size:10px;letter-spacing:.2em;opacity:.7">{{ w.n }}</span>
+          </figure>
+        </sc-for>
+      </div>
+    </section>
+    <section style="padding:120px 6vw 0;display:grid;grid-template-columns:{{ twoCol }};gap:30px 6vw;align-items:end">
+      <h2 data-reveal="1" style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.92;letter-spacing:-.02em">Your chapter <em>could be next.</em></h2>
+      <div data-reveal="1" style="display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center"><span style="font-size:13px;line-height:1.6;opacity:.8;max-width:380px">Every story here started with a short message. Tell us what you have in mind.</span><button data-p="contact" onClick="{{ goPage }}" style="border:1px solid currentColor;padding:15px 22px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">Book a similar session →</button></div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+    <section style="padding:120px 6vw 60px">
+      <div data-reveal="1" style="display:grid;grid-template-columns:{{ twoCol }};gap:6vw;align-items:start">
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.92;letter-spacing:-.02em">From an Instagram page to a <em>dedicated</em> studio.</h2>
+        <div style="font-size:15px;line-height:1.8;opacity:.82;display:flex;flex-direction:column;gap:18px">
+          <p style="margin:0">ZeusFrames started as an Instagram page capturing small businesses, kids, and food stories. As demand grew, we moved into a dedicated studio space in Stouffville to give families and creators a calm, controlled environment for photo and video.</p>
+          <p style="margin:0">Today we focus on motherhood and family journeys, fashion and branding shoots, and cinematic video art — combining our director’s experience behind the camera with a studio manager dedicated to client experience and marketing.</p>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:24px;margin-top:80px">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div data-reveal="1" style="border-top:1px solid {{ bd }};padding-top:20px;transition-delay:{{ s.delay }}">
+            <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,4.6vw,80px);line-height:1">{{ s.v }}</div>
+            <div style="margin-top:10px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">{{ s.t }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="padding:140px 6vw">
+      <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:46px">
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">The <em>studio</em></h2>
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Small team · one room · Stouffville</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:24px">
+        <sc-for list="{{ crew }}" as="c" hint-placeholder-count="4">
+          <div data-reveal="1" style="transition-delay:{{ c.delay }}">
+            <div style="aspect-ratio:3/4;overflow:hidden;background:#c9c8c3"><img src="{{ c.src }}" loading="lazy" alt="{{ c.alt }}" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></div>
+            <h3 style="margin:16px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,2.4vw,34px);line-height:1">{{ c.t }}</h3>
+            <p style="margin:8px 0 0;font-size:13px;line-height:1.7;opacity:.8">{{ c.d }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="padding:130px 6vw 60px">
+      <div data-reveal="1" style="display:grid;grid-template-columns:{{ twoCol }};gap:6vw;align-items:start">
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.92;letter-spacing:-.02em" id="values">Our <em>values</em></h2>
+        <div>
+          <sc-for list="{{ beliefs }}" as="b" hint-placeholder-count="4">
+            <div data-reveal="1" style="display:grid;grid-template-columns:70px minmax(0,1fr);gap:20px;align-items:baseline;padding:24px 0;border-top:1px solid {{ bd }}">
+              <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">{{ b.n }}</span>
+              <div><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,2.4vw,38px);line-height:1">{{ b.t }}</h3><p style="margin:10px 0 0;font-size:13px;line-height:1.7;opacity:.8">{{ b.d }}</p></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+    <section style="padding:40px 6vw 0">
+      <div data-reveal="1" style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+        <span style="font-size:14px;opacity:.85;margin-right:12px">Explore our services or reach out to plan your session.</span>
+        <button data-p="video" onClick="{{ goPage }}" style="border:1px solid currentColor;padding:14px 20px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">View Motherhood &amp; Family</button>
+        <button data-p="contact" onClick="{{ goPage }}" style="background:{{ ink }};color:{{ bg }};padding:14px 20px;font-size:10px;letter-spacing:.2em;text-transform:uppercase">Contact Us</button>
+      </div>
+    </section>
+  </sc-if>
+
   <sc-if value="{{ isStudio }}" hint-placeholder-val="{{ false }}">
     <section style="padding:130px 6vw 90px">
       <div data-reveal="1" style="display:grid;grid-template-columns:{{ twoCol }};gap:6vw;align-items:start">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.92;letter-spacing:-.02em">Book the room, <em>keep</em> the crew.</h2>
-        <p style="margin:0;font-size:15px;line-height:1.8;opacity:.82">Our North York studio is set for portraits, products, podcasts and lookbooks — cyc wall, continuous and strobe lighting, sound treatment and a lounge for clients. Rates include a photographer or camera operator, so nothing stalls while you're on the clock.</p>
+        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.92;letter-spacing:-.02em">A flexible, well‑lit space <em>near</em> Toronto.</h2>
+        <p style="margin:0;font-size:15px;line-height:1.8;opacity:.82">ZeusFrames Studio is available for other photographers, videographers, and creators. Our ≈300″ × 300″ shooting area includes a black‑wall set, white backdrop zone, and a lifestyle/window corner, plus optional access to cinema gear and lighting. Minimum booking 2 hours; 50% retainer to secure the date.</p>
       </div>
       <div style="display:grid;grid-template-columns:{{ galCols }};gap:16px;margin-top:70px">
         <sc-for list="{{ studioShots }}" as="g" hint-placeholder-count="5">
@@ -644,9 +779,9 @@ video,img{display:block}
     <section style="padding:140px 6vw">
       <div style="display:grid;grid-template-columns:{{ twoCol }};gap:6vw;align-items:start">
         <div data-reveal="1">
-          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">What's in the room</span>
-          <h2 style="margin:16px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.2vw,88px);line-height:.92;letter-spacing:-.02em">Kit <em>list</em></h2>
-          <p style="margin:24px 0 0;max-width:420px;font-size:14px;line-height:1.8;opacity:.8">Everything below is included in the rate. Bring your product, your outfits and your people — we bring the rest.</p>
+          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Sets &amp; gear</span>
+          <h2 style="margin:16px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.2vw,88px);line-height:.92;letter-spacing:-.02em">What's in the <em>room</em></h2>
+          <p style="margin:24px 0 0;max-width:420px;font-size:14px;line-height:1.8;opacity:.8">Sets and basic props are included in every rental. Cameras and lights come with the space + gear option. No smoking, no open flames, respect the equipment, tidy up at the end.</p>
         </div>
         <div>
           <sc-for list="{{ kit }}" as="k" hint-placeholder-count="6">
@@ -661,12 +796,12 @@ video,img{display:block}
 
     <section style="padding:130px 6vw 60px">
       <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:40px">
-        <h2 id="rates" style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">Studio <em>rates</em></h2>
-        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Extra time $100 / hr</span>
+        <h2 id="rates" style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,6vw,104px);line-height:.9;letter-spacing:-.02em">Rental <em>rates</em></h2>
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Launch rates · + HST · 2‑hour minimum</span>
       </div>
       <sc-for list="{{ studioRates }}" as="r" hint-placeholder-count="4">
         <button data-s="studio" data-id="{{ r.id }}" onClick="{{ pickPlan }}" data-reveal="1" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="width:100%;text-align:left;display:grid;grid-template-columns:{{ rateCols }};gap:20px 24px;align-items:baseline;padding:28px 0;border-top:1px solid {{ bd }};transition:padding-left .5s" style-hover="padding-left:14px">
-          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">{{ r.n }} · Add →</span>
+          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">{{ r.n }} · Request →</span>
           <div><h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,3vw,46px);line-height:1">{{ r.t }}</h3><p style="margin:8px 0 0;font-size:13px;line-height:1.7;opacity:.8;max-width:520px">{{ r.d }}</p></div>
           <span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(30px,3vw,48px);line-height:1;white-space:nowrap;justify-self:{{ rateAlign }}">{{ r.price }}</span>
         </button>
@@ -676,216 +811,46 @@ video,img{display:block}
 
   
 
-  <sc-if value="{{ isPackages }}" hint-placeholder-val="{{ false }}">
-    <section style="padding:130px 6vw 40px">
-      <div data-reveal="1" style="display:grid;grid-template-columns:{{ twoCol }};gap:6vw;align-items:start;margin-bottom:50px">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.92;letter-spacing:-.02em">Build <em>exactly</em> what you need.</h2>
-        <p style="margin:0;font-size:15px;line-height:1.8;opacity:.82">Choose a package per service, then adjust what's inside. The range updates as you go. Every price includes filming time, editing and colour grade; 10% off with a three-month contract.</p>
-      </div>
-    </section>
 
-    <section style="padding:0 6vw 30px">
-      <div data-reveal="1" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
-        <sc-for list="{{ qSteps }}" as="q" hint-placeholder-count="3">
-          <button data-n="{{ q.n }}" onClick="{{ qGo }}" style="text-align:left;border-top:2px solid currentColor;opacity:{{ q.op }};padding-top:10px;display:flex;flex-direction:column;gap:4px;transition:opacity .4s;cursor:{{ q.cursor }};min-width:0"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6;white-space:nowrap">{{ q.n }}</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(17px,2vw,28px);line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ q.t }}</span></button>
-        </sc-for>
-      </div>
-    </section>
-
-    <sc-if value="{{ q1 }}" hint-placeholder-val="{{ true }}">
-    <section id="estimate" style="padding:0 6vw 40px">
-      <div style="display:grid;grid-template-columns:{{ cfgCols }};gap:24px;align-items:start">
-        <div style="display:flex;flex-direction:column;gap:18px">
-          <sc-for list="{{ cfg }}" as="c" hint-placeholder-count="4">
-            <div data-reveal="1" style="border:1px solid {{ bd }};padding:{{ estPad }}">
-              <button data-s="{{ c.id }}" onClick="{{ cfgToggle }}" style="width:100%;text-align:left;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:18px;align-items:center">
-                <span style="width:22px;height:22px;border:1px solid currentColor;display:grid;place-items:center;background:{{ c.onBg }};color:{{ c.onFg }};transition:background .3s,color .3s;font-size:12px">{{ c.check }}</span>
-                <span style="display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px"><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(26px,2.6vw,40px);line-height:1">{{ c.t }}</span><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55">{{ c.mm }}</span></span>
-                <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75;white-space:nowrap">{{ c.sum }}</span>
-              </button>
-              <sc-if value="{{ c.on }}" hint-placeholder-val="{{ true }}">
-                <div style="margin-top:22px;animation:fade .35s both">
-                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px">
-                    <sc-for list="{{ c.plans }}" as="p" hint-placeholder-count="3">
-                      <button data-s="{{ c.id }}" data-id="{{ p.id }}" onClick="{{ pickPlan }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="text-align:left;border:1px solid {{ p.bd }};background:{{ p.bg }};color:{{ p.fg }};padding:14px 16px;display:flex;flex-direction:column;gap:6px;transition:background .3s,color .3s,border-color .3s">
-                        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">{{ p.tag }}</span>
-                        <span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:22px;line-height:1">{{ p.name }}</span>
-                        <span style="font-size:12px;letter-spacing:.04em">{{ p.price }} <span style="opacity:.55">{{ p.unit }}</span></span>
-                      </button>
-                    </sc-for>
-                  </div>
-                  <div style="margin-top:18px;display:flex;flex-wrap:wrap;gap:8px">
-                    <sc-for list="{{ c.opts }}" as="o" hint-placeholder-count="4">
-                      <button data-s="{{ c.id }}" data-k="{{ o.k }}" onClick="{{ optToggle }}" style="border:1px solid {{ bds }};border-radius:999px;padding:10px 14px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:{{ o.bg }};color:{{ o.fg }};transition:background .3s,color .3s;display:flex;gap:8px;align-items:baseline">{{ o.t }} <span style="opacity:.6">{{ o.p }}</span></button>
-                    </sc-for>
-                  </div>
-                  <div style="margin-top:16px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;font-size:12px;line-height:1.6;opacity:.65"><span>{{ c.inc }}</span><button data-p="{{ c.id }}" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:2px">Full details →</button></div>
-                </div>
-              </sc-if>
-            </div>
-          </sc-for>
-        </div>
-        <div style="position:{{ stickyPos }};top:110px;border:1px solid {{ bd }};padding:{{ estPad }};display:flex;flex-direction:column;gap:18px">
-          <div style="display:flex;align-items:center;gap:12px"><svg viewBox="0 0 485 541" style="width:22px;height:24px;overflow:visible" aria-hidden="true"><path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z"></path></svg><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Your package</span></div>
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <sc-for list="{{ summary }}" as="r" hint-placeholder-count="2">
-              <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline;border-top:1px solid {{ bd }};padding-top:10px;font-size:13px;line-height:1.5"><span><span style="opacity:.55">{{ r.svc }} · </span>{{ r.plan }}<span style="display:block;font-size:11px;opacity:.55">{{ r.opts }}</span></span><span style="white-space:nowrap;opacity:.8">{{ r.range }}</span></div>
-            </sc-for>
-          </div>
-          <div style="border-top:1px solid {{ bds }};padding-top:16px">
-            <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Estimated range</span>
-            <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,4.4vw,72px);line-height:1;letter-spacing:-.02em;margin-top:8px">{{ estLo }} – {{ estHi }}</div>
-            <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin-top:6px">{{ estUnit }}</div>
-          </div>
-          <button onClick="{{ togContract }}" style="display:flex;align-items:center;gap:12px;font-size:12px;text-align:left"><span style="width:38px;height:22px;border-radius:999px;border:1px solid {{ bds }};position:relative;background:{{ ctBg }};transition:background .3s;flex:none"><span style="position:absolute;top:3px;left:{{ ctKnob }};width:14px;height:14px;border-radius:50%;background:{{ ctKnobBg }};transition:left .3s,background .3s"></span></span><span>3-month contract · 10% off</span></button>
-          <p style="margin:0;font-size:12px;line-height:1.7;opacity:.6">{{ estNote }}</p>
-          <button onClick="{{ qNext }}" style="border:1px solid currentColor;padding:16px 22px;text-align:center;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">{{ q1Cta }}</button>
-        </div>
-      </div>
-    </section>
-    </sc-if>
-
-    <sc-if value="{{ q2 }}" hint-placeholder-val="{{ false }}">
-    <section style="padding:0 6vw 40px">
-      <div style="display:grid;grid-template-columns:{{ cfgCols }};gap:24px;align-items:start">
-        <div data-reveal="1" style="border:1px solid {{ bd }};padding:{{ estPad }};animation:fade .4s both">
-          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Who are we making it for?</span>
-          <h3 style="margin:14px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(30px,3.6vw,56px);line-height:.95;letter-spacing:-.02em">Your details.</h3>
-          <div style="display:grid;grid-template-columns:{{ fieldCols }};gap:22px 24px;margin-top:30px">
-            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Name<input data-f="name" value="{{ fName }}" onChange="{{ setField }}" placeholder="Your name" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
-            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Email<input data-f="email" type="email" value="{{ fEmail }}" onChange="{{ setField }}" placeholder="you@brand.com" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
-            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Phone<input data-f="phone" value="{{ fPhone }}" onChange="{{ setField }}" placeholder="+1 647 000 0000" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
-            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Business or brand<input data-f="brand" value="{{ fBrand }}" onChange="{{ setField }}" placeholder="Where you work" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
-          </div>
-          <div style="margin-top:30px">
-            <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Industry</span>
-            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
-              <sc-for list="{{ industries }}" as="i" hint-placeholder-count="7">
-                <button data-v="{{ i.t }}" onClick="{{ setInd }}" style="border:1px solid {{ bds }};border-radius:999px;padding:10px 16px;font-size:11px;letter-spacing:.08em;background:{{ i.bg }};color:{{ i.fg }};transition:background .3s,color .3s">{{ i.t }}</button>
-              </sc-for>
-            </div>
-          </div>
-          <div style="margin-top:30px">
-            <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Preferred contact</span>
-            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
-              <sc-for list="{{ contactVia }}" as="i" hint-placeholder-count="3">
-                <button data-v="{{ i.t }}" onClick="{{ setVia }}" style="border:1px solid {{ bds }};border-radius:999px;padding:10px 16px;font-size:11px;letter-spacing:.08em;background:{{ i.bg }};color:{{ i.fg }};transition:background .3s,color .3s">{{ i.t }}</button>
-              </sc-for>
-            </div>
-          </div>
-          <p style="margin:22px 0 0;font-size:12px;line-height:1.6;opacity:.6;min-height:18px">{{ q2Err }}</p>
-          <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:14px;border-top:1px solid {{ bd }};padding-top:24px">
-            <button onClick="{{ qPrev }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">← Back to the builder</button>
-            <button onClick="{{ qNext }}" style="margin-left:auto;border:1px solid currentColor;padding:15px 24px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">Next — the brief →</button>
-          </div>
-        </div>
-        <div data-reveal="1" style="position:{{ stickyPos }};top:110px;border:1px solid {{ bd }};padding:{{ estPad }};display:flex;flex-direction:column;gap:14px;order:{{ sideOrder }}">
-          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Your package</span>
-          <sc-for list="{{ summary }}" as="r" hint-placeholder-count="2">
-            <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline;border-top:1px solid {{ bd }};padding-top:10px;font-size:13px;line-height:1.5"><span><span style="opacity:.55">{{ r.svc }} · </span>{{ r.plan }}<span style="display:block;font-size:11px;opacity:.55">{{ r.opts }}</span></span><span style="white-space:nowrap;opacity:.8">{{ r.range }}</span></div>
-          </sc-for>
-          <div style="border-top:1px solid {{ bds }};padding-top:14px"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Estimated range</span><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(30px,3.4vw,52px);line-height:1;letter-spacing:-.02em;margin-top:6px">{{ estLo }} – {{ estHi }}</div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin-top:6px">{{ contractNote }}</div></div>
-          <button data-n="1" onClick="{{ qGo }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px;align-self:flex-start">Edit package</button>
-        </div>
-      </div>
-    </section>
-    </sc-if>
-
-    <sc-if value="{{ q3 }}" hint-placeholder-val="{{ false }}">
-    <section style="padding:0 6vw 40px">
-      <div style="display:grid;grid-template-columns:{{ cfgCols }};gap:24px;align-items:start">
-        <div data-reveal="1" style="border:1px solid {{ bd }};padding:{{ estPad }};animation:fade .4s both">
-          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">When and why?</span>
-          <h3 style="margin:14px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(30px,3.6vw,56px);line-height:.95;letter-spacing:-.02em">The brief.</h3>
-          <div style="display:grid;grid-template-columns:{{ fieldCols }};gap:22px 24px;margin-top:30px">
-            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Start date<input data-f="start" value="{{ fStart }}" onChange="{{ setField }}" placeholder="e.g. first week of October" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
-            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Deadline or event date<input data-f="deadline" value="{{ fDeadline }}" onChange="{{ setField }}" placeholder="If there is one" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
-            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Location<input data-f="location" value="{{ fLocation }}" onChange="{{ setField }}" placeholder="Our studio, your venue, or both" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
-            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Budget comfort<input data-f="budget" value="{{ fBudget }}" onChange="{{ setField }}" placeholder="Optional — a number or a range" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
-          </div>
-          <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75;margin-top:28px">What is the content for?<textarea data-f="goal" value="{{ fGoal }}" onChange="{{ setField }}" rows="4" placeholder="Launch, storefront traffic, a new product line, a celebration…" style="border:1px solid {{ bds }};padding:14px;font-size:15px;line-height:1.6;letter-spacing:0;text-transform:none;opacity:1;resize:vertical;width:100%;box-sizing:border-box"></textarea></label>
-          <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75;margin-top:22px">Anything else — references, links, must-haves<textarea data-f="notes" value="{{ fNotes }}" onChange="{{ setField }}" rows="4" placeholder="Paste links to work you like, list people or products to feature, tell us what to avoid." style="border:1px solid {{ bds }};padding:14px;font-size:15px;line-height:1.6;letter-spacing:0;text-transform:none;opacity:1;resize:vertical;width:100%;box-sizing:border-box"></textarea></label>
-          <div style="margin-top:30px;display:flex;flex-wrap:wrap;gap:14px;border-top:1px solid {{ bd }};padding-top:24px">
-            <button onClick="{{ qPrev }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">← Back</button>
-            <button onClick="{{ qSend }}" style="margin-left:auto;border:1px solid currentColor;padding:16px 26px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">Send the request →</button>
-          </div>
-        </div>
-        <div data-reveal="1" style="position:{{ stickyPos }};top:110px;border:1px solid {{ bd }};padding:{{ estPad }};display:flex;flex-direction:column;gap:14px;order:{{ sideOrder }}">
-          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Your package</span>
-          <sc-for list="{{ summary }}" as="r" hint-placeholder-count="2">
-            <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline;border-top:1px solid {{ bd }};padding-top:10px;font-size:13px;line-height:1.5"><span><span style="opacity:.55">{{ r.svc }} · </span>{{ r.plan }}<span style="display:block;font-size:11px;opacity:.55">{{ r.opts }}</span></span><span style="white-space:nowrap;opacity:.8">{{ r.range }}</span></div>
-          </sc-for>
-          <div style="border-top:1px solid {{ bds }};padding-top:14px"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Estimated range</span><div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(30px,3.4vw,52px);line-height:1;letter-spacing:-.02em;margin-top:6px">{{ estLo }} – {{ estHi }}</div><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;margin-top:6px">{{ contractNote }}</div></div>
-          <button data-n="1" onClick="{{ qGo }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px;align-self:flex-start">Edit package</button>
-        </div>
-      </div>
-    </section>
-    </sc-if>
-
-    <sc-if value="{{ qSent }}" hint-placeholder-val="{{ false }}">
-    <section style="padding:0 6vw 40px">
-      <div data-reveal="1" style="border:1px solid {{ bd }};padding:{{ estPad }};display:grid;grid-template-columns:{{ cfgCols }};gap:40px;animation:zoom .5s cubic-bezier(.2,.7,.2,1) both">
-        <div>
-          <div style="display:flex;align-items:center;gap:16px"><svg viewBox="0 0 485 541" style="width:34px;height:38px;overflow:visible" aria-hidden="true"><g stroke="#ecebe6" stroke-width="6" stroke-linejoin="round" fill="none" style="animation:zfLines 2.4s ease both"><path d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z" pathLength="1" stroke-dasharray="1" style="animation:zfHex 2.4s cubic-bezier(.65,0,.2,1) both"></path><path d="M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z" pathLength="1" stroke-dasharray="1" style="animation:zfTri 2.4s cubic-bezier(.65,0,.2,1) both"></path><path d="M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.4s cubic-bezier(.65,0,.2,1) both"></path><path d="M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.4s cubic-bezier(.65,0,.2,1) both"></path><path d="M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.4s cubic-bezier(.65,0,.2,1) both"></path></g><path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" style="animation:zfFill 2.4s ease both"></path></svg><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Request logged · {{ sentRef }}</span></div>
-          <h3 style="margin:16px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(32px,4.4vw,64px);line-height:1">Thanks, {{ sentName }} — we'll come back within two working days.</h3>
-          <p style="margin:18px 0 0;font-size:14px;line-height:1.8;opacity:.8;max-width:560px">We'll confirm the exact number, the shoot dates and what to bring, by {{ sentVia }}. A copy of this summary is on its way to {{ sentEmail }}.</p>
-          <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:28px">
-            <button onClick="{{ qRestart }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Build another package</button>
-            <button data-p="home" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Back to home</button>
-          </div>
-        </div>
-        <div style="border-left:{{ estBL }};padding-left:{{ estPL }};border-top:{{ estBT }};padding-top:{{ estPT }};display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:1.6">
-          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">What you sent</span>
-          <sc-for list="{{ summary }}" as="r" hint-placeholder-count="2">
-            <div style="display:flex;justify-content:space-between;gap:12px;border-top:1px solid {{ bd }};padding-top:10px"><span><span style="opacity:.55">{{ r.svc }} · </span>{{ r.plan }}<span style="display:block;font-size:11px;opacity:.55">{{ r.opts }}</span></span><span style="white-space:nowrap;opacity:.8">{{ r.range }}</span></div>
-          </sc-for>
-          <div style="display:flex;justify-content:space-between;gap:12px;border-top:1px solid {{ bds }};padding-top:12px"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Estimated range</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:26px;line-height:1">{{ estLo }} – {{ estHi }}</span></div>
-          <sc-for list="{{ sentRows }}" as="r" hint-placeholder-count="6">
-            <div style="display:flex;justify-content:space-between;gap:12px;border-top:1px solid {{ bd }};padding-top:10px"><span style="opacity:.55">{{ r.k }}</span><span style="text-align:right;max-width:60%">{{ r.v }}</span></div>
-          </sc-for>
-        </div>
-      </div>
-    </section>
-    </sc-if>
-
-    <section style="padding:120px 6vw">
-      <div data-reveal="1" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:40px">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.9;letter-spacing:-.02em">Add-<em>ons</em></h2>
-        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Attach to any package</span>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(50%,220px),1fr));gap:14px 24px">
-        <sc-for list="{{ addons }}" as="a" hint-placeholder-count="6">
-          <div data-reveal="1" style="display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:18px 0;border-top:1px solid {{ bd }};font-size:13px"><span>{{ a.t }}</span><span style="opacity:.65;white-space:nowrap">{{ a.p }}</span></div>
-        </sc-for>
-      </div>
-    </section>
-
-    <section style="padding:110px 6vw 60px">
-      <div data-reveal="1" style="margin-bottom:36px">
-        <h2 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.4vw,92px);line-height:.9;letter-spacing:-.02em">Common <em>questions</em></h2>
-      </div>
-      <sc-for list="{{ faq }}" as="f" hint-placeholder-count="5">
-        <div data-reveal="1" style="border-top:1px solid {{ bd }}">
-          <button data-i="{{ $index }}" onClick="{{ togFaq }}" style="width:100%;text-align:left;display:flex;justify-content:space-between;gap:24px;align-items:baseline;padding:26px 0">
-            <span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(22px,2.4vw,36px);line-height:1.1">{{ f.q }}</span>
-            <span style="font-size:20px;line-height:1;transform:rotate({{ f.rot }});transition:transform .4s">+</span>
-          </button>
-          <p style="margin:0;max-width:760px;font-size:14px;line-height:1.8;opacity:{{ f.op }};max-height:{{ f.mh }};overflow:hidden;padding-bottom:{{ f.pb }};transition:max-height .5s ease,opacity .5s ease,padding-bottom .5s ease">{{ f.a }}</p>
-        </div>
-      </sc-for>
-    </section>
-  </sc-if>
 
   
 
   <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
     <section style="padding:130px 6vw 40px">
       <div style="display:grid;grid-template-columns:{{ twoCol }};gap:6vw;align-items:start">
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ sendInq }}" data-reveal="1" style="border:1px solid {{ bd }};padding:{{ estPad }};display:flex;flex-direction:column;gap:22px">
+          <div><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Inquiry · one business day reply</span><h3 style="margin:14px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(30px,3.6vw,56px);line-height:.95;letter-spacing:-.02em">Tell us about your story.</h3></div>
+          <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
+            <div style="border:1px solid {{ bds }};padding:16px 18px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 20px;animation:fade .4s both"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Selected</span><span style="font-family:'Cormorant Garamond',serif;font-size:20px;line-height:1.2;flex:1 1 200px">{{ selText }}</span><span style="font-size:12px;opacity:.8;white-space:nowrap">{{ selPrice }}</span><button type="button" data-p="{{ selEditPage }}" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:2px">Edit</button></div>
+          </sc-if>
+          <div style="display:grid;grid-template-columns:{{ fieldCols }};gap:22px 24px">
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Name<input data-f="name" value="{{ fName }}" onChange="{{ setField }}" placeholder="Your name" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Email<input data-f="email" type="email" value="{{ fEmail }}" onChange="{{ setField }}" placeholder="you@email.com" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Phone<input data-f="phone" value="{{ fPhone }}" onChange="{{ setField }}" placeholder="+1 (optional)" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75">Service type<select data-f="svc" value="{{ fSvc }}" onChange="{{ setField }}" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box;background:{{ bg }};color:{{ ink }}"><option value="">Choose a service…</option><sc-for list="{{ svcOpts }}" as="o" hint-placeholder-count="9"><option value="{{ o }}">{{ o }}</option></sc-for></select></label>
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75;grid-column:1 / -1">Preferred date or timeframe<input data-f="start" value="{{ fStart }}" onChange="{{ setField }}" placeholder="e.g. late November · 32 weeks · flexible" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box"></label>
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.75;grid-column:1 / -1">Message<textarea data-f="notes" rows="4" value="{{ fNotes }}" onChange="{{ setField }}" placeholder="Tell us about your journey, project, or idea" style="border-bottom:1px solid {{ bds }};padding:10px 0;font-size:15px;letter-spacing:0;text-transform:none;opacity:1;width:100%;box-sizing:border-box;resize:vertical;line-height:1.6"></textarea></label>
+          </div>
+          <p style="margin:0;font-size:12px;line-height:1.7;opacity:.6">Not sure which package is right? Share what you have in mind and we'll recommend options based on your goals and budget.</p>
+          <p style="margin:0;font-size:12px;line-height:1.6;opacity:.6;min-height:18px">{{ q2Err }}</p>
+          <button type="submit" style="align-self:flex-start;border:1px solid currentColor;padding:16px 26px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;transition:background .3s,color .3s" style-hover="background:{{ ink }};color:{{ bg }}">Send inquiry →</button>
+        </form>
+        </sc-if>
+        <sc-if value="{{ qSent }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px solid {{ bd }};padding:{{ estPad }};display:flex;flex-direction:column;gap:18px;animation:zoom .5s cubic-bezier(.2,.7,.2,1) both">
+          <svg viewBox="0 0 485 541" style="width:34px;height:38px"><path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z"></path></svg>
+          <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Inquiry received · {{ sentRef }}</span>
+          <h3 style="margin:0;font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(30px,3.6vw,56px);line-height:.98;letter-spacing:-.02em">Thanks, {{ sentName }} — we'll reply within one business day.</h3>
+          <p style="margin:0;font-size:13px;line-height:1.7;opacity:.75">We'll come back to {{ sentEmail }} with availability, next steps, and any questions we have{{ sentSvcText }}. A 50% retainer confirms your date.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:6px"><button onClick="{{ qRestart }}" style="border:1px solid currentColor;padding:14px 20px;font-size:10px;letter-spacing:.2em;text-transform:uppercase">Send another</button><button data-p="home" onClick="{{ goPage }}" style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px;align-self:center">Back to home</button></div>
+        </div>
+        </sc-if>
         <div data-reveal="1" style="display:flex;flex-direction:column">
           <a href="tel:+16478391491" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }};transition:padding-left .4s" style-hover="padding-left:12px;opacity:1"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;min-width:90px">Call</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,3.4vw,52px);line-height:1;letter-spacing:-.02em">+1 647-839-1491</span></a>
           <a href="mailto:Zeusframess@gmail.com" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }};transition:padding-left .4s" style-hover="padding-left:12px;opacity:1"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;min-width:90px">Email</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,2.8vw,44px);line-height:1;letter-spacing:-.02em;word-break:break-all">Zeusframess@gmail.com</span></a>
           <a href="https://wa.me/16478391491" target="_blank" rel="noopener" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }};transition:padding-left .4s" style-hover="padding-left:12px;opacity:1"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;min-width:90px">WhatsApp</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,3.4vw,52px);line-height:1;letter-spacing:-.02em">Message us ↗</span></a>
-          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }}"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;min-width:90px">Studio</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,2.8vw,44px);line-height:1.1;letter-spacing:-.02em;text-align:right">180 Shaughnessy Blvd<br>North York, ON M2J 1K3</span></div>
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }}"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;min-width:90px">Studio</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,2.8vw,44px);line-height:1.1;letter-spacing:-.02em;text-align:right">ZeusFrames Studio<br>Stouffville, Ontario</span></div>
           <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }};border-bottom:1px solid {{ bd }}"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55;min-width:90px">Hours</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,2.8vw,44px);line-height:1;letter-spacing:-.02em">Mon–Sat · 9:00–19:00</span></div>
           <div style="margin-top:40px">
             <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55">Follow</span>
@@ -896,17 +861,14 @@ video,img{display:block}
             </div>
           </div>
         </div>
-        <div data-reveal="1" style="display:flex;flex-direction:column;gap:24px">
-          <div style="aspect-ratio:4/5;overflow:hidden;background:#1a1a1a"><img loading="lazy" src="assets/img/1554048612-b6a482bc67e5.jpg" alt="Film camera on a desk" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></div>
-          <a href="https://maps.google.com/?q=180+Shaughnessy+Blvd+North+York+ON" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:6px;align-self:flex-start">Open in Maps ↗</a>
-        </div>
+
       </div>
     </section>
   </sc-if>
 
   <sc-if value="{{ showCta }}" hint-placeholder-val="{{ true }}">
     <section style="padding:40px 6vw 0">
-      <button data-p="contact" onClick="{{ goPage }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" data-reveal="1" style="width:100%;text-align:left;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid {{ bd }};border-bottom:1px solid {{ bd }};padding:60px 0">
+      <button data-p="contact" data-svc="{{ bandSvc }}" onClick="{{ goPage }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" data-reveal="1" style="width:100%;text-align:left;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid {{ bd }};border-bottom:1px solid {{ bd }};padding:60px 0">
         <span style="display:flex;align-items:center;gap:.3em;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,7vw,120px);line-height:.9;letter-spacing:-.02em"><svg data-revmark="1" viewBox="0 0 485 541" style="width:.55em;height:.62em;overflow:visible;flex:none" aria-hidden="true"><g stroke="#ecebe6" stroke-width="8" stroke-linejoin="round" fill="none" style="animation:zfLines 2.6s ease 0s both;animation-play-state:paused">
             <path d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z" pathLength="1" stroke-dasharray="1" style="animation:zfHex 2.6s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
             <path d="M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z" pathLength="1" stroke-dasharray="1" style="animation:zfTri 2.6s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
@@ -914,8 +876,8 @@ video,img{display:block}
             <path d="M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.6s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
             <path d="M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 2.6s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
           </g>
-          <path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" style="animation:zfFill 2.6s ease 0s both;animation-play-state:paused"></path></svg>Get a <em>quote</em></span>
-        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Build your package · then call or message →</span>
+          <path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" style="animation:zfFill 2.6s ease 0s both;animation-play-state:paused"></path></svg>{{ bandA }} <em>{{ bandB }}</em></span>
+        <span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65">Ready to plan your story? →</span>
       </button>
     </section>
   </sc-if>
@@ -931,8 +893,8 @@ video,img{display:block}
             <path d="M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 3s cubic-bezier(.65,0,.2,1) 0s both;animation-play-state:paused"></path>
           </g>
           <path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" style="animation:zfFill 3s ease 0s both;animation-play-state:paused"></path></svg>
-        <img src="assets/logo-h-white.png" alt="Zeus Frames — Creative Brand Agency" style="height:38px;width:auto;display:block">
-        <p style="margin:14px 0 0;font-size:12px;line-height:1.8;opacity:.7;max-width:260px">A Toronto media studio for video, photography and social content.</p>
+        <img src="assets/logo-h-white.png" alt="ZeusFrames Studio" style="height:38px;width:auto;display:block">
+        <p style="margin:14px 0 0;font-size:12px;line-height:1.8;opacity:.7;max-width:260px">A minimal‑modern studio in Stouffville for motherhood journeys, family stories, fashion editorials and cinematic video art.</p>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Pages</div>
@@ -942,7 +904,7 @@ video,img{display:block}
       </div>
       <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:1.7">
         <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.5">Studio</div>
-        <span>180 Shaughnessy Blvd<br>North York, ON M2J 1K3</span>
+        <span>ZeusFrames Studio<br>Stouffville, Ontario</span>
         <span>Mon–Sat · 9:00–19:00</span>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:1.7">
@@ -953,18 +915,19 @@ video,img{display:block}
       </div>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;margin-top:80px;padding-top:20px;border-top:1px solid {{ bd }};font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.55">
-      <span>© 2026 Zeus Frames Inc.</span><span>Toronto, Canada</span>
+      <span>© 2026 ZeusFrames Studio · Stouffville</span><span>Ontario, Canada</span>
     </div>
   </footer>
 
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;page&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;home&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;video&quot;,&quot;social&quot;,&quot;events&quot;,&quot;studio&quot;,&quot;packages&quot;,&quot;contact&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Site&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;page&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;home&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;video&quot;,&quot;social&quot;,&quot;events&quot;,&quot;studio&quot;,&quot;portfolio&quot;,&quot;about&quot;,&quot;contact&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Site&quot;}}">
 class Component extends DCLogic {
-  PAGES = ['home', 'video', 'social', 'events', 'studio', 'packages', 'contact'];
+  PAGES = ['home', 'video', 'social', 'events', 'studio', 'portfolio', 'about', 'contact'];
+  // page keys kept for routing: video=Motherhood & Family · social=Fashion & Branding · events=Commercial & Music Video · studio=Studio Rental
   rootRef = React.createRef(); topRef = React.createRef(); afRef = React.createRef(); frRef = React.createRef(); ringRef = React.createRef();
   state = { page: 'home', intro: true, tc: '00:00:00:00', mob: false, light: false, lens: 0, wh: null, lb: null, shot: false,
-    menu: false, faq: 0, touched: false, brandSeen: false, contract: false, q: 1, qSent: false, qErr: '', form: { name: '', email: '', phone: '', brand: '', ind: '', via: 'WhatsApp', start: '', deadline: '', location: '', budget: '', goal: '', notes: '' },
-    cfg: { video: { on: false, plan: 'growth', opts: {} }, social: { on: true, plan: 'pro', opts: {} }, events: { on: false, plan: 'launch', opts: {} }, studio: { on: false, plan: 'half', opts: {} } } };
+    menu: false, faq: 0, touched: false, brandSeen: false, contract: false, q: 1, qSent: false, qErr: '', form: { name: '', email: '', phone: '', svc: '', brand: '', ind: '', via: 'WhatsApp', start: '', deadline: '', location: '', budget: '', goal: '', notes: '' },
+    cfg: { video: { on: true, plan: 'maternity', opts: {} }, social: { on: false, plan: 'editorial', opts: {} }, events: { on: false, plan: 'sbc', opts: {} }, studio: { on: false, plan: 'half', opts: {} } } };
 
   componentDidMount() {
     const h = (location.hash || '').replace('#', ''), pv = this.props.page;
@@ -1024,6 +987,9 @@ class Component extends DCLogic {
     if (this.io) this.io.disconnect(); if (this.lensIo) this.lensIo.disconnect(); if (this.vidIo) this.vidIo.disconnect(); if (this.brandIo) this.brandIo.disconnect(); if (this.revIo) this.revIo.disconnect(); clearTimeout(this.navT);
     window.removeEventListener('scroll', this.onScrollB); window.removeEventListener('resize', this.onResizeB); if (this.rootRo) this.rootRo.disconnect(); if (this.mq) { if (this.mq.removeEventListener) this.mq.removeEventListener('change', this.onMq); else this.mq.removeListener(this.onMq); } window.removeEventListener('hashchange', this.onHash); window.removeEventListener('keydown', this.onKey);
   }
+  SVC_OPTS = ['Motherhood', 'Newborn', 'Family', 'Kidsgraphy', 'Fashion', 'Branding', 'Commercial', 'Music Video', 'Studio Rental'];
+  svcLabel(key) { const m = { 'motherhood-family': 'Motherhood', 'fashion-branding': 'Fashion', 'commercial-video': 'Commercial', 'studio-rental': 'Studio Rental', maternity: 'Motherhood', newborn: 'Newborn', family: 'Family', kids: 'Kidsgraphy', editorial: 'Fashion', creator: 'Branding', brand: 'Branding', sbc: 'Commercial', film: 'Commercial', music: 'Music Video', h1: 'Studio Rental', half: 'Studio Rental', full: 'Studio Rental', video: 'Motherhood', social: 'Fashion', events: 'Commercial', studio: 'Studio Rental' }; return m[key] || (this.SVC_OPTS.includes(key) ? key : ''); }
+  applySvc(key) { if (!key) return; let label = '', sel = false; if (key === '__journey') { this.setState(s => ({ selJourney: true, selFromCfg: false, qSent: false, qErr: '', form: { ...s.form, svc: 'Motherhood' } })); return; } if (key === '__cfg') { const c = this.state.cfg; const first = ['video', 'social', 'events', 'studio'].find(k => c[k].on); label = first ? this.svcLabel(c[first].plan) : ''; sel = !!first; } else { label = this.svcLabel(key); } this.setState(s => ({ selFromCfg: sel, selJourney: false, qSent: false, qErr: '', form: { ...s.form, svc: label || s.form.svc } })); }
   jumpTop() {
     const el = document.documentElement, body = document.body;
     const go = () => { const p = el.style.scrollBehavior; el.style.scrollBehavior = 'auto'; body.style.scrollBehavior = 'auto'; window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); el.scrollTop = 0; body.scrollTop = 0; el.style.scrollBehavior = p; body.style.scrollBehavior = ''; };
@@ -1070,55 +1036,67 @@ class Component extends DCLogic {
     const bg = light ? '#ecebe6' : '#0c0c0c', ink = light ? '#0c0c0c' : '#ecebe6';
     const bd = light ? 'rgba(12,12,12,.22)' : 'rgba(236,235,230,.22)', bds = light ? 'rgba(12,12,12,.5)' : 'rgba(236,235,230,.5)';
     const page = S.page;
-    const pageDefs = [['home', 'Home'], ['services', 'Services'], ['studio', 'Studio'], ['packages', 'Packages'], ['contact', 'Contact']];
-    const subDefs = [['video', 'Video production'], ['social', 'Social marketing'], ['events', 'Events']];
+    const pageDefs = [['home', 'Home'], ['services', 'Services'], ['studio', 'Studio Rental'], ['portfolio', 'Portfolio'], ['about', 'About'], ['contact', 'Contact']];
+    const subDefs = [['video', 'Motherhood & Family'], ['social', 'Fashion & Branding'], ['events', 'Commercial & Music Video']];
     const heroes = {
-      home: { k: 'Toronto media studio · Video · Photo · Social', t1: 'Everything', t2: 'in focus.', lead: 'Video, photography and social content from a North York studio — for brands, creators and families who want to be remembered.', vid: V(12735441), link: '#work', linkT: 'See the work', size: 'clamp(60px,11vw,190px)' },
-      video: { k: 'Video production · 24mm · f/2.8', t1: 'Brand films', t2: 'with a pulse.', lead: 'Commercials, brand films, product spots and property tours — scripted, shot and graded by the same crew.', vid: V(3588888), link: '#plans', linkT: 'See video packages', size: 'clamp(52px,9.5vw,170px)' },
-      social: { k: 'Social marketing · 35mm · f/2', t1: 'A feed that', t2: 'never sleeps.', lead: 'Monthly reels, captions, scheduling and reporting. One production day becomes thirty days of content.', vid: V(34132691), link: '#plans', linkT: 'See monthly plans', size: 'clamp(52px,9.5vw,170px)' },
-      events: { k: 'Events · 50mm · f/1.4', t1: 'The night,', t2: 'kept.', lead: 'Launches, galas, tournaments and celebrations — filmed live, recapped within 48 hours.', vid: V(35340079), link: '#plans', linkT: 'Coverage packages', size: 'clamp(56px,10vw,180px)' },
-      _services: { k: 'Services · Video · Social · Events', t1: 'Three lenses,', t2: 'one crew.', lead: 'Brand films, a monthly content engine and live event coverage — scripted, shot and graded by the same people.', vid: V(3588888), link: '#svc-video', linkT: 'Jump to a service', size: 'clamp(54px,9.8vw,176px)' },
-      studio: { k: 'The studio · 85mm · f/1.8', t1: 'A room built', t2: 'for light.', lead: 'Portraits, products, podcasts and lookbooks in North York — crew, kit and edit included.', vid: V(31850422), link: '#rates', linkT: 'Studio rates', size: 'clamp(52px,9.5vw,170px)' },
-      packages: { k: 'Packages · Live estimate', t1: 'Build it.', t2: 'Send it.', lead: 'Pick a package per service, adjust what is inside, and get a real range in seconds.', vid: V(7823380), link: '#estimate', linkT: 'Build a package', size: 'clamp(46px,8.4vw,150px)' },
-      contact: { k: 'Contact · North York studio', t1: 'Say hello.', t2: "We're quick.", lead: 'Call, message or drop by the studio. Build your package first and we come back with an exact number within two working days.', vid: V(12987888), link: 'https://wa.me/16478391491', linkT: 'WhatsApp us', size: 'clamp(48px,8.6vw,156px)' }
+      home: { k: 'Stouffville studio · Motherhood · Family · Fashion', t1: 'Everything', t2: 'in focus.', lead: 'Minimal, modern portraits and cinematic video art for families, mothers, and creators in Stouffville and the GTA.', vid: V(12735441), link: '#work', linkT: 'See recent stories', size: 'clamp(60px,11vw,190px)' },
+      video: { k: 'Motherhood & Family · 50mm · f/1.8', t1: 'Maternity, Newborn', t2: '& Family.', lead: 'Motherhood moves quickly. ZeusFrames exists to slow it down — minimal‑modern, dreamy sessions for parents across Stouffville and the GTA, guided, calm, and designed around your comfort.', vid: V(30603141), link: '#plans', linkT: 'See sessions & journeys', size: 'clamp(50px,9vw,160px)' },
+      social: { k: 'Fashion & Personal Branding · 85mm · f/2', t1: 'Fashion &', t2: 'Personal Branding.', lead: 'Bold, editorial fashion shoots and personal branding sessions for models, designers, influencers, and entrepreneurs — colorful backdrops, dramatic lighting, and our black‑wall set.', vid: V(31850422), link: '#plans', linkT: 'See packages', size: 'clamp(52px,9.5vw,170px)' },
+      events: { k: 'Commercial & Music Video · 24mm · f/2.8', t1: 'Commercial content', t2: '& music videos.', lead: 'Small business content sessions, brand film days, and indie music videos — produced in our Stouffville studio with cinema‑level cameras and professional lighting.', vid: V(3588888), link: '#plans', linkT: 'See starting points', size: 'clamp(46px,8.4vw,150px)' },
+      studio: { k: 'Studio rental · Stouffville · ≈300″ × 300″', t1: 'A room built', t2: 'for light.', lead: 'Rent ZeusFrames Studio for your own shoots — black‑wall set, white backdrop zone, lifestyle corner, with optional FX5 and Alpha cameras and Nanlite and Aputure lighting.', vid: V(31850422), link: '#rates', linkT: 'Rental rates', size: 'clamp(52px,9.5vw,170px)' },
+      packages: { k: 'Experience & Pricing · Journey planner', t1: 'Experience &', t2: 'investment.', lead: 'How a session runs, what is included, and every starting price in one place. Pick a Journey bundle and a payment option to see the total.', vid: V(30603141), link: '#journeys', linkT: 'Plan a journey', size: 'clamp(46px,8.4vw,150px)' },
+      portfolio: { k: 'Portfolio · every story in one place', t1: 'Recent', t2: 'stories.', lead: 'A curated selection of motherhood, newborn, family, kidsgraphy, fashion, branding and commercial work created at ZeusFrames Studio in Stouffville and across the GTA. Filter by service, hover to play, click to open.', vid: V(12735441), link: '#contact', linkT: 'Book a similar session', size: 'clamp(52px,9.5vw,170px)' },
+      about: { k: 'About ZeusFrames · Stouffville', t1: 'A calm studio for', t2: 'life’s chapters.', lead: 'How ZeusFrames grew from an Instagram page into a dedicated studio in Stouffville — motherhood journeys, family stories, fashion editorials, and cinematic video art.', vid: V(31850422), link: '#values', linkT: 'Our values', size: 'clamp(46px,8.4vw,150px)' },
+      contact: { k: 'Contact · Stouffville studio', t1: 'Inquire', t2: '& book.', lead: 'Tell us a bit about your story or project and the kind of session you are dreaming about. We reply within one business day with availability and next steps.', vid: V(12987888), link: 'https://wa.me/16478391491', linkT: 'WhatsApp us', size: 'clamp(48px,8.6vw,156px)' }
     };
     const H = heroes[page] || heroes.home;
     const svcBase = [
-      { n: '01', t: 'Video Production', d: 'Brand films, commercials and cinematic reels — scripted, shot and graded in-house.', src: V(32896750), mm: '24mm', page: 'video', cta: 'Video production' },
-      { n: '02', t: 'Social Marketing', d: 'A monthly content engine: reels, captions, scheduling and reporting, so every scroll finds you.', src: V(34132691), mm: '35mm', page: 'social', cta: 'Social marketing' },
-      { n: '03', t: 'Studio', d: 'A physical studio in North York for portraits, products and podcasts — lit, staffed, ready.', src: V(31850422), mm: '85mm', page: 'studio', cta: 'The studio' },
-      { n: '04', t: 'Events', d: 'Launches, galas and shows — captured live and recapped the same week.', src: V(35340079), mm: '50mm', page: 'events', cta: 'Event coverage' }
+      { n: '01', t: 'Motherhood & Family Journeys', d: 'Maternity, newborn, kidsgraphy, and family sessions with minimal sets, dreamy light, and calm guidance.', src: V(30603141), mm: '50mm', page: 'video', cta: 'Motherhood & Family' },
+      { n: '02', t: 'Fashion & Personal Branding', d: 'Colorful high‑fashion editorials and dark‑wall portraits for models, designers, and influencers.', src: V(31850422), mm: '85mm', page: 'social', cta: 'Fashion & Branding' },
+      { n: '03', t: 'Video Art Films', d: 'Your maternity, newborn or family session becomes a 60–90 second cinematic film — motion, sound and feeling.', src: V(10276471), mm: '35mm', page: 'video', cta: 'ArtFilm sessions' },
+      { n: '04', t: 'Studio Rental & Commercial', d: 'Rent ZeusFrames Studio for your own shoots, or work with us on brand films and music videos.', src: V(3588888), mm: '24mm', page: 'studio', cta: 'Studio & Commercial' }
     ];
     const workSets = {
-      home: [['F01', 'Royal Snooker', 'Brand film', 3588888], ['F02', 'Studio portraits', 'Photography', 31850422], ['F03', 'Mr. Snooker', 'Social reels', 34132691], ['F04', 'Downtown launch', 'Event recap', 35340079], ['F05', 'Product story', 'Commerce', 7823380], ['F06', 'Toronto from above', 'Aerial', 13580749]],
-      video: [['V01', 'Royal Snooker', 'Brand film', 3588888], ['V02', 'Product story', 'Commerce', 7823380], ['V03', 'Toronto from above', 'Aerial', 13580749], ['V04', 'Night shift', 'Documentary', 8084901], ['V05', 'Studio session', 'Fashion', 31850422], ['V06', 'Mr. Snooker', 'Social reels', 34132691]],
-      events: [['E01', 'Downtown launch', 'Launch party', 35340079], ['E02', 'Tournament final', 'Sports', 3588888], ['E03', 'Gala dinner', 'Corporate', 12987888], ['E04', 'Street festival', 'Community', 12735441], ['E05', 'Family celebration', 'Private', 30603141], ['E06', 'After hours', 'Recap', 8084901]],
-      services: [['S01', 'Royal Snooker', 'Brand film', 3588888], ['S02', 'Mr. Snooker', 'Social reels', 34132691], ['S03', 'Downtown launch', 'Event recap', 35340079], ['S04', 'Product story', 'Commerce', 7823380], ['S05', 'Gala dinner', 'Corporate', 12987888], ['S06', 'Toronto from above', 'Aerial', 13580749]]
+      home: [['F01', 'Bump to Baby', 'Maternity · Newborn', 30603141], ['F02', 'Dark‑wall editorial', 'Fashion', 31850422], ['F03', 'Family Story', 'Family · ArtFilm', 10276471], ['F04', 'Personal Brand Story', 'Branding', 34132691], ['F05', 'Kidsgraphy', 'Kids', 12735441], ['F06', 'Small business content', 'Commercial', 3588888]],
+      video: [['M01', 'Maternity Dream', 'Maternity', 30603141], ['M02', 'First Days', 'Newborn', 10276471], ['M03', 'Family Story', 'Family', 12735441], ['M04', 'Kidsgraphy Play', 'Kids', 34132691], ['M05', 'Legacy ArtFilm', 'Video art', 31850422], ['M06', 'Seasonal Mini Day', 'Minis', 8084901]],
+      events: [['C01', 'Small business content', 'Commercial', 3588888], ['C02', 'Brand Film Day', 'Brand film', 12987888], ['C03', 'Indie Artist', 'Music video', 8084901], ['C04', 'Product story', 'Commerce', 7823380], ['C05', 'Team portraits', 'Corporate', 35340079], ['C06', 'Vertical cutdowns', 'Social', 13580749]],
+      services: [['S01', 'Bump to Baby', 'Maternity · Newborn', 30603141], ['S02', 'Dark‑wall editorial', 'Fashion', 31850422], ['S03', 'Family Story', 'Family', 10276471], ['S04', 'Personal Brand Story', 'Branding', 34132691], ['S05', 'Kidsgraphy', 'Kids', 12735441], ['S06', 'Small business content', 'Commercial', 3588888]]
     };
-    const works = (workSets[page] || workSets.home).map(([n, t, c, id], i) => ({ n, t, c, src: V(id), delay: (i % 3) * 0.1 + 's', blur: S.wh == null || S.wh === i ? '0px' : '6px', op: S.wh == null || S.wh === i ? 1 : 0.5, sc: S.wh === i ? 1.04 : 1 }));
+    const PF = [
+      ['P01', 'Bump to Baby', 'Maternity', 'mother', 30603141, 2, 2], ['P02', 'Dark‑wall editorial', 'Fashion', 'fashion', 31850422, 1, 2], ['P03', 'First Days', 'Newborn', 'mother', 10276471, 1, 1],
+      ['P04', 'Personal Brand Story', 'Branding', 'fashion', 34132691, 1, 1], ['P05', 'Kidsgraphy Play', 'Kids', 'family', 12735441, 2, 1], ['P06', 'Small business content', 'Commercial', 'commercial', 3588888, 1, 1],
+      ['P07', 'Legacy ArtFilm', 'Video art', 'artfilm', 8084901, 1, 2], ['P08', 'Family Story', 'Family', 'family', 7823380, 2, 1], ['P09', 'Creator content day', 'Branding', 'fashion', 35340079, 1, 1],
+      ['P10', 'Indie artist', 'Music video', 'commercial', 13580749, 2, 1], ['P11', 'Seasonal Mini Day', 'Minis', 'family', 12987888, 1, 1], ['P12', 'Maternity ArtFilm', 'Video art', 'artfilm', 28638048, 1, 1]
+    ];
+    const PF_TABS = [['all', 'All'], ['mother', 'Motherhood'], ['family', 'Family & Kids'], ['fashion', 'Fashion & Branding'], ['artfilm', 'Video art'], ['commercial', 'Commercial']];
+    const pfK = S.pf || 'all';
+    const pfAll = PF.map(([n, t, c, k, id, cs, rs], i) => ({ n, t, c, k, src: V(id), i, cs, rs }));
+    const pfList = pfAll.filter(w => pfK === 'all' || w.k === pfK);
+    const pfWorks = pfList.map((w, i) => ({ ...w, col: mob ? (w.cs === 2 ? 'span 2' : 'span 1') : 'span ' + w.cs, row: mob ? 'span 1' : 'span ' + w.rs, delay: (i % 4) * 0.06 + 's' }));
+    const works = page === 'portfolio' ? pfList.map((w, i) => ({ n: w.n, t: w.t, c: w.c, src: w.src, delay: '0s', blur: '0px', op: 1 })) : (workSets[page] || workSets.home).map(([n, t, c, id], i) => ({ n, t, c, src: V(id), delay: (i % 3) * 0.1 + 's', blur: S.wh == null || S.wh === i ? '0px' : '6px', op: S.wh == null || S.wh === i ? 1 : 0.5, sc: S.wh === i ? 1.04 : 1 }));
     const lb = S.lb == null ? null : works[S.lb];
     const CAT = {
-      video: { t: 'Video production', mm: '24mm', unit: 'project', inc: 'Includes shoot day, edit, colour grade and two revision rounds.', plans: [
-        { id: 'essential', tag: 'One-off', name: 'Essential', lo: 899, hi: 1200, items: ['One shoot day', 'Three deliverables', 'Basic grade', 'Two revisions'] },
-        { id: 'growth', tag: 'Campaign', name: 'Growth', lo: 2499, hi: 3200, items: ['Two shoot days', 'Eight deliverables', 'Lighting crew', 'Drone and product table', 'Four revisions'] },
-        { id: 'signature', tag: 'Flagship', name: 'Signature', lo: 6000, hi: 8500, items: ['Full production week', 'Brand film plus 12 cuts', 'Casting and wardrobe', 'VFX and licensed score', 'Unlimited revisions'] } ],
-        opts: [['drone', 'Drone', 300, 600], ['second', 'Second operator', 250, 250], ['vfx', 'VFX / motion titles', 150, 600], ['music', 'Licensed track', 80, 250], ['rush', 'Rush 24h', 0.25, 0.25, 'pct']] },
-      social: { t: 'Social marketing', mm: '35mm', unit: '/ mo', inc: 'Includes content day, three cuts per reel, captions and scheduling.', plans: [
-        { id: 'basic', tag: 'Starter', name: 'Basic Presence', lo: 499, hi: 499, items: ['3 reels per month', 'Up to 3h filming', '5 edited photos', 'Captions and hashtags', 'One revision round'] },
-        { id: 'pro', tag: 'Most popular', name: 'Pro Essentials', lo: 1990, hi: 1990, items: ['8 cinematic reels', '6h filming with lighting', '10 edited photos', 'Drone coverage', 'Colour grade', 'Four revision rounds'] },
-        { id: 'elite', tag: 'Full production', name: 'Elite Cinematic', lo: 4000, hi: 4000, items: ['8 campaign reels', 'One brand film per quarter', '10 retouched photos', 'Licensed music and VFX', 'Scheduling and reporting', 'Unlimited revisions'] } ],
-        opts: [['reels4', '+4 reels', 700, 900], ['photos', '+10 photos', 300, 400], ['community', 'Community replies', 250, 250], ['paid', 'Paid-social cuts', 300, 500], ['subs', 'Subtitles · extra language', 40, 120]] },
-      events: { t: 'Events', mm: '50mm', unit: 'event', inc: 'Includes two operators, discreet lighting and a 48h recap edit.', plans: [
-        { id: 'launch', tag: 'Half day', name: 'Launch', lo: 700, hi: 900, items: ['Up to 4h coverage', 'Two operators', '60s recap in 48h', 'Photo selection'] },
-        { id: 'corporate', tag: 'Full day', name: 'Corporate', lo: 1200, hi: 1800, items: ['Up to 8h coverage', 'Stage and candids', 'Speaker cutdowns', 'Sponsor deliverables'] },
-        { id: 'tournament', tag: 'Multi-day', name: 'Tournament', lo: 900, hi: 2400, items: ['Per-day pricing', 'Multi-angle coverage', 'Highlight reels', 'Same-day social cuts'] } ],
-        opts: [['verticals', 'Same-week verticals', 300, 300], ['photog', 'Dedicated photographer', 350, 450], ['live', 'Live stream', 500, 900], ['drone', 'Drone', 300, 600], ['travel', 'Outside GTA', 120, 400]] },
-      studio: { t: 'Studio', mm: '85mm', unit: 'session', inc: 'Includes operator, lighting and the set of your choice.', plans: [
-        { id: 'portrait', tag: '90 min', name: 'Portrait', lo: 250, hi: 250, items: ['Three looks', '10 retouched images'] },
-        { id: 'half', tag: '4 hours', name: 'Half day', lo: 450, hi: 450, items: ['One operator', 'Unlimited set changes'] },
-        { id: 'podcast', tag: '2 hours', name: 'Podcast', lo: 350, hi: 350, items: ['Up to four mics', 'Multicam and clean mix'] },
-        { id: 'full', tag: '8 hours', name: 'Full day', lo: 850, hi: 850, items: ['Two operators', 'Client lounge'] } ],
-        opts: [['hour', 'Extra hour', 100, 100], ['stylist', 'Stylist', 250, 350], ['retouch', '+10 retouched', 200, 250], ['second', 'Second operator', 250, 250]] }
+      video: { t: 'Motherhood & Family', mm: '50mm', unit: '+ HST', inc: 'Every session includes an online gallery; add ArtFilm to any photo session for +$300.', plans: [
+        { id: 'maternity', tag: '60–90 min', name: 'Maternity Dream Session', lo: 450, hi: 450, items: ['Studio or nearby outdoor location', '1–2 looks (outfits/backdrops)', '20 edited high‑resolution images', 'Online gallery delivery'] },
+        { id: 'newborn', tag: '2–3 hours', name: 'Newborn First Days Session', lo: 550, hi: 550, items: ['Baby‑led pacing in a warm, quiet studio', 'Wraps, props and simple sets', 'Baby + parents; siblings optional', '20–25 edited images'] },
+        { id: 'family', tag: '60–90 min', name: 'Family Story Session', lo: 450, hi: 450, items: ['Up to 6 family members', 'Studio or outdoor', 'Candid and lightly posed', '25–30 edited images'] },
+        { id: 'kids', tag: '45–60 min', name: 'Kidsgraphy Play Session', lo: 350, hi: 350, items: ['Playful, character‑focused direction', 'One main set (studio or outdoor)', '15–20 edited images'] } ],
+        opts: [['artfilm', 'ArtFilm · 60–90s video art', 300, 300], ['img10', '10 extra edited images', 150, 150], ['reel', 'Extra 30–45s social reel', 200, 200], ['print8', '8×10 print', 25, 25], ['print12', '12×18 print', 45, 45], ['book', 'Basic photo book (≈25 pages)', 250, 250]] },
+      social: { t: 'Fashion & Branding', mm: '85mm', unit: '+ HST', inc: 'Launch: first 10 fashion/branding bookings get 10% off any package.', plans: [
+        { id: 'editorial', tag: '2 hours · studio', name: 'Editorial Look Session', lo: 650, hi: 650, items: ['2‑hour studio shoot', '2–3 looks (outfits/backdrops)', '20–25 edited images'] },
+        { id: 'creator', tag: '3 hours · studio', name: 'Influencer / Creator Content Day', lo: 850, hi: 850, items: ['3‑hour studio session', '3 sets', '30 edited photos', '6 short vertical reels (10–20s)'] },
+        { id: 'brand', tag: '4 hours · studio + outdoor', name: 'Personal Brand Story', lo: 1200, hi: 1200, items: ['4‑hour session (studio and/or nearby outdoor)', '3–4 looks', '40 edited photos', '1 main 60–90s brand video'] } ],
+        opts: [['img', 'Extra edited image', 25, 25], ['reel', 'Extra short reel', 150, 150], ['hour', 'Extra hour of shooting', 200, 200]] },
+      events: { t: 'Commercial & Music Video', mm: '24mm', unit: '+ HST', inc: 'Custom projects with starting points. Opening quarter: 10% off Small Business Content and Indie Music Video.', plans: [
+        { id: 'sbc', tag: '3 hours', name: 'Small Business Content Session', lo: 950, hi: 950, items: ['Studio or on‑location', 'Product shots, team portraits, environment', '30 edited photos', '4 short vertical reels (10–20s)'] },
+        { id: 'film', tag: 'Full day · from', name: 'Brand Film Day', lo: 2500, hi: 2500, items: ['Up to 8 hours', 'FX5 + Alpha camera package', 'Basic script + shot list', '1 main 1.5–3 min brand film', '3 short vertical cutdowns'] },
+        { id: 'music', tag: 'Up to 8 hours · from', name: 'Indie Artist Music Video', lo: 2800, hi: 2800, items: ['Concept development and simple storyboard', 'Studio + optional extra location', 'FX5 + lighting package', 'Final 2.5–4 min music video'] } ],
+        opts: [['day', 'Extra shooting day (from)', 1200, 1200], ['cut', 'Extra 30–60s social cut', 200, 200], ['script', 'Scriptwriting upgrade', 300, 500]] },
+      studio: { t: 'Studio Rental', mm: 'Space', unit: '+ HST', inc: 'Minimum booking 2 hours · 50% retainer to secure the date.', plans: [
+        { id: 'h1', tag: 'Space only · per hour', name: 'Hourly (2‑hour min)', lo: 70, hi: 70, items: ['Black‑wall set, white backdrop zone, lifestyle corner', 'Basic props and stands'] },
+        { id: 'half', tag: 'Space only · 4 h', name: 'Half‑day', lo: 260, hi: 260, items: ['Four hours of studio time', 'All sets and basic props'] },
+        { id: 'full', tag: 'Space only · 8 h', name: 'Full‑day', lo: 480, hi: 480, items: ['Eight hours of studio time', 'All sets and basic props'] } ],
+        opts: [['gearH', 'Add gear · hourly (FX5, Alpha, lights)', 20, 20], ['gearHalf', 'Add gear · half‑day', 60, 60], ['gearFull', 'Add gear · full‑day', 120, 120]] }
     };
     const money = n => '$' + Math.round(n).toLocaleString('en-CA');
     let lo = 0, hi = 0, any = false; const summary = [];
@@ -1130,53 +1108,71 @@ class Component extends DCLogic {
         return { k, t, p: kind === 'pct' ? '+' + Math.round(a * 100) + '%' : (a === b ? money(a) : money(a) + '–' + money(b)), bg: on ? ink : 'transparent', fg: on ? bg : 'inherit' }; });
       plo *= 1 + pctLo; phi *= 1 + pctHi;
       if (st.on) { lo += plo; hi += phi; any = true; summary.push({ svc: C.t, plan: plan.name, opts: optNames.length ? '+ ' + optNames.join(', ') : 'No add-ons', range: plo === phi ? money(plo) : money(plo) + ' – ' + money(phi) }); }
-      return { id, t: C.t, mm: C.mm, on: st.on, check: st.on ? '✓' : '', onBg: st.on ? ink : 'transparent', onFg: st.on ? bg : 'inherit', planName: plan.name, inc: C.inc,
+      return { id, t: C.t, mm: C.mm, on: st.on, check: st.on ? '✓' : '', onBg: st.on ? ink : 'transparent', onFg: st.on ? bg : 'inherit', planName: plan.name.replace(' Session', ''), inc: C.inc,
         sum: st.on ? (plo === phi ? money(plo) : money(plo) + ' – ' + money(phi)) + ' ' + C.unit : 'Not included',
         plans: C.plans.map(p => { const sel = p.id === plan.id; return { id: p.id, tag: p.tag, name: p.name, price: p.lo === p.hi ? money(p.lo) : money(p.lo) + '–' + money(p.hi), unit: C.unit, bd: sel ? ink : bd, bg: sel ? ink : 'transparent', fg: sel ? bg : 'inherit' }; }), opts };
     });
-    if (S.contract) { lo *= 0.9; hi *= 0.9; }
+    
     const svcKey = ['video', 'social', 'events'].includes(page) ? page : null;
-    const svcPlans = svcKey ? CAT[svcKey].plans.map((p, i) => { const sel = S.cfg[svcKey].on && S.cfg[svcKey].plan === p.id; return { id: p.id, svc: svcKey, tag: p.tag, name: p.name, price: p.lo === p.hi ? money(p.lo) : money(p.lo) + '–' + money(p.hi), unit: CAT[svcKey].unit, items: p.items, delay: i * 0.1 + 's', bd: sel ? bds : bd, bg: sel ? 'rgba(236,235,230,.06)' : 'transparent', picked: sel ? 'In your package ✓' : '', cta: sel ? 'Selected — open builder →' : 'Add ' + p.name + ' →' }; }) : [];
+    const svcPlans = svcKey ? CAT[svcKey].plans.map((p, i) => { const sel = S.cfg[svcKey].on && S.cfg[svcKey].plan === p.id; return { id: p.id, svc: svcKey, tag: p.tag, name: p.name, price: 'Starting at ' + money(p.lo), unit: CAT[svcKey].unit, items: p.items, delay: i * 0.1 + 's', bd: sel ? bds : bd, bg: sel ? 'rgba(236,235,230,.06)' : 'transparent', picked: sel ? 'In your package ✓' : '', cta: sel ? 'Selected — continue to inquiry →' : 'Book ' + p.name.split(' ')[0] + ' →' }; }) : [];
 
     const faqData = [
-      ['How fast do we get the first cut?', 'Reels land within 48 hours of the shoot. Brand films take seven to ten working days, including one revision round.'],
-      ['Do you write the scripts and captions?', 'Yes. We draft the script, the on-screen text and the captions, then you edit the words you want changed.'],
-      ['Can you film at our location?', 'We shoot anywhere in the GTA. Travel inside Toronto is included; outside the city we add mileage at cost.'],
-      ['What if we already have footage?', 'We can edit, grade and cut your existing material — priced by the hour, or folded into a monthly package.'],
-      ['Is there a contract?', 'Monthly plans run month to month. A three-month commitment takes 10% off the whole plan.']
+      ['When should I schedule my maternity session?', 'Most mothers in Stouffville and the GTA schedule maternity sessions between 28 and 34 weeks, when the bump is visible but you still feel comfortable. If you are unsure, we can advise based on your due date.'],
+      ['How old should my newborn be for the session?', 'Newborn sessions typically happen within the first 5–21 days, but we happily photograph slightly older babies too. The most important thing is choosing a day when you and your baby feel ready.'],
+      ['What should we wear for family photos?', 'Neutral, comfortable clothing works best with our minimal‑modern sets. Avoid heavy logos and extremely bright patterns. After you book, we send a simple style guide for parents, kids, and newborns.'],
+      ['Do you provide props for newborns and kids?', 'Yes. The studio includes simple wraps, blankets, and a few soft props. You are welcome to bring personal items like a favorite toy or blanket to make the session feel more like home.'],
+      ['How far in advance should we book?', 'For maternity and newborn sessions, we recommend booking at least 4–8 weeks in advance, especially during busy seasons. Last‑minute dates may be available; reach out and we will do our best.'],
+      ['How do payments and bundles work?', 'Single sessions require a 50% retainer to hold your date, with the balance due on or before the session. Journey bundles can be paid per session, in two installments, or in full upfront with additional savings.']
     ];
     const faq = faqData.map(([q, a], i) => { const on = S.faq === i; return { q, a, rot: on ? '45deg' : '0deg', op: on ? 0.8 : 0, mh: on ? '200px' : '0px', pb: on ? '26px' : '0px' }; });
+    const selParts = ['video', 'social', 'events', 'studio'].filter(k => S.cfg[k] && S.cfg[k].on).map(k => { const C = CAT[k]; const p = C.plans.find(x => x.id === S.cfg[k].plan) || C.plans[0]; const o = Object.keys(S.cfg[k].opts || {}).filter(x => S.cfg[k].opts[x]).length; return p.name + (o ? ' + ' + o + ' add‑on' + (o > 1 ? 's' : '') : ''); });
+    const selText = selParts.join(' · '), selPrice = any ? (lo === hi ? money(lo) : money(lo) + ' – ' + money(hi)) + ' + HST' : '';
+    const JOURNEYS = [
+      { l: 'A', t: 'Bump to Baby', items: ['Maternity Dream Session · 20 images', 'Newborn First Days Session · 20–25 images'], value: 1000, price: 900, off: '10% off', pos: 'Two chapters, one consistent look — from bump to first days.' },
+      { l: 'B', t: 'Bump, Baby & Family', items: ['Maternity Dream Session', 'Newborn First Days Session', 'Family Story Session'], value: 1450, price: 1280, off: '~12% off', pos: 'Three photo chapters that read as one story.' },
+      { l: 'C', t: 'Motherhood Legacy ArtFilm Journey', items: ['Maternity Dream + ArtFilm', 'Newborn First Days + ArtFilm', 'Family Story + ArtFilm'], value: 2350, price: 2050, off: '~13% off', pos: 'Photo and video art across three chapters, so the whole journey feels like one film.' }
+    ];
+    const jI = S.journey == null ? 1 : S.journey, J = JOURNEYS[jI], pay = S.pay || 'two';
+    const PAY = [['per', 'Pay per session', J.value, 'Separate prices · pay as each chapter comes'], ['two', 'Two installments', J.price, 'Bundle price · 50% now, 50% before the first session'], ['full', 'Pay in full upfront', Math.round(J.price * 0.95 * 100) / 100, 'Bundle price with an extra 5% off']];
+    const P = PAY.find(p => p[0] === pay);
+    const jMoney = n => '$' + (Number.isInteger(n) ? n.toLocaleString('en-CA') : n.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+    const jOn = a => a ? { bg: ink, fg: bg, bd: ink, line: 'rgba(12,12,12,.25)' } : { bg: 'transparent', fg: 'inherit', bd: bd, line: bd };
     return {
       label: page.charAt(0).toUpperCase() + page.slice(1) + ' — Viewfinder',
       pageName: (subDefs.find(p => p[0] === page) ? 'Services / ' + subDefs.find(p => p[0] === page)[1] : (pageDefs.find(p => p[0] === page) || pageDefs[0])[1]),
       topRef: this.topRef, toTop: () => window.scrollTo({ top: 0, behavior: 'smooth' }),
       stop: e => e.stopPropagation(),
-      rangeBar: any && S.touched && page !== 'contact' && page !== 'packages', rangeBottom: mob ? '104px' : '28px',
+      rangeBar: any && S.touched && !S.rangeHidden && page !== 'contact', rangeHide: () => this.setState({ rangeHidden: true }), estText: lo === hi ? money(lo) : money(lo) + ' – ' + money(hi), rangeBottom: mob ? '104px' : '28px',
       rootRef: this.rootRef, hudRow: mob ? 'none' : 'flex', bg, ink, bd, bds, mob, notMob: !mob, deskOnly: mob ? 'none' : 'block', mobOnly: mob ? 'block' : 'none',
       intro: S.intro, tc: S.tc, exp: light ? 'ISO 100 · f/8 · 1/250 · EV +2.0' : 'ISO 800 · f/1.8 · 1/50 · EV −1.0',
       afRef: this.afRef, frRef: this.frRef, ringRef: this.ringRef,
       afMove: e => { if (mob) return; this.afX = e.clientX; this.afY = e.clientY; if (!this.afLocked) this.afApply(); },
       afLock: e => this.afLockEl(e.currentTarget), afFree: () => { this.afLocked = null; this.afApply(); },
-      pages: pageDefs.map(([id, t], i) => { const on = page === id; const hints = { home: 'Work · Lens · Studio · About', services: 'Video · Social · Events', studio: 'Gallery · Kit · Rates', packages: 'Per-service builder · FAQ', contact: 'Call · WhatsApp · Studio' }; return { id, t, n: '0' + (i + 1), op: on || (id === 'services' && ['video', 'social', 'events'].includes(page)) ? 1 : 0.6, hint: on ? 'You are here' : hints[id], isSvc: id === 'services', cursor: id === 'services' ? 'default' : 'pointer' }; }),
-      footPages: [['home', 'Home'], ...subDefs, ['studio', 'Studio'], ['packages', 'Packages'], ['contact', 'Contact']].map(([id, t]) => ({ id, t })),
+      pages: pageDefs.map(([id, t], i) => { const on = page === id; const hints = { home: 'Stories · Journeys · Studio', services: 'Motherhood · Fashion · Commercial', studio: 'Sets · Gear · Rates', portfolio: 'Every story · filter by service', about: 'Story · Values · Team', contact: 'Inquire · Book' }; return { id, t, n: '0' + (i + 1), op: on || (id === 'services' && ['video', 'social', 'events'].includes(page)) ? 1 : 0.6, hint: on ? 'You are here' : hints[id], isSvc: id === 'services', cursor: id === 'services' ? 'default' : 'pointer' }; }),
+      footPages: [['home', 'Home'], ...subDefs, ['studio', 'Studio Rental'], ['portfolio', 'Portfolio'], ['about', 'About'], ['contact', 'Contact']].map(([id, t]) => ({ id, t })),
       menuCols: '1fr', scrimH: mob ? '96px' : '120px',
-      goPage: e => { const p = e.currentTarget.dataset.p; if (!this.PAGES.includes(p)) return; const changed = p !== this.state.page; this.jumpTop(); this.afLocked = null; this.afApply(); this.setState({ page: p, menu: false, navFlash: changed && !this.embed }); if (changed) { clearTimeout(this.navT); this.navT = setTimeout(() => this.setState({ navFlash: false }), 1250); } },
+      goPage: e => { const p = e.currentTarget.dataset.p; if (!this.PAGES.includes(p)) return; if (e.currentTarget.dataset.svc) this.applySvc(e.currentTarget.dataset.svc); const anchor = e.currentTarget.dataset.anchor; if (anchor) { setTimeout(() => { const el = document.getElementById(anchor); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' }); }, 1250); } const changed = p !== this.state.page; this.jumpTop(); this.afLocked = null; this.afApply(); this.setState({ page: p, menu: false, navFlash: changed && !this.embed }); if (changed) { clearTimeout(this.navT); this.navT = setTimeout(() => this.setState({ navFlash: false }), 1250); } },
       navFlash: !!S.navFlash, menuOpen: S.menu, openMenu: () => this.setState({ menu: true }), closeMenu: () => this.setState({ menu: false }),
-      isHome: page === 'home', isServices: page === 'services', isVideo: page === 'video', isSocial: page === 'social', isEvents: page === 'events', isStudio: page === 'studio', isPackages: page === 'packages', isContact: page === 'contact',
+      isHome: page === 'home', isServices: page === 'services', isVideo: page === 'video', isSocial: page === 'social', isEvents: page === 'events', isStudio: page === 'studio', isPackages: page === 'packages', isAbout: page === 'about', isContact: page === 'contact',
       subs: subDefs.map(([id, t]) => ({ id, t, op: page === id ? 1 : 0.6, hint: page === id ? ' · here' : '' })),
-      doors: [['video', '01', '24mm', 'Video production', 'Brand films, commercials, product and property.', 'From $899', V(3588888)], ['social', '02', '35mm', 'Social marketing', 'A monthly content engine for your feed.', 'From $499 / mo', V(34132691)], ['events', '03', '50mm', 'Events', 'Filmed live, recapped within 48 hours.', 'From $700', V(35340079)]].map(([id, n, mm, t, d, from, src], i) => ({ id, n, mm, t, d, from, src, delay: i * 0.1 + 's' })),
+      doors: [['video', '01', '50mm', 'Motherhood & Family', 'Maternity, newborn, kidsgraphy and family sessions.', 'From $350 + HST', V(30603141)], ['social', '02', '85mm', 'Fashion & Branding', 'Editorial looks, creator content days, brand stories.', 'From $650 + HST', V(31850422)], ['events', '03', '24mm', 'Commercial & Music Video', 'Content sessions, brand film days, indie music videos.', 'From $950 + HST', V(3588888)]].map(([id, n, mm, t, d, from, src], i) => ({ id, n, mm, t, d, from, src, delay: i * 0.1 + 's' })),
       doorOn: e => this.afLockEl(e.currentTarget), doorOff: () => { this.afLocked = null; this.afApply(); },
-      videoSpecs: [['Formats', '6'], ['First cut', '7–10 days'], ['Crew', '2–4'], ['From', '$899']].map(([k, v]) => ({ k, v })),
+      videoSpecs: [['Sessions', '4 + minis'], ['Book ahead', '4–8 weeks'], ['ArtFilm add‑on', '+$300'], ['From', '$350 + HST']].map(([k, v]) => ({ k, v })),
       feedTiles: [34132691, 31850422, 10276471, 3588888, 35340079, 7823380, 30603141, 8084901].map((id, i) => ({ src: V(id), t: 'R0' + (i + 1) })), feedW: mob ? '150px' : '190px',
       socials: [['Instagram', '@zeusframes.inc', 'https://www.instagram.com/zeusframes.inc'], ['TikTok', '@zeusframes', 'https://www.tiktok.com/@zeusframes'], ['YouTube', 'Zeus Frames', 'https://www.youtube.com/@zeusframes'], ['LinkedIn', 'Zeus Frames Inc.', 'https://www.linkedin.com/company/zeusframes']].map(([t, h, href]) => ({ t, h, href })),
-      qSteps: [[1, 'Build'], [2, 'Details'], [3, 'Brief']].map(([n, t]) => ({ n, t, op: S.q === n ? 1 : (n < S.q ? 0.7 : 0.35), cursor: n < S.q ? 'pointer' : 'default' })),
-      q1: S.q === 1 && !S.qSent, q2: S.q === 2 && !S.qSent, q3: S.q === 3 && !S.qSent, qSent: S.qSent,
-      q1Cta: any ? 'Continue — your details →' : 'Pick at least one service',
-      qGo: e => { const n = +e.currentTarget.dataset.n; if (n < this.state.q) { this.setState({ q: n, qErr: '' }); this.jumpTop(); } },
-      qNext: () => { const st = this.state; if (st.q === 1) { if (!any) return; this.setState({ q: 2 }); } else if (st.q === 2) { const f = st.form; if (!f.name.trim() || !/.+@.+\..+/.test(f.email)) { this.setState({ qErr: 'Please add your name and a valid email so we can reply.' }); return; } this.setState({ q: 3, qErr: '' }); } this.jumpTop(); },
-      qPrev: () => { this.setState(s => ({ q: Math.max(1, s.q - 1), qErr: '' })); window.scrollTo({ top: 0, behavior: 'smooth' }); },
-      qSend: () => { const ref = 'ZF-' + new Date().toISOString().slice(2, 10).replace(/-/g, '') + '-' + Math.floor(100 + Math.random() * 900); this.setState({ qSent: true, sentRef: ref }); window.scrollTo({ top: 0, behavior: 'smooth' }); },
-      qRestart: () => this.setState({ qSent: false, q: 1, qErr: '' }),
+      q1: true, qSent: !!S.qSent, notSent: !S.qSent,
+      afBandH: mob ? '70vh' : '78vh', addonCols: mob ? '1fr' : 'minmax(0,.9fr) minmax(0,1.1fr)',
+      jRowCols: mob ? '1fr' : '90px minmax(0,1fr) 200px', jRowPad: mob ? '26px 20px' : '32px 28px', jRowPadHover: mob ? '20px' : '36px', jPriceAlign: mob ? 'center' : 'flex-end', jPriceDir: mob ? 'row' : 'column', jCtaMt: mob ? '0' : '8px', jPayCols: mob ? '1fr' : 'repeat(4,minmax(0,1fr))', jTotalCol: mob ? 'auto' : 'span 1',
+      journeys: JOURNEYS.map((j, i) => ({ ...j, price: jMoney(j.price), value: jMoney(j.value), delay: i * 0.08 + 's', cta: jI === i ? 'Selected ✓' : 'Select', ...jOn(jI === i) })),
+      pickJourney: e => this.setState({ journey: +e.currentTarget.dataset.i, touched: true }),
+      jSel: J, payOpts: PAY.map(([k, t, p, n], i) => ({ k, t, n, p: jMoney(p), step: 'Payment 0' + (i + 1), ...jOn(pay === k), bg: pay === k ? ink : bg })), pickPay: e => this.setState({ pay: e.currentTarget.dataset.k }),
+      jTotal: jMoney(P[2]), jNote: pay === 'per' ? 'Separate session prices · ' + jMoney(J.value) + ' total' : pay === 'two' ? 'You save ' + jMoney(J.value - J.price) + ' versus paying per session' : 'You save ' + jMoney(Math.round((J.value - P[2]) * 100) / 100) + ' versus paying per session',
+      q1Cta: any ? 'Continue to inquiry →' : 'Pick at least one service',
+      svcOpts: this.SVC_OPTS, fSvc: S.form.svc,
+      selEditPage: S.selJourney ? 'video' : (['video', 'social', 'events', 'studio'].find(k => S.cfg[k] && S.cfg[k].on) || 'video'), hasSel: (!!S.selFromCfg && any) || !!S.selJourney, selText: S.selJourney ? 'Journey ' + J.l + ' — ' + J.t + ' · ' + P[1] : selText, selPrice: S.selJourney ? jMoney(P[2]) + ' + HST' : selPrice,
+      sendInq: e => { e.preventDefault(); const f = this.state.form; if (!f.name.trim() || !/.+@.+\..+/.test(f.email)) { this.setState({ qErr: 'Please add your name and a valid email so we can reply.' }); return; } const ref = 'ZF-' + new Date().toISOString().slice(2, 10).replace(/-/g, '') + '-' + Math.floor(100 + Math.random() * 900); this.setState({ qSent: true, sentRef: ref, qErr: '' }); this.jumpTop(); },
+      qRestart: () => this.setState({ qSent: false, qErr: '', selFromCfg: false, selJourney: false }),
+      sentSvcText: S.form.svc ? ' about your ' + S.form.svc.toLowerCase() + ' session' : '',
       sideOrder: mob ? 2 : 0, q2Err: S.qErr, fieldCols: mob ? '1fr' : 'repeat(2,minmax(0,1fr))',
       setField: e => { const f = e.currentTarget.dataset.f, v = e.currentTarget.value; this.setState(s => ({ form: { ...s.form, [f]: v } })); },
       setInd: e => { const v = e.currentTarget.dataset.v; this.setState(s => ({ form: { ...s.form, ind: s.form.ind === v ? '' : v } })); },
@@ -1188,15 +1184,17 @@ class Component extends DCLogic {
       sentRef: S.sentRef || '', sentName: S.form.name.split(' ')[0] || 'there', sentVia: (S.form.via || 'email').toLowerCase(), sentEmail: S.form.email || 'your inbox',
       sentRows: [['Name', S.form.name], ['Brand', S.form.brand], ['Industry', S.form.ind], ['Phone', S.form.phone], ['Start', S.form.start], ['Deadline', S.form.deadline], ['Location', S.form.location], ['Budget', S.form.budget], ['Goal', S.form.goal], ['Notes', S.form.notes]].filter(([k, v]) => v && v.trim()).map(([k, v]) => ({ k, v })),
       cfg, summary, cfgCols: mob ? '1fr' : 'minmax(0,1.4fr) minmax(0,.7fr)', stickyPos: mob ? 'relative' : 'sticky',
-      cfgToggle: e => { const id = e.currentTarget.dataset.s; this.setState(s => ({ touched: true, cfg: { ...s.cfg, [id]: { ...s.cfg[id], on: !s.cfg[id].on } } })); },
-      pickPlan: e => { const id = e.currentTarget.dataset.s, pid = e.currentTarget.dataset.id; this.setState(s => ({ touched: true, cfg: { ...s.cfg, [id]: { ...s.cfg[id], on: true, plan: pid } } })); if (this.state.page !== 'packages') { this.jumpTop(); this.setState({ page: 'packages' }); } },
+      cfgToggle: e => { const id = e.currentTarget.dataset.s; this.setState(s => ({ touched: true, rangeHidden: false, cfg: { ...s.cfg, [id]: { ...s.cfg[id], on: !s.cfg[id].on } } })); },
+      pickPlan: e => { const id = e.currentTarget.dataset.s, pid = e.currentTarget.dataset.id; const onPk = false; this.setState(s => ({ touched: true, rangeHidden: false, cfg: onPk ? { ...s.cfg, [id]: { ...s.cfg[id], on: true, plan: pid } } : { video: { ...s.cfg.video, on: false }, social: { ...s.cfg.social, on: false }, events: { ...s.cfg.events, on: false }, studio: { ...s.cfg.studio, on: false }, [id]: { ...s.cfg[id], on: true, plan: pid, opts: {} } } })); if (!onPk) { this.applySvc(pid); this.setState(s => ({ selFromCfg: true })); this.jumpTop(); this.setState({ page: 'contact' }); } },
       optToggle: e => { const id = e.currentTarget.dataset.s, k = e.currentTarget.dataset.k; this.setState(s => ({ touched: true, cfg: { ...s.cfg, [id]: { ...s.cfg[id], opts: { ...s.cfg[id].opts, [k]: !s.cfg[id].opts[k] } } } })); },
       togContract: () => this.setState(s => ({ contract: !s.contract })), ctBg: S.contract ? ink : 'transparent', ctKnob: S.contract ? '19px' : '3px', ctKnobBg: S.contract ? bg : ink,
       estUnit: summary.length ? (summary.length === 1 ? 'for ' + summary[0].svc.toLowerCase() : summary.length + ' services · mixed billing') : '',
-      svcPlans, svcPlansA: svcKey === 'social' ? 'Monthly' : svcKey === 'events' ? 'Coverage' : 'Video', svcPlansB: svcKey === 'social' ? 'plans' : 'packages', svcPlansNote: svcKey ? CAT[svcKey].inc : '',
-      showCta: page !== 'contact' && page !== 'packages',
-      hudCtaPage: page === 'packages' ? 'contact' : 'packages', hudCtaT: page === 'packages' ? 'Contact' : 'Packages',
-      heroCtaPage: page === 'contact' || page === 'packages' ? 'packages' : 'contact', heroCtaT: page === 'contact' ? 'Build a package' : page === 'packages' ? 'Start below' : 'Get a quote',
+      svcPlans, svcPlansA: svcKey === 'social' ? 'Fashion & Branding' : svcKey === 'events' ? 'Starting' : 'Single', svcPlansB: svcKey === 'social' ? 'packages' : svcKey === 'events' ? 'points' : 'sessions', svcPlansNote: svcKey ? CAT[svcKey].inc : '',
+      showCta: page !== 'contact',
+      hudCtaPage: 'contact', hudCtaT: 'Book',
+      bandA: ({ video: 'Inquire about', social: 'Inquire about', events: 'Start a', studio: 'Request', portfolio: 'Book a', about: 'Inquire &' }[page] || 'Inquire &'), bandB: ({ video: 'Motherhood & Family', social: 'Fashion & Branding', events: 'commercial project', studio: 'studio rental', portfolio: 'similar session', about: 'book' }[page] || 'book'),
+      bandSvc: ({ video: 'motherhood-family', social: 'fashion-branding', events: 'commercial-video', studio: 'studio-rental' }[page] || ''),
+      heroCtaDisplay: page === 'home' ? 'flex' : 'none', heroCtaPage: 'contact', heroCtaT: 'Book a session',
       brandPlay: S.brandSeen ? 'running' : 'paused', stageW: mob ? 'min(80vh,92vw)' : 'min(84vh,88vw)',
       heroH: page === 'home' ? '100vh' : mob ? '86vh' : '82vh', heroVid: H.vid, heroKicker: H.k, heroT1: H.t1, heroT2: H.t2, heroLead: H.lead, heroLink: H.link, heroLinkT: H.linkT, heroSize: H.size,
       twoCol: mob ? '1fr' : 'minmax(0,1fr) minmax(0,1fr)', threeCol: mob ? '1fr' : 'repeat(3,minmax(0,1fr))',
@@ -1205,15 +1203,22 @@ class Component extends DCLogic {
       whOn: e => { const v = e.currentTarget.querySelector('video'); if (v) { v.muted = true; const p = v.play(); if (p) p.catch(() => {}); } this.afLockEl(e.currentTarget); this.setState({ wh: +e.currentTarget.dataset.i }); },
       whLeave: e => { const v = e.currentTarget.querySelector('video'); if (v) v.pause(); this.afLocked = null; this.afApply(); }, whOff: () => this.setState({ wh: null }),
       shoot: e => { const i = +e.currentTarget.dataset.i; this.setState({ shot: true }); clearTimeout(this.shotT); clearTimeout(this.shotT2); this.shotT = setTimeout(() => this.setState({ lb: i }), 330); this.shotT2 = setTimeout(() => this.setState({ shot: false }), 800); },
+      isPortfolio: page === 'portfolio',
+      quotes: [['We felt so calm and taken care of during our maternity and newborn sessions. The video art piece made us cry.', 'Journey client', 'Stouffville · Bump to Baby'], ['The fashion shoot at ZeusFrames finally made my brand look how it feels. The studio lighting is unreal.', 'Personal brand client', 'Toronto · Brand Story']].map(([t, w, s], i) => ({ t, w, s, delay: i * 0.12 + 's' })),
+      pfTabs: PF_TABS.map(([k, t]) => ({ k, t, n: String(k === 'all' ? pfAll.length : pfAll.filter(w => w.k === k).length).padStart(2, '0'), bg: pfK === k ? ink : 'transparent', fg: pfK === k ? bg : 'inherit', bd: pfK === k ? ink : bd })),
+      pfSet: e => this.setState({ pf: e.currentTarget.dataset.k, lb: null }), pfSvcPage: ({ mother: 'video', family: 'video', artfilm: 'video', fashion: 'social', commercial: 'events' }[pfK] || 'video'), pfSvcDisp: pfK === 'all' ? 'none' : 'inline', pfSvcT: ({ mother: 'Motherhood & Family', family: 'Family sessions', artfilm: 'ArtFilm', fashion: 'Fashion & Branding', commercial: 'Commercial' }[pfK] || ''), pfCount: String(pfList.length).padStart(2, '0'),
+      pfItems: pfWorks.map((w, i) => ({ ...w, i })), pfCols: mob ? 'repeat(2,minmax(0,1fr))' : 'repeat(4,minmax(0,1fr))', pfRow: mob ? '42vw' : 'minmax(220px,22vw)',
+      pfOpen: e => { const i = +e.currentTarget.dataset.i; this.setState({ lb: i }); },
+      lbNavDisp: works.length > 1 ? 'grid' : 'none', lbPrev: e => { e.stopPropagation(); this.setState(s => ({ lb: (s.lb - 1 + works.length) % works.length })); }, lbNext: e => { e.stopPropagation(); this.setState(s => ({ lb: (s.lb + 1) % works.length })); },
       shotOn: S.shot, lbOpen: !!lb, lbSrc: lb ? lb.src : '', lbT: lb ? lb.t : '', lbN: lb ? lb.n : '', lbC: lb ? lb.c : '', closeLb: () => this.setState({ lb: null }),
       svcs: svcBase.map((s, i) => ({ ...s, op: S.lens === i ? 1 : 0.4 })),
       lensVids: svcBase.map((s, i) => ({ src: s.src, r: i <= S.lens ? '75%' : '0%' })),
       lensLabel: svcBase[S.lens].n + ' — ' + svcBase[S.lens].t + ' · ' + svcBase[S.lens].mm,
       lensCols: mob ? '1fr' : 'minmax(0,1fr) minmax(0,1fr)', lensDisplay: mob ? 'none' : 'block', lensW: mob ? '32vw' : 'min(38vw,70vh)', lensTop: mob ? '72px' : 'calc(50vh - min(19vw,35vh))', ringIn: mob ? '-8px' : '-18px', svcMinH: mob ? '0' : '72vh',
-      steps: [['01', 'Discovery', 'A 20-minute call: what you sell, who buys, what has worked. We come back with a shot list.'], ['02', 'Pre-production', 'Script, locations, wardrobe and a schedule you sign off before anyone picks up a camera.'], ['03', 'Shoot day', 'One day, two operators, our lighting. You approve frames as we go.'], ['04', 'Delivery', 'First cuts in 48 hours, full set inside ten days, sized for every platform you post on.']].map(([n, t, d], i) => ({ n, t, d, delay: i * 0.1 + 's' })),
-      videoKinds: [['01', 'Commercials', 'Thirty and sixty second spots built for paid placement, with alternate cuts for each platform.', '24mm', 'From $1,500'], ['02', 'Brand films', 'A two to three minute story about the people behind the product. The anchor of your site.', '35mm', 'From $2,500'], ['03', 'Product', 'Tabletop, macro and lifestyle coverage — stills and motion from the same session.', '100mm', 'From $499'], ['04', 'Real estate', 'Walkthroughs, drone exteriors and twilight sets, delivered inside 72 hours.', '16mm', 'From $1,200'], ['05', 'Music videos', 'Performance and narrative, single or multi-location, with colour built around the track.', '50mm', 'From $1,800'], ['06', 'Documentary', 'Long-form interviews and vérité coverage for founders, athletes and institutions.', '85mm', 'On request']].map(([n, t, d, mm, price], i) => ({ n, t, d, mm, price, delay: (i % 3) * 0.1 + 's' })),
-      checklist: ['Concept and script', 'Location scouting', 'Casting', 'Wardrobe and styling', 'Lighting and grip', 'Sound recording', 'Drone and aerial', 'Gimbal and slider', 'Editing', 'Colour grade', 'VFX and titles', 'Licensed music'].map((t, i) => ({ t, n: String(i + 1).padStart(2, '0') })),
-      socialCards: [['01', 'Content days', 'One booked day, eight to twelve pieces filmed back to back — the engine behind every plan.'], ['02', 'Editing and captions', 'Three lengths per reel, subtitled, with copy written to your voice, not a template.'], ['03', 'Scheduling', 'We post on your calendar, at the hours your audience actually opens the app.'], ['04', 'Community', 'First-hour replies on the posts we publish, so the algorithm sees a live conversation.'], ['05', 'Reporting', 'A monthly one-pager: what performed, what to cut, what we shoot next.'], ['06', 'Paid support', 'Ad-ready cuts and creative testing for teams already running paid social.']].map(([n, t, d], i) => ({ n, t, d, delay: (i % 3) * 0.1 + 's' })),
+      steps: [['01', 'Inquiry', 'You share a bit about your motherhood journey, family, fashion project, or commercial shoot. We respond within one business day.'], ['02', 'Planning', 'We confirm the package or Journey bundle, schedule your date, and talk through style, wardrobe, and special requests.'], ['03', 'Shoot day', 'You arrive to a prepared studio with sets and lighting ready. We guide you through poses and moments so you never feel lost.'], ['04', 'Post-production', 'We choose the strongest images and clips, edit them in our signature style, and prepare your gallery and films.'], ['05', 'Delivery & review', 'A private online gallery and video links, with options to add extra edits, prints, or albums.']].map(([n, t, d], i) => ({ n, t, d, delay: i * 0.1 + 's' })),
+      videoKinds: [['01', 'Maternity Dream Session', '60–90 minutes in studio or outdoors, 20 edited images, minimal‑modern sets and dreamy light.', '50mm', 'Starting at $450 + HST'], ['02', 'Newborn First Days Session', '2–3 hours in studio, baby‑led pacing, 20–25 edited images, calm and safe environment.', '85mm', 'Starting at $550 + HST'], ['03', 'Family Story Session', '60–90 minutes for up to six people, 25–30 edited images, a mix of candid and lightly posed portraits.', '35mm', 'Starting at $450 + HST'], ['04', 'Kidsgraphy Play Session', '45–60 minutes focused on your child, playful direction, 15–20 edited images.', '50mm', 'Starting at $350 + HST'], ['05', 'Seasonal Mini Days', '20–30 minute slots on a pre‑styled studio set, 10 edited images. Limited dates.', '85mm', '$199 + HST per slot'], ['06', 'ArtFilm upgrade', 'A 60–90 second video art piece with licensed music and a simple scenario, added to any photo session.', '24mm', '+$300 + HST']].map(([n, t, d, mm, price], i) => ({ n, t, d, mm, price, img: ['1493894473891-10fc1e5dbd22', '1519689680058-324335c77eba', '1511895426328-dc8714191300', '1503454537195-1dcabb73ffb9', '1555252333-9f8e92e65df9', '1516035069371-29a1b244cc32'].map(id => 'assets/img/' + id + '.jpg')[i], delay: (i % 3) * 0.1 + 's' })),
+      checklist: ['Soft neutrals and gentle props', 'Flattering, dreamy light', 'Warm, quiet studio for newborns', 'Time for feeding and breaks', 'Light posing guidance', 'Safety and consent first', 'Style guide after booking', 'Wraps and blankets provided', 'Studio or nearby outdoor', 'Private online gallery', 'Optional ArtFilm piece', 'Prints and photo books'].map((t, i) => ({ t, n: String(i + 1).padStart(2, '0') })),
+      socialCards: [['01', 'Moodboards', 'We collaborate on moodboards, wardrobe, and posing so each look supports your brand or portfolio goals.'], ['02', 'Colorful high‑fashion', 'Bold backdrops and dramatic lighting for images that look like they belong in a magazine.'], ['03', 'Dark‑wall editorial', 'Our black‑wall set for moody, sculpted portraits — models, designers, fashion lovers.'], ['04', 'E‑commerce clean', 'Clean, consistent product and lookbook frames ready for your store.'], ['05', 'Creator content', 'Photos plus short vertical reels in one session, planned for multiple posts.'], ['06', 'Personal brand', 'Website and social visuals for entrepreneurs, coaches and creatives — one cohesive set.']].map(([n, t, d], i) => ({ n, t, d, delay: (i % 3) * 0.1 + 's' })),
       verticals: [34132691, 31850422, 10276471].map((id, i) => ({ src: V(id), delay: i * 0.15 + 's' })),
       studioShots: [
         { src: U('1517604931442-7e0c8ed2963c', 1400), alt: 'Studio lighting setup', ar: '16/10', col: mob ? '1 / -1' : 'span 2', delay: '0s' },
@@ -1222,22 +1227,22 @@ class Component extends DCLogic {
         { src: U('1526170375885-4d8ecf77b99f'), alt: 'Camera gear on a table', ar: '4/5', col: 'span 1', delay: '.3s' },
         { src: U('1516724562728-afc824a36e84', 1400), alt: 'Lighting detail', ar: '16/10', col: mob ? '1 / -1' : 'span 3', delay: '.4s' }
       ],
-      kit: [['01', 'Cinema bodies', 'Full-frame cinema cameras with prime and zoom glass from 16mm to 135mm.'], ['02', 'Lighting', 'Continuous LED panels, strobes, softboxes and practicals — plus a white cyc wall.'], ['03', 'Sound', 'Treated room, shotgun and lavalier mics, and a podcast table for two to four people.'], ['04', 'Sets', 'Product table, seamless backdrops, furniture and props for lifestyle frames.'], ['05', 'Client space', 'Lounge, wifi, monitor feed and a changing area with a mirror and steamer.'], ['06', 'Crew', 'Every booking includes an operator; add a second shooter or stylist on request.']].map(([n, t, d]) => ({ n, t, d })),
-      studioRates: [['01', 'half', 'Half day in studio', 'Four hours with an operator, lighting and the set of your choice.', '$450'], ['02', 'full', 'Full day in studio', 'Eight hours, two operators, unlimited set changes.', '$850'], ['03', 'podcast', 'Podcast session', 'Two hours, up to four mics, multicam recording and a clean mix.', '$350'], ['04', 'portrait', 'Portrait session', 'Ninety minutes, three looks, ten retouched images.', '$250']].map(([n, id, t, d, price]) => ({ n, id, t, d, price })),
-      eventKinds: [['01', 'Launches', 'Two operators, roaming coverage, and a 60-second recap for the next morning.', 'From $700'], ['02', 'Corporate', 'Conferences, galas and award nights — stage, candids and sponsor deliverables.', 'From $1,200'], ['03', 'Tournaments', 'Sports and league play with multi-angle coverage and highlight cutdowns.', 'From $900'], ['04', 'Openings', 'Storefront and restaurant openings, filmed for both feed and future ads.', 'From $600'], ['05', 'Family', 'Milestones, engagements and celebrations, shot discreetly and delivered privately.', 'From $400'], ['06', 'Same-week recap', 'Add vertical cuts and a photo set inside five days of the event.', '+$300']].map(([n, t, d, price], i) => ({ n, t, d, price, delay: (i % 3) * 0.1 + 's' })),
-      timeline: [['−1 wk', 'Walkthrough', 'We visit the venue, map the light and agree the must-have moments.'], ['T−2h', 'Load in', 'Discreet rigging before guests arrive. Nothing blocks a sightline.'], ['Live', 'Coverage', 'Two operators: one on the room, one on the stage and speeches.'], ['+48h', 'Recap cut', 'A 60-second edit in your inbox while the room is still talking.'], ['+5d', 'Full set', 'Long-form edit, vertical cuts and the photo selection.']].map(([time, t, d], i) => ({ time, t, d, delay: i * 0.08 + 's' })),
-      addons: [['Extra filming hour', '$100 / hr'], ['Additional edited photo', '$50'], ['VFX and motion graphics', 'From $150'], ['Second operator', '$250 / day'], ['Licensed music track', 'From $80'], ['Rush 24-hour delivery', '+25%'], ['Drone add-on', '$300'], ['Subtitles per language', '$40']].map(([t, p]) => ({ t, p })),
+      kit: [['01', 'Black‑wall creator set', 'Moody, sculpted portraits and editorial looks.'], ['02', 'White seamless zone', 'White or light seamless backdrop for clean, bright frames.'], ['03', 'Lifestyle corner', 'Window light, simple furniture and décor for natural, at‑home feeling images.'], ['04', 'Cameras', 'Sony FX5 and Alpha series available with the gear option.'], ['05', 'Lighting', 'Nanlite and Aputure with softboxes and modifiers.'], ['06', 'Props and stands', 'Basic props, wraps, stands — included in every booking.']].map(([n, t, d]) => ({ n, t, d })),
+      studioRates: [['01', 'h1', 'Hourly · space only', 'Two‑hour minimum. Sets, stands and basic props included.', '$70 / hr'], ['02', 'half', 'Half‑day · space only', 'Four hours of studio time for your own shoot.', '$260'], ['03', 'full', 'Full‑day · space only', 'Eight hours; ideal for lookbooks and multi‑set days.', '$480'], ['04', 'h1', 'Hourly · space + gear', 'Adds FX5, Alpha cameras and the lighting kit.', '$90 / hr'], ['05', 'half', 'Half‑day · space + gear', 'Four hours with cameras and lights.', '$320'], ['06', 'full', 'Full‑day · space + gear', 'Eight hours with cameras and lights.', '$600']].map(([n, id, t, d, price]) => ({ n, id, t, d, price })),
+      eventKinds: [['01', 'Small Business Content Session', '3‑hour shoot, studio or on‑location. Product shots, team portraits, environment, 30 photos and 4 vertical reels.', 'From $950 + HST'], ['02', 'Brand Film Day', 'Full‑day shoot with FX5 + Alpha, basic script and shot list, one 1.5–3 min film and 3 vertical cutdowns.', 'From $2,500 + HST'], ['03', 'Indie Artist Music Video', 'Concept and simple storyboard, up to 8 hours in studio plus an optional location, final 2.5–4 min video.', 'From $2,800 + HST'], ['04', 'Extra shooting day', 'Crew and time dependent.', 'From $1,200 + HST'], ['05', 'Extra social cut', '30–60 second vertical cut from your footage.', '$200 + HST'], ['06', 'Scriptwriting upgrade', 'Treatment and script development.', '$300–$500 + HST']].map(([n, t, d, price], i) => ({ n, t, d, price, delay: (i % 3) * 0.1 + 's' })),
+      timeline: [['Wk 0', 'Inquiry', 'Tell us the goal, the release plan and the budget you have in mind.'], ['Wk 1', 'Treatment', 'Concept, shot list and a simple storyboard you sign off.'], ['Shoot', 'Production', 'FX5 + Alpha, Nanlite and Aputure lighting, configurable studio layout.'], ['+7d', 'First cut', 'Main film for review, with one round of notes.'], ['+14d', 'Delivery', 'Final film plus vertical cutdowns sized for every platform.']].map(([time, t, d], i) => ({ time, t, d, delay: i * 0.08 + 's' })),
+      addons: [['Extra edited image (motherhood)', '$20 + HST'], ['10 extra images', '$150 + HST'], ['Extra 30–45s social reel', '$200 + HST'], ['8×10 print', '$25 + HST'], ['12×18 print', '$45 + HST'], ['Basic photo book (≈25 pages)', 'from $250 + HST'], ['Extra edited image (fashion)', '$25 + HST'], ['Extra hour of shooting', '$200 + HST']].map(([t, p]) => ({ t, p })),
       faq, togFaq: e => { const i = +e.currentTarget.dataset.i; this.setState(s => ({ faq: s.faq === i ? -1 : i })); },
-      estLo: money(lo), estHi: money(hi), estNote: any ? 'Indicative CAD range. We confirm the exact number, dates and what to bring within two working days.' : 'Tick at least one service to see a range.',
+      estLo: money(lo), estHi: money(hi), estNote: any ? 'Launch pricing, CAD + HST. Single sessions need a 50% retainer; Journey bundles can be paid per session, in two installments, or in full upfront.' : 'Tick at least one service to see a total.',
       estPad: mob ? '24px' : '44px', estGrid: mob ? '1fr' : 'minmax(0,1.2fr) minmax(0,1fr)', estBL: mob ? 'none' : '1px solid ' + bd, estPL: mob ? '0' : '44px', estBT: mob ? '1px solid ' + bd : 'none', estPT: mob ? '28px' : '0',
-      stats: [['24', 'Projects delivered'], ['6', 'Industries served'], ['48h', 'First cut turnaround'], ['1', 'Studio in North York']].map(([v, t], i) => ({ v, t, delay: i * 0.08 + 's' })),
+      stats: [['$350', 'Sessions start at'], ['3', 'Journey bundles'], ['60–90s', 'ArtFilm pieces'], ['1', 'Studio in Stouffville']].map(([v, t], i) => ({ v, t, delay: i * 0.08 + 's' })),
       crew: [
-        { t: 'Director', d: 'Owns the story, the shot list and the final grade.', src: U('1493863641943-9b68992a8d07'), alt: 'Director with a camera', delay: '0s' },
-        { t: 'Camera', d: 'Lights the frame and operates on the day — often two of us.', src: U('1526170375885-4d8ecf77b99f'), alt: 'Camera operator gear', delay: '.1s' },
-        { t: 'Editor', d: 'Cuts for platform, writes the captions, keeps the sound clean.', src: U('1554048612-b6a482bc67e5'), alt: 'Editing desk', delay: '.2s' },
-        { t: 'Producer', d: 'Schedules, permits, wardrobe and everything that makes a day run.', src: U('1516035069371-29a1b244cc32'), alt: 'Producer planning a shoot', delay: '.3s' }
+        { t: 'Director', d: 'Behind the camera on every session — light, posing, the story.', src: U('1493863641943-9b68992a8d07'), alt: 'Director with a camera', delay: '0s' },
+        { t: 'Studio manager', d: 'Client experience, scheduling and marketing — your first reply.', src: U('1516035069371-29a1b244cc32'), alt: 'Studio manager planning a session', delay: '.1s' },
+        { t: 'Editor', d: 'Signature grade for stills, and the cut for every ArtFilm.', src: U('1554048612-b6a482bc67e5'), alt: 'Editing desk', delay: '.2s' },
+        { t: 'The studio', d: 'Sets, light and quiet — built for babies, families and creators.', src: U('1526170375885-4d8ecf77b99f'), alt: 'Studio gear', delay: '.3s' }
       ],
-      beliefs: [['01', 'The story first', 'A camera cannot rescue a thin idea. We spend the first hour on what you want people to remember.'], ['02', 'One roof', 'Script, shoot, edit and grade happen with the same crew — nothing gets lost in a handoff.'], ['03', 'Real prices', 'Every package on this site shows a number. No discovery call needed to learn the range.'], ['04', 'Made to be posted', 'Films are delivered in the sizes you actually publish, the week you need them.']].map(([n, t, d]) => ({ n, t, d })),
+      beliefs: [['01', 'Calm & safety', 'The studio stays warm and quiet, with time for feeding, changing and breaks. Consent first, always.'], ['02', 'Artful minimalism', 'Simple, clean, modern sets — soft neutrals, gentle props, flattering light.'], ['03', 'Emotional storytelling', 'Photographs and video art that show how a chapter felt, not just how you looked.'], ['04', 'Long‑term relationships', 'Journey bundles follow you from bump to baby to family, so every chapter connects.']].map(([n, t, d]) => ({ n, t, d })),
     };
   }
 }
