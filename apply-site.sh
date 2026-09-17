@@ -34,6 +34,9 @@ s = s.replace(
     'U = id => `${AB}assets/img/${id}.jpg`;')
 s = re.sub(r"\.map\(id => 'https://images\.unsplash\.com/photo-' \+ id \+ '\?[^']*'\)",
            ".map(id => AB + 'assets/img/' + id + '.jpg')", s)
+# poster helper: 'https://…/photo-' + <id expr> + '?w=…'  ->  AB + 'assets/img/' + <id expr> + '.jpg'
+s = re.sub(r"'https://images\.unsplash\.com/photo-' \+ (.*?) \+ '\?[^']*'",
+           r"AB + 'assets/img/' + \1 + '.jpg'", s)
 s = re.sub(r'https://images\.unsplash\.com/photo-([A-Za-z0-9-]+)\?[^"\'&]*(&amp;[^"\']*)?',
            r'{{ assetBase }}assets/img/\1.jpg', s)
 s = re.sub(r'https://www\.pexels\.com/download/video/([0-9]+)/',
@@ -41,7 +44,14 @@ s = re.sub(r'https://www\.pexels\.com/download/video/([0-9]+)/',
 s = s.replace('src="assets/', 'src="{{ assetBase }}assets/')
 need('      svcOpts: this.SVC_OPTS,', 'render values')
 s = s.replace('      svcOpts: this.SVC_OPTS,', '      assetBase: AB, svcOpts: this.SVC_OPTS,', 1)
-left = [m for m in re.findall(r'https://(?:images\.unsplash|www\.pexels)[^"\'\s)`]*', s)
+# The export falls back to Pexels' CDN when a video fails to load, and derives the id
+# from "video/<digits>" — which also matches our local assets/video/<id>.mp4 paths, so it
+# would replace working local files with remote ones (and return nothing for unlisted ids).
+# Our media is local, so a candidate list of just the given src is correct.
+need('  vidCands(src) {', 'video fallback')
+s = re.sub(r'  vidCands\(src\) \{.*?\n  \}\n', '  vidCands(src) { return [src]; }\n', s, count=1, flags=re.S)
+
+left = [m for m in re.findall(r'https://(?:images\.unsplash|www\.pexels|videos\.pexels)[^"\'\s)`]*', s)
         if '${' not in m]
 if left:
     raise SystemExit('apply-site: stock media still hotlinked: %s' % left[:3])

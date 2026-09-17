@@ -27,6 +27,8 @@ video,img{display:block}
 [data-reveal="up"][data-inview]{clip-path:inset(0 0 0 0)}
 [data-reveal="iris"]{opacity:1;transform:none;clip-path:circle(0% at 50% 50%);transition:clip-path 1.4s cubic-bezier(.76,0,.24,1)}
 [data-reveal="iris"][data-inview]{clip-path:circle(75% at 50% 50%)}
+body[data-zf-light] img:not([data-theme-logo]),body[data-zf-light] video{filter:none !important;transition:filter .8s ease}
+body[data-zf-light] img[data-theme-logo]{filter:invert(1) !important}
 @keyframes irisOpen{to{width:300vmax;height:300vmax}}
 @keyframes themeWipe{0%{clip-path:circle(0% at var(--tx,50%) var(--ty,50%))}100%{clip-path:circle(150% at var(--tx,50%) var(--ty,50%))}}
 @keyframes themeFade{0%,70%{opacity:1}100%{opacity:0}}
@@ -93,7 +95,7 @@ video,img{display:block}
   </sc-if>
 
   <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ closeLb }}" style="position:fixed;inset:0;z-index:800;background:#000;color:#ecebe6;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:18px;padding:80px 6vw 40px;box-sizing:border-box;animation:fade .5s .3s both;cursor:zoom-out">
+    <div onClick="{{ closeLb }}" style="position:fixed;inset:0;z-index:800;background:{{ lbBg }};color:{{ ink }};display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:18px;padding:80px 6vw 40px;box-sizing:border-box;animation:fade .5s .3s both;cursor:zoom-out">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:11px;letter-spacing:.16em;text-transform:uppercase"><span style="display:flex;align-items:center;gap:12px"><svg viewBox="0 0 485 541" style="width:20px;height:22px;overflow:visible" aria-hidden="true"><g stroke="#ecebe6" stroke-width="10" stroke-linejoin="round" fill="none" style="animation:zfLines 1.4s ease .2s both">
             <path d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z" pathLength="1" stroke-dasharray="1" style="animation:zfHex 1.4s cubic-bezier(.65,0,.2,1) .2s both"></path>
             <path d="M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z" pathLength="1" stroke-dasharray="1" style="animation:zfTri 1.4s cubic-bezier(.65,0,.2,1) .2s both"></path>
@@ -101,10 +103,10 @@ video,img{display:block}
             <path d="M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 1.4s cubic-bezier(.65,0,.2,1) .2s both"></path>
             <path d="M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" pathLength="1" stroke-dasharray="1" style="animation:zfCut 1.4s cubic-bezier(.65,0,.2,1) .2s both"></path>
           </g>
-          <path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" style="animation:zfFill 1.4s ease .2s both"></path></svg>{{ lbN }} — {{ lbC }}</span><span>Close ✕</span></div>
+          <path fill="#ecebe6" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z" style="animation:zfFill 1.4s ease .2s both"></path></svg>{{ lbN }} — {{ lbC }}</span><span>Close ✕︎</span></div>
       <button onClick="{{ lbPrev }}" aria-label="Previous" style="position:absolute;left:6vw;top:50%;transform:translateY(-50%);width:48px;height:48px;border:1px solid rgba(236,235,230,.35);border-radius:50%;display:{{ lbNavDisp }};place-items:center;font-size:16px;transition:background .3s,color .3s" style-hover="background:#ecebe6;color:#0c0c0c">←</button>
       <button onClick="{{ lbNext }}" aria-label="Next" style="position:absolute;right:6vw;top:50%;transform:translateY(-50%);width:48px;height:48px;border:1px solid rgba(236,235,230,.35);border-radius:50%;display:{{ lbNavDisp }};place-items:center;font-size:16px;transition:background .3s,color .3s" style-hover="background:#ecebe6;color:#0c0c0c">→</button>
-      <video data-auto="1" src="{{ lbSrc }}" muted="{{ true }}" autoPlay="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="width:100%;height:100%;object-fit:contain;filter:grayscale(1)"></video>
+      <video data-auto="1" data-lazy="{{ lbSrc }}" data-autoplay="1" muted="{{ true }}" autoPlay="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="width:100%;height:100%;object-fit:contain;filter:grayscale(1)"></video>
       <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(32px,5vw,84px);line-height:1">{{ lbT }}</div>
     </div>
   </sc-if>
@@ -133,13 +135,13 @@ video,img{display:block}
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:11px;letter-spacing:.16em;text-transform:uppercase">
         <img src="{{ assetBase }}assets/logo-h-white.png" data-theme-logo="1" alt="Zeus Frames" style="height:26px;width:auto;display:block">
-        <button onClick="{{ closeMenu }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="border:1px solid rgba(236,235,230,.5);border-radius:999px;padding:12px 18px">Close ✕</button>
+        <button onClick="{{ closeMenu }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="border:1px solid rgba(236,235,230,.5);border-radius:999px;padding:12px 18px">Close ✕︎</button>
       </div>
     </div>
   </sc-if>
 
 
-  <div style="position:fixed;left:0;right:0;top:0;height:{{ scrimH }};z-index:499;pointer-events:none;background:{{ scrimBg }};transition:opacity .4s" ref="{{ scrimRef }}"></div>
+  <div style="position:fixed;left:0;right:0;top:0;height:{{ scrimH }};z-index:499;pointer-events:none;background:{{ scrimBg }};opacity:0;transition:opacity .6s ease" ref="{{ scrimRef }}"></div>
   <div style="position:fixed;inset:0;z-index:500;pointer-events:none;mix-blend-mode:difference;color:#fff;font-size:11px;letter-spacing:.16em;text-transform:uppercase">
     <div style="position:absolute;left:36px;right:36px;top:26px;display:flex;justify-content:space-between;align-items:center;gap:16px">
       <button data-p="home" onClick="{{ goPage }}" aria-label="Zeus Frames — home" style="pointer-events:auto;display:flex;align-items:center;gap:12px"><svg viewBox="0 0 485 541" style="width:28px;height:31px;display:block" aria-hidden="true"><path fill="#fff" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z"></path></svg><span style="display:{{ deskOnly }};letter-spacing:.18em;text-transform:uppercase;font-size:12px;opacity:.8">/ {{ pageName }}</span></button>
@@ -151,21 +153,21 @@ video,img{display:block}
     </div>
   </div>
 
-  <button ref="{{ topRef }}" onClick="{{ toTop }}" aria-label="Back to top" style="position:fixed;right:20px;bottom:60px;z-index:520;display:{{ deskOnly }};width:44px;height:44px;border:1px solid {{ bds }};border-radius:50%;background:{{ bg }};backdrop-filter:blur(14px);color:{{ ink }};font-size:14px;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .4s,transform .4s">↑</button>
+  <button ref="{{ topRef }}" onClick="{{ toTop }}" aria-label="Back to top" style="position:fixed;right:20px;bottom:60px;z-index:520;display:{{ deskOnly }};width:44px;height:44px;border:1px solid {{ bds }};border-radius:50%;background:{{ bg }};backdrop-filter:blur(14px);color:{{ ink }};font-size:14px;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .4s,transform .4s">↑︎</button>
   <sc-if value="{{ mob }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed;left:0;right:0;bottom:0;height:120px;z-index:529;pointer-events:none;background:{{ botScrim }}"></div>
     <div style="position:fixed;left:16px;right:16px;bottom:44px;z-index:530;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 48px 48px;gap:8px;align-items:center">
       <a href="https://wa.me/16478391491" style="display:flex;align-items:center;justify-content:center;height:48px;background:#ecebe6;color:#0c0c0c;font-size:11px;letter-spacing:.16em;text-transform:uppercase;border-radius:999px;white-space:nowrap">WhatsApp</a>
       <a href="tel:+16478391491" style="display:flex;align-items:center;justify-content:center;height:48px;border:1px solid #ecebe6;color:#ecebe6;font-size:11px;letter-spacing:.16em;text-transform:uppercase;border-radius:999px">Call</a>
       <button data-p="contact" onClick="{{ goPage }}" aria-label="Get a quote" style="width:48px;height:48px;border-radius:50%;border:1px solid #ecebe6;color:#ecebe6;font-size:16px;display:grid;place-items:center">→</button>
-      <button onClick="{{ toTop }}" aria-label="Back to top" style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(236,235,230,.45);color:#ecebe6;font-size:14px;display:grid;place-items:center">↑</button>
+      <button onClick="{{ toTop }}" aria-label="Back to top" style="width:48px;height:48px;border-radius:50%;border:1px solid rgba(236,235,230,.45);color:#ecebe6;font-size:14px;display:grid;place-items:center">↑︎</button>
     </div>
   </sc-if>
 
 
   <sc-if value="{{ rangeBar }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed;left:50%;bottom:{{ rangeBottom }};transform:translateX(-50%);z-index:525;display:flex;align-items:center;gap:4px;padding:6px 6px 6px 8px;border-radius:999px;background:{{ ink }};color:{{ bg }};box-shadow:0 12px 40px rgba(0,0,0,.25);font-size:11px;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;animation:zoom .5s cubic-bezier(.2,.7,.2,1) both;max-width:calc(100vw - 32px)">
-      <button onClick="{{ rangeHide }}" aria-label="Hide" style="width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:13px;opacity:.55;transition:opacity .3s,background .3s" style-hover="opacity:1;background:rgba(12,12,12,.08)">✕</button>
+      <button onClick="{{ rangeHide }}" aria-label="Hide" style="width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:13px;opacity:.55;transition:opacity .3s,background .3s" style-hover="opacity:1;background:rgba(12,12,12,.08)">✕︎</button>
       <button data-p="contact" onClick="{{ goPage }}" style="display:flex;align-items:center;gap:16px;padding:6px 6px 6px 10px;border-radius:999px;color:inherit">
         <span style="opacity:.6">Your total</span>
         <span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:22px;letter-spacing:0;text-transform:none;line-height:1">{{ estText }}</span>
@@ -176,10 +178,9 @@ video,img{display:block}
 
   <sc-if value="{{ hasHero }}" hint-placeholder-val="{{ true }}">
   <section style="position:relative;height:{{ heroH }};min-height:0;overflow:hidden;background:#000;color:#ecebe6">
-    <video data-auto="1" data-key="{{ heroVid }}" src="{{ heroVid }}" aria-label="{{ heroKicker }} — ZeusFrames Studio, Stouffville" preload="auto" muted="{{ true }}" autoPlay="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;animation:focusPull 2.4s cubic-bezier(.2,.7,.2,1) both"></video>
+    <video data-auto="1" data-key="{{ heroVid }}" data-lazy="{{ heroVid }}" data-poster="{{ heroPoster }}" data-autoplay="1" aria-label="{{ heroKicker }} — ZeusFrames Studio, Stouffville" preload="auto" muted="{{ true }}" autoPlay="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;animation:focusPull 2.4s cubic-bezier(.2,.7,.2,1) both"></video>
     <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 40%,rgba(0,0,0,.55) 100%),linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.6))"></div>
-    <div style="position:absolute;left:0;right:0;bottom:0;height:20vh;background:linear-gradient(180deg,rgba(0,0,0,0),{{ bg }});pointer-events:none;opacity:{{ heroFadeOp }};transition:opacity 1.2s ease"></div>
-    <div style="position:absolute;left:6vw;right:6vw;top:96px;bottom:9vh;display:flex;flex-direction:column;justify-content:flex-end;min-height:0;overflow:hidden">
+    <div style="position:absolute;left:6vw;right:6vw;top:96px;bottom:9vh;display:flex;flex-direction:column;justify-content:flex-end;min-height:0;padding-bottom:6px;overflow:visible">
       <div style="font-size:11px;letter-spacing:.25em;text-transform:uppercase;opacity:.75;animation:fade 1s 1.9s both">{{ heroKicker }}</div>
       <h1 style="margin:14px 0 0;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:{{ heroSize }};line-height:.88;letter-spacing:-.025em">
         <span style="display:block;animation:rise 1.2s cubic-bezier(.2,.7,.2,1) 2s both">{{ heroT1 }}</span>
@@ -188,7 +189,7 @@ video,img{display:block}
       <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:28px;animation:fade 1s 2.5s both">
         <p style="margin:0;max-width:460px;font-size:14px;line-height:1.7;opacity:.85">{{ heroLead }}</p>
         <div style="display:{{ heroCtaDisplay }};align-items:center;gap:26px">
-          <button data-p="{{ heroCtaPage }}" onClick="{{ goPage }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;align-items:center;gap:14px"><span style="width:56px;height:56px;border-radius:50%;background:#ecebe6;box-shadow:0 0 0 3px #000,0 0 0 4px #ecebe6;transition:transform .4s" style-hover="transform:scale(1.08)"></span><span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase">{{ heroCtaT }}</span></button>
+          <button data-p="{{ heroCtaPage }}" onClick="{{ goPage }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;align-items:center;gap:14px"><span style="width:56px;height:56px;border-radius:50%;background:#ecebe6;box-shadow:{{ heroDiscRing }};transition:transform .4s" style-hover="transform:scale(1.08)"></span><span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase">{{ heroCtaT }}</span></button>
           <a href="{{ heroLink }}" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid rgba(236,235,230,.5);padding-bottom:4px">{{ heroLinkT }}</a>
         </div>
       </div>
@@ -206,11 +207,11 @@ video,img{display:block}
         <sc-for list="{{ works }}" as="w" hint-placeholder-count="6">
           <figure data-i="{{ $index }}" onClick="{{ shoot }}" onMouseEnter="{{ whOn }}" onMouseLeave="{{ whLeave }}" data-reveal="1" style="margin:0;cursor:pointer;transition-delay:{{ w.delay }}">
             <div style="overflow:hidden;aspect-ratio:16/10;background:#1a1a1a;position:relative">
-              <video data-lazy="{{ w.src }}" aria-label="{{ w.t }} — {{ w.c }} by ZeusFrames, Stouffville / GTA" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) blur({{ w.blur }});transform:scale({{ w.sc }});opacity:{{ w.op }};transition:filter .7s ease,transform .9s cubic-bezier(.2,.7,.2,1),opacity .7s ease"></video>
+              <video data-lazy="{{ w.src }}" data-poster="{{ w.poster }}" aria-label="{{ w.t }} — {{ w.c }} by ZeusFrames, Stouffville / GTA" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) blur({{ w.blur }});transform:scale({{ w.sc }});opacity:{{ w.op }};transition:filter .7s ease,transform .9s cubic-bezier(.2,.7,.2,1),opacity .7s ease"></video>
               <span style="position:absolute;left:12px;top:10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;mix-blend-mode:difference">{{ w.n }}</span>
               <span style="position:absolute;right:12px;bottom:10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;mix-blend-mode:difference">{{ w.t }}</span>
             </div>
-            <figcaption style="display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase"><span>{{ w.t }}</span><a href="https://www.instagram.com/zeusframes.inc" target="_blank" rel="noopener" onClick="{{ stop }}" style="opacity:.55;border-bottom:1px solid currentColor;padding-bottom:2px">{{ w.c }} ↗</a></figcaption>
+            <figcaption style="display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase"><span>{{ w.t }}</span><a href="https://www.instagram.com/zeusframes.inc" target="_blank" rel="noopener" onClick="{{ stop }}" style="opacity:.55;border-bottom:1px solid currentColor;padding-bottom:2px">{{ w.c }} ↗︎</a></figcaption>
           </figure>
         </sc-for>
       </div>
@@ -235,9 +236,10 @@ video,img{display:block}
         <div style="position:sticky;top:{{ lensTop }};width:{{ lensW }};aspect-ratio:1;justify-self:center;z-index:2;display:{{ lensDisplay }}">
           <div ref="{{ ringRef }}" style="position:absolute;inset:{{ ringIn }};border-radius:50%;border:1px dashed {{ bds }};will-change:transform"></div>
           <div style="position:absolute;inset:-6px;border-radius:50%;border:1px solid {{ bd }}"></div>
-          <div style="position:absolute;inset:0;border-radius:50%;overflow:hidden;background:#000">
+          <div style="position:absolute;inset:0;border-radius:50%;overflow:hidden;background:#151515">
+            <img loading="lazy" data-img="{{ lensStill }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05)">
             <sc-for list="{{ lensVids }}" as="l" hint-placeholder-count="4">
-              <video data-lazy="{{ l.src }}" data-autoplay="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);clip-path:circle({{ l.r }} at 50% 50%);transition:clip-path 1.1s cubic-bezier(.76,0,.24,1)"></video>
+              <video data-lazy="{{ l.src }}" data-poster="{{ l.poster }}" data-autoplay="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);clip-path:circle({{ l.r }} at 50% 50%);transition:clip-path 1.1s cubic-bezier(.76,0,.24,1)"></video>
             </sc-for>
             <svg viewBox="0 0 485 541" style="position:absolute;left:50%;top:50%;width:34px;height:38px;transform:translate(-50%,-50%);mix-blend-mode:difference;opacity:.85" aria-hidden="true"><path fill="#fff" fill-rule="evenodd" d="M271.5 17 Q242 0 212.5 17 L37.5 118 Q8 135 8 169 L8 372 Q8 406 37.5 423 L212.5 524 Q242 541 271.5 524 L446.5 423 Q476 406 476 372 L476 169 Q476 135 446.5 118 Z M48.4 193.6 Q17 139 80 139 L404 139 Q467 139 435.6 193.6 L273.4 476.4 Q242 531 210.6 476.4 Z M257.7 33.9 Q242 25 226.3 33.9 L117.8 95.6 Q110 100 110 109 L110 109 Q110 118 119 118 L365 118 Q374 118 374 109 L374 109 Q374 100 366.2 95.6 Z M45.4 230.7 Q29 202 29 235 L29 365 Q29 398 58.5 412.8 L156.5 462.2 Q186 477 169.6 448.3 Z M455 235 Q455 202 438.6 230.7 L314.4 448.3 Q298 477 327.5 462.2 L425.5 412.8 Q455 398 455 365 Z"></path></svg>
           </div>
@@ -468,11 +470,11 @@ video,img{display:block}
         <sc-for list="{{ works }}" as="w" hint-placeholder-count="6">
           <figure data-i="{{ $index }}" onClick="{{ shoot }}" onMouseEnter="{{ whOn }}" onMouseLeave="{{ whLeave }}" data-reveal="1" style="margin:0;cursor:pointer;transition-delay:{{ w.delay }}">
             <div style="overflow:hidden;aspect-ratio:16/10;background:#1a1a1a;position:relative">
-              <video data-lazy="{{ w.src }}" aria-label="{{ w.t }} — {{ w.c }} by ZeusFrames, Stouffville / GTA" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) blur({{ w.blur }});transform:scale({{ w.sc }});opacity:{{ w.op }};transition:filter .7s ease,transform .9s cubic-bezier(.2,.7,.2,1),opacity .7s ease"></video>
+              <video data-lazy="{{ w.src }}" data-poster="{{ w.poster }}" aria-label="{{ w.t }} — {{ w.c }} by ZeusFrames, Stouffville / GTA" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) blur({{ w.blur }});transform:scale({{ w.sc }});opacity:{{ w.op }};transition:filter .7s ease,transform .9s cubic-bezier(.2,.7,.2,1),opacity .7s ease"></video>
               <span style="position:absolute;left:12px;top:10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;mix-blend-mode:difference">{{ w.n }}</span>
               <span style="position:absolute;right:12px;bottom:10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;mix-blend-mode:difference">{{ w.t }}</span>
             </div>
-            <figcaption style="display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase"><span>{{ w.t }}</span><a href="https://www.instagram.com/zeusframes.inc" target="_blank" rel="noopener" onClick="{{ stop }}" style="opacity:.55;border-bottom:1px solid currentColor;padding-bottom:2px">{{ w.c }} ↗</a></figcaption>
+            <figcaption style="display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase"><span>{{ w.t }}</span><a href="https://www.instagram.com/zeusframes.inc" target="_blank" rel="noopener" onClick="{{ stop }}" style="opacity:.55;border-bottom:1px solid currentColor;padding-bottom:2px">{{ w.c }} ↗︎</a></figcaption>
           </figure>
         </sc-for>
       </div>
@@ -484,7 +486,7 @@ video,img{display:block}
       <div data-reveal="1" style="display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;padding:0 6vw 8px">
         <sc-for list="{{ feedTiles }}" as="t" hint-placeholder-count="8">
           <div onMouseEnter="{{ hp }}" onMouseLeave="{{ hs }}" style="flex:none;width:{{ feedW }};aspect-ratio:9/16;overflow:hidden;background:#1a1a1a;position:relative">
-            <video data-lazy="{{ t.src }}" data-autoplay="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></video>
+            <video data-lazy="{{ t.src }}" data-poster="{{ t.poster }}" data-autoplay="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></video>
             <span style="position:absolute;left:10px;bottom:10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;mix-blend-mode:difference">{{ t.t }}</span>
           </div>
         </sc-for>
@@ -524,7 +526,7 @@ video,img{display:block}
         <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
           <sc-for list="{{ verticals }}" as="v" hint-placeholder-count="3">
             <div onMouseEnter="{{ hp }}" onMouseLeave="{{ hs }}" data-reveal="iris" style="aspect-ratio:9/16;overflow:hidden;background:#c9c8c3;transition-delay:{{ v.delay }}">
-              <video data-lazy="{{ v.src }}" data-autoplay="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></video>
+              <video data-lazy="{{ v.src }}" data-poster="{{ v.poster }}" data-autoplay="1" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></video>
             </div>
           </sc-for>
         </div>
@@ -586,11 +588,11 @@ video,img{display:block}
         <sc-for list="{{ works }}" as="w" hint-placeholder-count="6">
           <figure data-i="{{ $index }}" onClick="{{ shoot }}" onMouseEnter="{{ whOn }}" onMouseLeave="{{ whLeave }}" data-reveal="1" style="margin:0;cursor:pointer;transition-delay:{{ w.delay }}">
             <div style="overflow:hidden;aspect-ratio:16/10;background:#1a1a1a;position:relative">
-              <video data-lazy="{{ w.src }}" aria-label="{{ w.t }} — {{ w.c }} by ZeusFrames, Stouffville / GTA" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) blur({{ w.blur }});transform:scale({{ w.sc }});opacity:{{ w.op }};transition:filter .7s ease,transform .9s cubic-bezier(.2,.7,.2,1),opacity .7s ease"></video>
+              <video data-lazy="{{ w.src }}" data-poster="{{ w.poster }}" aria-label="{{ w.t }} — {{ w.c }} by ZeusFrames, Stouffville / GTA" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1) blur({{ w.blur }});transform:scale({{ w.sc }});opacity:{{ w.op }};transition:filter .7s ease,transform .9s cubic-bezier(.2,.7,.2,1),opacity .7s ease"></video>
               <span style="position:absolute;left:12px;top:10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;mix-blend-mode:difference">{{ w.n }}</span>
               <span style="position:absolute;right:12px;bottom:10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;mix-blend-mode:difference">{{ w.t }}</span>
             </div>
-            <figcaption style="display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase"><span>{{ w.t }}</span><a href="https://www.instagram.com/zeusframes.inc" target="_blank" rel="noopener" onClick="{{ stop }}" style="opacity:.55;border-bottom:1px solid currentColor;padding-bottom:2px">{{ w.c }} ↗</a></figcaption>
+            <figcaption style="display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase"><span>{{ w.t }}</span><a href="https://www.instagram.com/zeusframes.inc" target="_blank" rel="noopener" onClick="{{ stop }}" style="opacity:.55;border-bottom:1px solid currentColor;padding-bottom:2px">{{ w.c }} ↗︎</a></figcaption>
           </figure>
         </sc-for>
       </div>
@@ -697,9 +699,9 @@ video,img{display:block}
       <div onMouseLeave="{{ whOff }}" style="display:grid;grid-template-columns:{{ pfCols }};grid-auto-rows:{{ pfRow }};grid-auto-flow:dense;gap:14px;margin-top:30px">
         <sc-for list="{{ pfItems }}" as="w" hint-placeholder-count="9">
           <figure data-i="{{ w.i }}" onClick="{{ pfOpen }}" onMouseEnter="{{ whOn }}" onMouseLeave="{{ whLeave }}" style="margin:0;position:relative;overflow:hidden;background:#1a1a1a;cursor:zoom-in;grid-column:{{ w.col }};grid-row:{{ w.row }};animation:fade .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:{{ w.delay }}">
-            <video data-lazy="{{ w.src }}" aria-label="{{ w.t }} — {{ w.c }} by ZeusFrames, Stouffville / GTA" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:transform 1s cubic-bezier(.2,.7,.2,1)" style-hover="transform:scale(1.04)"></video>
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.55));pointer-events:none"></div>
-            <figcaption style="position:absolute;left:16px;right:16px;bottom:14px;display:flex;justify-content:space-between;gap:12px;align-items:baseline"><span style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,1.6vw,24px);line-height:1.1">{{ w.t }}</span><span style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.75;white-space:nowrap">{{ w.c }}</span></figcaption>
+            <video data-lazy="{{ w.src }}" data-poster="{{ w.poster }}" aria-label="{{ w.t }} — {{ w.c }} by ZeusFrames, Stouffville / GTA" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:transform 1s cubic-bezier(.2,.7,.2,1)" style-hover="transform:scale(1.04)"></video>
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.72));pointer-events:none"></div>
+            <figcaption style="position:absolute;left:16px;right:16px;bottom:14px;display:flex;justify-content:space-between;gap:12px;align-items:baseline;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.6)"><span style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,1.6vw,24px);line-height:1.1">{{ w.t }}</span><span style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.9;white-space:nowrap">{{ w.c }}</span></figcaption>
             <span style="position:absolute;left:16px;top:14px;font-size:11px;letter-spacing:.16em;opacity:.7">{{ w.n }}</span>
           </figure>
         </sc-for>
@@ -856,7 +858,7 @@ video,img{display:block}
         <div data-reveal="1" style="display:flex;flex-direction:column">
           <a href="tel:+16478391491" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }};transition:padding-left .4s" style-hover="padding-left:12px;opacity:1"><span style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.55;min-width:90px">Call</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,3.4vw,52px);line-height:1;letter-spacing:-.02em">+1 647-839-1491</span></a>
           <a href="mailto:Zeusframess@gmail.com" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }};transition:padding-left .4s" style-hover="padding-left:12px;opacity:1"><span style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.55;min-width:90px">Email</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,2.8vw,44px);line-height:1;letter-spacing:-.02em;word-break:break-all">Zeusframess@gmail.com</span></a>
-          <a href="https://wa.me/16478391491" target="_blank" rel="noopener" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }};transition:padding-left .4s" style-hover="padding-left:12px;opacity:1"><span style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.55;min-width:90px">WhatsApp</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,3.4vw,52px);line-height:1;letter-spacing:-.02em">Message us ↗</span></a>
+          <a href="https://wa.me/16478391491" target="_blank" rel="noopener" onMouseEnter="{{ afLock }}" onMouseLeave="{{ afFree }}" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }};transition:padding-left .4s" style-hover="padding-left:12px;opacity:1"><span style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.55;min-width:90px">WhatsApp</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,3.4vw,52px);line-height:1;letter-spacing:-.02em">Message us ↗︎</span></a>
           <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }}"><span style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.55;min-width:90px">Studio</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,2.8vw,44px);line-height:1.1;letter-spacing:-.02em;text-align:right">ZeusFrames Studio<br>Stouffville, Ontario<br><span style="font-size:12px;opacity:.55">Exact address shared on booking</span></span></div>
           <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px 24px;padding:26px 0;border-top:1px solid {{ bd }};border-bottom:1px solid {{ bd }}"><span style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.55;min-width:90px">Hours</span><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,2.8vw,44px);line-height:1;letter-spacing:-.02em">Mon–Sat · 9:00–19:00</span></div>
           <div style="margin-top:40px">
@@ -976,9 +978,9 @@ class Component extends DCLogic {
     }), { threshold: 0.12 });
     this.vidIo = new IntersectionObserver(es => es.forEach(e => {
       const v = e.target;
-      if (e.isIntersecting) { if (!v.getAttribute('src')) { v.src = v.dataset.lazy; v.preload = 'metadata'; v.load(); v.addEventListener('loadeddata', () => { try { v.currentTime = 0.05; } catch (_) {} }, { once: true }); } if (v.dataset.autoplay) { v.muted = true; const p = v.play(); if (p) p.catch(() => {}); } }
+      if (e.isIntersecting) { if (!v.getAttribute('src')) this.queueVid(v); if (v.dataset.autoplay) { v.muted = true; const p = v.play(); if (p) p.catch(() => {}); } }
       else if (v.dataset.autoplay && !v.paused) v.pause();
-    }), { rootMargin: '300px 0px' });
+    }), { rootMargin: '150px 0px' });
     this.revIo = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('[style*="animation-play-state"]').forEach(el => { el.style.animationPlayState = 'running'; }); this.revIo.unobserve(e.target); } }), { threshold: 0.5 });
     this.brandIo = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !this.state.brandSeen) this.setState({ brandSeen: true }); }), { threshold: 0.4 });
     this.lensIo = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const i = +e.target.dataset.lens; if (i !== this.state.lens) this.setState({ lens: i }); } }), { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
@@ -1002,6 +1004,7 @@ class Component extends DCLogic {
     if (pp.page !== this.props.page && this.PAGES.includes(this.props.page)) this.setState({ page: this.props.page });
     if (ps.page !== this.state.page) {
       this.jumpTop(); this.afLocked = null;
+      { const sc = this.scrimRef.current; if (sc) sc.style.opacity = this.state.page === 'portfolio' ? '1' : '0'; }
       this.syncUrl(this.state.page, !!this.popNav); this.popNav = false;
       this.setState({ lens: 0, wh: null, lb: null, shot: false, menu: false, brandSeen: false, qErr: '' });
       this.applySeo();
@@ -1029,23 +1032,53 @@ class Component extends DCLogic {
     contact: ['Book a Photography or Video Session in Stouffville | ZeusFrames Contact', 'Inquire about maternity, newborn, family, fashion or commercial sessions at ZeusFrames Studio in Stouffville. We reply within one business day.', 'book photography session Stouffville']
   };
   applySeo(pg) { const page = pg || this.state.page; const m = this.SEO[page] || this.SEO.home; document.title = m[0]; let d = document.querySelector('meta[name="description"]'); if (!d) { d = document.createElement('meta'); d.setAttribute('name', 'description'); document.head.appendChild(d); } d.setAttribute('content', m[1]); let c = document.querySelector('link[rel="canonical"]'); if (!c) { c = document.createElement('link'); c.setAttribute('rel', 'canonical'); document.head.appendChild(c); } c.setAttribute('href', 'https://zeusframes.ca/' + (page === 'home' ? '' : ({ video: 'motherhood-family', social: 'fashion-branding', events: 'commercial-music-video', studio: 'studio-rental' }[page] || page))); }
-  themeLogos() { const inv = this.state.light ? 'invert(1)' : 'none'; document.querySelectorAll('img[data-theme-logo]').forEach(im => { im.style.filter = inv; }); }
+  themeLogos() { if (this.state.light) document.body.setAttribute('data-zf-light', '1'); else document.body.removeAttribute('data-zf-light');
+    const inv = this.state.light ? 'invert(1)' : 'none'; document.querySelectorAll('img[data-theme-logo]').forEach(im => { im.style.filter = inv; }); }
   navTo(p, anchor) { if (!this.PAGES.includes(p)) return; this.applySeo(p); const changed = p !== this.state.page; this.jumpTop(); this.setState({ page: p, menu: false, navFlash: changed && !this.embed }); if (changed) { clearTimeout(this.navT); this.navT = setTimeout(() => this.setState({ navFlash: false }), 1250); } if (anchor) setTimeout(() => { const el = document.getElementById(anchor); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' }); }, 1250); }
-  toggleTheme(e) { const r = e && e.currentTarget ? e.currentTarget.getBoundingClientRect() : null; const x = r ? ((r.left + r.width / 2) / window.innerWidth * 100).toFixed(1) + '%' : '50%', y = r ? ((r.top + r.height / 2) / window.innerHeight * 100).toFixed(1) + '%' : '50%'; const next = !this.state.light; try { localStorage.setItem('zf-theme', next ? 'light' : 'dark'); } catch (_) {} this.setState({ light: next, themeWipe: true, wipeX: x, wipeY: y }); setTimeout(() => { const sc = this.scrimRef.current; if (sc) sc.style.opacity = (next && (window.scrollY > window.innerHeight * 0.6 || this.state.page === 'portfolio')) ? '0' : '1'; }, 50); clearTimeout(this.wipeT); this.wipeT = setTimeout(() => this.setState({ themeWipe: false }), 1300); }
+  toggleTheme(e) { const r = e && e.currentTarget ? e.currentTarget.getBoundingClientRect() : null; const x = r ? ((r.left + r.width / 2) / window.innerWidth * 100).toFixed(1) + '%' : '50%', y = r ? ((r.top + r.height / 2) / window.innerHeight * 100).toFixed(1) + '%' : '50%'; const next = !this.state.light; try { localStorage.setItem('zf-theme', next ? 'light' : 'dark'); } catch (_) {} this.setState({ themeWipe: true, wipeX: x, wipeY: y, wipeTo: next ? '#ecebe6' : '#0c0c0c' }); clearTimeout(this.wipeFlipT); clearTimeout(this.wipeT); this.wipeFlipT = setTimeout(() => this.setState({ light: next }), 430); this.wipeT = setTimeout(() => this.setState({ themeWipe: false, wipeTo: null }), 1300); }
   jumpTop() {
     const el = document.documentElement, body = document.body;
     const go = () => { const p = el.style.scrollBehavior; el.style.scrollBehavior = 'auto'; body.style.scrollBehavior = 'auto'; window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); el.scrollTop = 0; body.scrollTop = 0; el.style.scrollBehavior = p; body.style.scrollBehavior = ''; };
     go(); requestAnimationFrame(go); setTimeout(go, 0); setTimeout(go, 120); setTimeout(go, 400);
   }
+  CDN = { 12735441: '12735441-sd_640_360_30fps.mp4' };
+  vidCands(src) { return [src]; }
+  queueVid(v) {
+    this.vq = this.vq || []; this.vActive = this.vActive || 0;
+    if (v.dataset.queued) return; v.dataset.queued = '1'; this.vq.push(v); this.pumpVid();
+  }
+  tryVid(v, cands, k, done) {
+    if (k >= cands.length) { done(); return; }
+    let settled = false;
+    const next = () => { if (settled) return; settled = true; clearTimeout(t); v.removeEventListener('loadeddata', ok); v.removeEventListener('error', next); this.tryVid(v, cands, k + 1, done); };
+    const ok = () => { if (settled) return; settled = true; clearTimeout(t); try { v.currentTime = 0.05; } catch (_) {} if (v.dataset.autoplay || v.dataset.auto) { v.muted = true; const p = v.play(); if (p) p.catch(() => {}); } done(); };
+    const t = setTimeout(next, 6000);
+    v.addEventListener('loadeddata', ok, { once: true });
+    v.addEventListener('error', next, { once: true });
+    v.src = cands[k]; v.preload = 'metadata'; v.load();
+  }
+  pumpVid() {
+    this.vq = this.vq || []; this.vActive = this.vActive || 0;
+    while (this.vActive < 3 && this.vq.length) {
+      this.vq.sort((a, b) => Math.abs(a.getBoundingClientRect().top) - Math.abs(b.getBoundingClientRect().top));
+      const v = this.vq.shift(); if (!v || !v.isConnected || v.getAttribute('src')) continue;
+      this.vActive++;
+      const done = () => { this.vActive = Math.max(0, this.vActive - 1); this.pumpVid(); };
+      this.tryVid(v, this.vidCands(v.dataset.lazy), 0, done);
+    }
+  }
   refresh() { this.themeLogos();
     document.querySelectorAll('[data-reveal]:not([data-obs]),[data-light-zone]:not([data-obs])').forEach(el => { el.setAttribute('data-obs', '1'); this.io.observe(el); });
     const vh0 = window.innerHeight; document.querySelectorAll('[data-reveal]:not([data-inview])').forEach(el => { const r = el.getBoundingClientRect(); if (r.bottom > 0 && r.top < vh0 * 0.95 && r.height > 0) el.setAttribute('data-inview', '1'); });
     document.querySelectorAll('video:not([data-err])').forEach(v => { v.setAttribute('data-err', '1'); v.addEventListener('error', () => { v.style.opacity = '0'; }); });
-    document.querySelectorAll('video[data-lazy]:not([data-vobs])').forEach(v => { v.setAttribute('data-vobs', '1'); this.vidIo.observe(v); });
+    document.querySelectorAll('img[data-img]').forEach(im => { const u = im.dataset.img; if (u && u.indexOf('{{') < 0 && im.getAttribute('src') !== u) im.src = u; });
+    document.querySelectorAll('video[data-poster]').forEach(v => { const p = v.dataset.poster; if (p && p.indexOf('{{') < 0 && v.poster !== p) v.poster = p; });
+    document.querySelectorAll('video[data-lazy]:not([data-vobs])').forEach(v => { if ((v.dataset.lazy || '').indexOf('{{') >= 0) return; v.setAttribute('data-vobs', '1'); this.vidIo.observe(v); });
+    clearTimeout(this.vqT); this.vqT = setTimeout(() => { document.querySelectorAll('video[data-lazy]:not([data-queued]):not([data-auto])').forEach(v => { if ((v.dataset.lazy || '').indexOf('{{') < 0) this.queueVid(v); }); }, 900);
     document.querySelectorAll('[data-revmark]:not([data-robs])').forEach(el => { el.setAttribute('data-robs', '1'); this.revIo.observe(el); });
     document.querySelectorAll('[data-brandmark]:not([data-bobs])').forEach(el => { el.setAttribute('data-bobs', '1'); this.brandIo.observe(el); });
     document.querySelectorAll('[data-lens]:not([data-lens-obs])').forEach(el => { el.setAttribute('data-lens-obs', '1'); this.lensIo.observe(el); });
-    document.querySelectorAll('video[data-auto]:not([data-armed])').forEach(v => { v.setAttribute('data-armed', '1'); v.muted = true; v.loop = true; v.playsInline = true; const p = v.play(); if (p) p.catch(() => {}); });
+    document.querySelectorAll('video[data-auto]:not([data-armed])').forEach(v => { if (!v.dataset.resolved && v.dataset.lazy && v.dataset.lazy.indexOf('{{') < 0) { v.dataset.resolved = '1'; this.tryVid(v, this.vidCands(v.dataset.lazy), 0, () => {}); } v.setAttribute('data-armed', '1'); v.muted = true; v.loop = true; v.playsInline = true; const p = v.play(); if (p) p.catch(() => {}); });
   }
   onScroll() {
     if (this.sRaf) return;
@@ -1057,7 +1090,7 @@ class Component extends DCLogic {
       const k = Math.min(1, sy / Math.max(1, document.documentElement.scrollHeight - vh));
       if (this.frRef.current) this.frRef.current.textContent = 'FR ' + String(Math.round(k * 1000)).padStart(4, '0') + ' / 1000';
       if (this.ringRef.current) this.ringRef.current.style.transform = 'rotate(' + (sy / 9).toFixed(1) + 'deg)';
-      const sc = this.scrimRef.current; if (sc) sc.style.opacity = (this.state.light && (sy > vh * 0.6 || this.state.page === 'portfolio')) ? '0' : '1';
+      const sc = this.scrimRef.current; if (sc) sc.style.opacity = this.state.page === 'portfolio' ? '1' : Math.max(0, Math.min(1, (sy - vh * 0.35) / (vh * 0.45))).toFixed(3);
       const tb = this.topRef.current; if (tb) { const on = sy > vh; tb.style.opacity = on ? '1' : '0'; tb.style.pointerEvents = on ? 'auto' : 'none'; tb.style.transform = on ? 'none' : 'translateY(10px)'; }
     });
   }
@@ -1074,6 +1107,8 @@ class Component extends DCLogic {
     if (mob !== this.state.mob || window.innerHeight !== this.state.vh) this.setState({ mob, vh: window.innerHeight });
   }
   renderVals() {
+    const POSTER = { 12735441: '1477959858617-67f85cf4f1df', 30603141: '1493894473891-10fc1e5dbd22', 31850422: '1509631179647-0177331693ae', 10276471: '1519689680058-324335c77eba', 34132691: '1529139574466-a303027c1d8b', 3588888: '1544005313-94ddf0286df2', 7823380: '1542038784456-1ea8e935640e', 35340079: '1511578314322-379afb476865', 13580749: '1517935706615-2717063c2225', 8084901: '1505373877841-8d25f7d46678', 12987888: '1478720568477-152d9b164e26', 28638048: '1503454537195-1dcabb73ffb9', 13641378: '1511895426328-dc8714191300', 2859888: '1493863641943-9b68992a8d07', 10276178: '1555252333-9f8e92e65df9', 34132690: '1516035069371-29a1b244cc32', 3719160: '1526170375885-4d8ecf77b99f' };
+    const PO = src => AB + 'assets/img/' + (POSTER[(String(src).match(/video\/(\d+)/) || [])[1]] || '1509631179647-0177331693ae') + '.jpg';
     const S = this.state, AB = this.routeBase(), V = id => `${AB}assets/video/${id}.mp4`, U = id => `${AB}assets/img/${id}.jpg`;
     const mob = !!S.mob, light = !!S.light;
     const bg = light ? '#ecebe6' : '#0c0c0c', ink = light ? '#0c0c0c' : '#ecebe6';
@@ -1116,7 +1151,7 @@ class Component extends DCLogic {
     const pfAll = PF.map(([n, t, c, k, id, cs, rs], i) => ({ n, t, c, k, src: V(id), i, cs, rs }));
     const pfList = pfAll.filter(w => pfK === 'all' || w.k === pfK);
     const pfWorks = pfList.map((w, i) => ({ ...w, col: mob ? (w.cs === 2 ? 'span 2' : 'span 1') : 'span ' + w.cs, row: mob ? 'span 1' : 'span ' + w.rs, delay: (i % 4) * 0.06 + 's' }));
-    const works = page === 'portfolio' ? pfList.map((w, i) => ({ n: w.n, t: w.t, c: w.c, src: w.src, delay: '0s', blur: '0px', op: 1 })) : (workSets[page] || workSets.home).map(([n, t, c, id], i) => ({ n, t, c, src: V(id), delay: (i % 3) * 0.1 + 's', blur: S.wh == null || S.wh === i ? '0px' : '6px', op: S.wh == null || S.wh === i ? 1 : 0.5, sc: S.wh === i ? 1.04 : 1 }));
+    const works = page === 'portfolio' ? pfList.map((w, i) => ({ n: w.n, t: w.t, c: w.c, src: w.src, delay: '0s', blur: '0px', op: 1 })) : (workSets[page] || workSets.home).map(([n, t, c, id], i) => ({ n, t, c, src: V(id), delay: (i % 3) * 0.1 + 's', blur: S.wh == null || S.wh === i ? '0px' : '6px', op: S.wh == null || S.wh === i ? 1 : 0.5, sc: S.wh === i ? 1.04 : 1 })).map(w => ({ ...w })).map(w => ({ ...w, poster: PO(w.src) }));
     const lb = S.lb == null ? null : works[S.lb];
     const CAT = {
       video: { t: 'Motherhood & Family', mm: '50mm', unit: '+ HST', inc: 'Every session includes an online gallery; add ArtFilm to any photo session for +$300.', plans: [
@@ -1189,9 +1224,9 @@ class Component extends DCLogic {
       stop: e => e.stopPropagation(),
       rangeBar: any && S.touched && !S.rangeHidden && page !== 'contact' && page !== 'packages', rangeHide: () => this.setState({ rangeHidden: true }), estText: lo === hi ? money(lo) : money(lo) + ' – ' + money(hi), rangeBottom: mob ? '104px' : '28px',
       rootRef: this.rootRef, hudRow: mob ? 'none' : 'flex', bg, ink, bd, bds, mob, notMob: !mob, deskOnly: mob ? 'none' : 'block', mobOnly: mob ? 'block' : 'none',
-      heroFadeOp: light ? 1 : 0, botScrim: light ? 'linear-gradient(0deg,rgba(236,235,230,.95) 0%,rgba(236,235,230,.75) 50%,rgba(236,235,230,0) 100%)' : 'linear-gradient(0deg,rgba(12,12,12,.95) 0%,rgba(12,12,12,.75) 50%,rgba(12,12,12,0) 100%)',
-      scrimBg: 'linear-gradient(180deg,rgba(12,12,12,.92) 0%,rgba(12,12,12,.7) 45%,rgba(12,12,12,0) 100%)', scrimRef: this.scrimRef,
-      toggleTheme: e => this.toggleTheme(e), themeWipe: S.themeWipe, wipeBg: light ? '#ecebe6' : '#0c0c0c', wipeX: S.wipeX, wipeY: S.wipeY, sunOp: light ? 1 : 0, sunRot: light ? '0deg' : '-90deg', moonOp: light ? 0 : 1, moonRot: light ? '90deg' : '0deg', themeTitle: light ? 'Switch to dark' : 'Switch to light',
+      heroPoster: PO(H.vid), heroDiscRing: light ? 'none' : '0 0 0 3px #000,0 0 0 4px #ecebe6', botScrim: light ? 'linear-gradient(0deg,rgba(236,235,230,.95) 0%,rgba(236,235,230,.75) 50%,rgba(236,235,230,0) 100%)' : 'linear-gradient(0deg,rgba(12,12,12,.95) 0%,rgba(12,12,12,.75) 50%,rgba(12,12,12,0) 100%)',
+      scrimBg: light ? 'linear-gradient(180deg,rgba(236,235,230,.96) 0%,rgba(236,235,230,.78) 45%,rgba(236,235,230,0) 100%)' : 'linear-gradient(180deg,rgba(12,12,12,.92) 0%,rgba(12,12,12,.7) 45%,rgba(12,12,12,0) 100%)', scrimRef: this.scrimRef,
+      toggleTheme: e => this.toggleTheme(e), themeWipe: S.themeWipe, wipeBg: S.wipeTo || (light ? '#ecebe6' : '#0c0c0c'), wipeX: S.wipeX, wipeY: S.wipeY, sunOp: light ? 1 : 0, sunRot: light ? '0deg' : '-90deg', moonOp: light ? 0 : 1, moonRot: light ? '90deg' : '0deg', themeTitle: light ? 'Switch to dark' : 'Switch to light',
       intro: S.intro, tc: S.tc, exp: light ? 'ISO 100 · f/8 · 1/250 · EV +2.0' : 'ISO 800 · f/1.8 · 1/50 · EV −1.0',
       afRef: this.afRef, frRef: this.frRef, ringRef: this.ringRef,
       afMove: e => { if (mob) return; this.afX = e.clientX; this.afY = e.clientY; if (!this.afLocked) this.afApply(); },
@@ -1206,7 +1241,7 @@ class Component extends DCLogic {
       doors: [['video', '01', '50mm', 'Motherhood & Family', 'Maternity, newborn, kidsgraphy and family sessions.', 'From $350 + HST', V(30603141)], ['social', '02', '85mm', 'Fashion & Branding', 'Editorial looks, creator content days, brand stories.', 'From $650 + HST', V(31850422)], ['events', '03', '24mm', 'Commercial & Music Video', 'Content sessions, brand film days, indie music videos.', 'From $950 + HST', V(3588888)]].map(([id, n, mm, t, d, from, src], i) => ({ id, n, mm, t, d, from, src, delay: i * 0.1 + 's' })),
       doorOn: e => this.afLockEl(e.currentTarget), doorOff: () => { this.afLocked = null; this.afApply(); },
       videoSpecs: [['Sessions', '4 + minis'], ['Book ahead', '4–8 weeks'], ['ArtFilm add‑on', '+$300'], ['From', '$350 + HST']].map(([k, v]) => ({ k, v })),
-      feedTiles: [34132691, 31850422, 10276471, 3588888, 35340079, 7823380, 30603141, 8084901].map((id, i) => ({ src: V(id), t: 'R0' + (i + 1) })), feedW: mob ? '150px' : '190px',
+      feedTiles: [34132691, 31850422, 10276471, 3588888, 35340079, 7823380, 30603141, 8084901].map((id, i) => ({ src: V(id), poster: PO(V(id)), t: 'R0' + (i + 1) })), feedW: mob ? '150px' : '190px',
       socials: [['Instagram', '@zeusframes.inc', 'https://www.instagram.com/zeusframes.inc'], ['TikTok', '@zeusframes', 'https://www.tiktok.com/@zeusframes'], ['YouTube', 'Zeus Frames', 'https://www.youtube.com/@zeusframes'], ['LinkedIn', 'Zeus Frames Inc.', 'https://www.linkedin.com/company/zeusframes']].map(([t, h, href]) => ({ t, h, href })),
       q1: true, qSent: !!S.qSent, notSent: !S.qSent,
       afBandH: mob ? '70vh' : '78vh', addonCols: mob ? '1fr' : 'minmax(0,.9fr) minmax(0,1.1fr)',
@@ -1274,19 +1309,20 @@ class Component extends DCLogic {
       quotes: [['We felt so calm and taken care of during our maternity and newborn sessions. The video art piece made us cry.', 'Journey client', 'Stouffville · Bump to Baby'], ['The fashion shoot at ZeusFrames finally made my brand look how it feels. The studio lighting is unreal.', 'Personal brand client', 'Toronto · Brand Story']].map(([t, w, s], i) => ({ t, w, s, delay: i * 0.12 + 's' })),
       pfTabs: PF_TABS.map(([k, t]) => ({ k, t, n: String(k === 'all' ? pfAll.length : pfAll.filter(w => w.k === k).length).padStart(2, '0'), bg: pfK === k ? ink : 'transparent', fg: pfK === k ? bg : 'inherit', bd: pfK === k ? ink : bd })),
       pfSet: e => this.setState({ pf: e.currentTarget.dataset.k, lb: null }), pfSvcPage: ({ mother: 'video', family: 'video', artfilm: 'video', fashion: 'social', commercial: 'events' }[pfK] || 'video'), pfSvcDisp: pfK === 'all' ? 'none' : 'inline', pfBookSvc: ({ mother: 'maternity', family: 'family', artfilm: 'artfilm', fashion: 'fashion-branding', commercial: 'commercial-video' }[pfK] || ''), pfSvcT: ({ mother: 'Motherhood & Family', family: 'Family sessions', artfilm: 'ArtFilm', fashion: 'Fashion & Branding', commercial: 'Commercial' }[pfK] || ''), pfCount: String(pfList.length).padStart(2, '0'),
-      pfItems: pfWorks.map((w, i) => ({ ...w, i })), pfCols: mob ? 'repeat(2,minmax(0,1fr))' : 'repeat(4,minmax(0,1fr))', pfRow: mob ? '42vw' : 'minmax(220px,22vw)',
+      pfItems: pfWorks.map((w, i) => ({ ...w, i, poster: PO(w.src) })), pfCols: mob ? 'repeat(2,minmax(0,1fr))' : 'repeat(4,minmax(0,1fr))', pfRow: mob ? '42vw' : 'minmax(220px,22vw)',
       pfOpen: e => { const i = +e.currentTarget.dataset.i; this.setState({ lb: i }); },
       lbNavDisp: works.length > 1 ? 'grid' : 'none', lbPrev: e => { e.stopPropagation(); this.setState(s => ({ lb: (s.lb - 1 + works.length) % works.length })); }, lbNext: e => { e.stopPropagation(); this.setState(s => ({ lb: (s.lb + 1) % works.length })); },
-      shotOn: S.shot, lbOpen: !!lb, lbSrc: lb ? lb.src : '', lbT: lb ? lb.t : '', lbN: lb ? lb.n : '', lbC: lb ? lb.c : '', closeLb: () => this.setState({ lb: null }),
+      lbBg: light ? '#ecebe6' : '#000', shotOn: S.shot, lbOpen: !!lb, lbSrc: lb ? lb.src : '', lbT: lb ? lb.t : '', lbN: lb ? lb.n : '', lbC: lb ? lb.c : '', closeLb: () => this.setState({ lb: null }),
       svcs: svcBase.map((s, i) => ({ ...s, glyph: [this.GLYPH.halo, this.GLYPH.pupil, this.GLYPH.aperture, this.GLYPH.weave][i], op: S.lens === i ? 1 : 0.4 })),
-      lensVids: svcBase.map((s, i) => ({ src: s.src, r: i <= S.lens ? '75%' : '0%' })),
+      lensStill: PO(svcBase[S.lens].src),
+      lensVids: svcBase.map((s, i) => ({ src: s.src, poster: PO(s.src), r: i <= S.lens ? '75%' : '0%' })),
       lensLabel: svcBase[S.lens].n + ' — ' + svcBase[S.lens].t + ' · ' + svcBase[S.lens].mm,
       lensCols: mob ? '1fr' : 'minmax(0,1fr) minmax(0,1fr)', lensDisplay: mob ? 'none' : 'block', lensW: mob ? '32vw' : 'min(38vw,70vh)', lensTop: mob ? '72px' : 'calc(50vh - min(19vw,35vh))', ringIn: mob ? '-8px' : '-18px', svcMinH: mob ? '0' : '72vh',
       steps: [['01', 'Inquiry', 'You share a bit about your motherhood journey, family, fashion project, or commercial shoot. We respond within one business day.'], ['02', 'Planning', 'We confirm the package or Journey bundle, schedule your date, and talk through style, wardrobe, and special requests.'], ['03', 'Shoot day', 'You arrive to a prepared studio with sets and lighting ready. We guide you through poses and moments so you never feel lost.'], ['04', 'Post-production', 'We choose the strongest images and clips, edit them in our signature style, and prepare your gallery and films.'], ['05', 'Delivery & review', 'A private online gallery and video links, with options to add extra edits, prints, or albums.']].map(([n, t, d], i) => ({ n, t, d, delay: i * 0.1 + 's' })),
       videoKinds: [['01', 'Maternity Dream Session', '60–90 minutes in studio or outdoors, 20 edited images, minimal‑modern sets and dreamy light.', '50mm', 'Starting at $450 + HST'], ['02', 'Newborn First Days Session', '2–3 hours in studio, baby‑led pacing, 20–25 edited images, calm and safe environment.', '85mm', 'Starting at $550 + HST'], ['03', 'Family Story Session', '60–90 minutes for up to six people, 25–30 edited images, a mix of candid and lightly posed portraits.', '35mm', 'Starting at $450 + HST'], ['04', 'Kidsgraphy Play Session', '45–60 minutes focused on your child, playful direction, 15–20 edited images.', '50mm', 'Starting at $350 + HST'], ['05', 'Seasonal Mini Days', '20–30 minute slots on a pre‑styled studio set, 10 edited images. Limited dates.', '85mm', '$199 + HST per slot'], ['06', 'ArtFilm upgrade', 'A 60–90 second video art piece with licensed music and a simple scenario, added to any photo session.', '24mm', '+$300 + HST']].map(([n, t, d, mm, price], i) => ({ n, t, d, mm, price, svc: ['maternity', 'newborn', 'family', 'kids', 'minis', 'artfilm'][i], img: ['1493894473891-10fc1e5dbd22', '1519689680058-324335c77eba', '1511895426328-dc8714191300', '1503454537195-1dcabb73ffb9', '1555252333-9f8e92e65df9', '1516035069371-29a1b244cc32'].map(id => AB + 'assets/img/' + id + '.jpg')[i], delay: (i % 3) * 0.1 + 's' })),
       checklist: ['Soft neutrals and gentle props', 'Flattering, dreamy light', 'Warm, quiet studio for newborns', 'Time for feeding and breaks', 'Light posing guidance', 'Safety and consent first', 'Style guide after booking', 'Wraps and blankets provided', 'Studio or nearby outdoor', 'Private online gallery', 'Optional ArtFilm piece', 'Prints and photo books'].map((t, i) => ({ t, n: String(i + 1).padStart(2, '0') })),
       socialCards: [['01', 'Moodboards', 'We collaborate on moodboards, wardrobe, and posing so each look supports your brand or portfolio goals.'], ['02', 'Colorful high‑fashion', 'Bold backdrops and dramatic lighting for images that look like they belong in a magazine.'], ['03', 'Dark‑wall editorial', 'Our black‑wall set for moody, sculpted portraits — models, designers, fashion lovers.'], ['04', 'E‑commerce clean', 'Clean, consistent product and lookbook frames ready for your store.'], ['05', 'Creator content', 'Photos plus short vertical reels in one session, planned for multiple posts.'], ['06', 'Personal brand', 'Website and social visuals for entrepreneurs, coaches and creatives — one cohesive set.']].map(([n, t, d], i) => ({ n, t, d, delay: (i % 3) * 0.1 + 's' })),
-      verticals: [34132691, 31850422, 10276471].map((id, i) => ({ src: V(id), delay: i * 0.15 + 's' })),
+      verticals: [34132691, 31850422, 10276471].map((id, i) => ({ src: V(id), poster: PO(V(id)), delay: i * 0.15 + 's' })),
       studioShots: [
         { src: U('1517604931442-7e0c8ed2963c', 1400), alt: 'Studio lighting setup', ar: '16/10', col: mob ? '1 / -1' : 'span 2', delay: '0s' },
         { src: U('1598488035139-bdbb2231ce04'), alt: 'Podcast microphone', ar: '4/5', col: 'span 1', delay: '.1s' },
